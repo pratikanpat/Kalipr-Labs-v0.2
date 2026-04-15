@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Kalipr Labs — Product Studio</title>
+  <meta name="description" content="We design, build, and ship products that matter. A focused product studio from Pune, India." />
+  <meta name="keywords" content="Kalipr Labs, product studio, AI tools, software products, Pune India" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kalipr Labs — Product Studio" />
+  <meta property="og:description" content="We design, build, and ship products that matter." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kaliprlabs.in" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- NAVBAR                                          -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <nav id="navbar" class="navbar">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__brand" id="nav-brand">KALIPR LABS</a>
+      <div class="navbar__links" id="nav-links">
+        <a href="#products" class="navbar__link" id="nav-products">Products</a>
+        <a href="#philosophy" class="navbar__link" id="nav-philosophy">Philosophy</a>
+        <a href="#contact" class="navbar__link" id="nav-contact">Contact</a>
+      </div>
+      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__inner">
+      <a href="#products" class="mobile-menu__link" id="mobile-products">Products</a>
+      <a href="#philosophy" class="mobile-menu__link" id="mobile-philosophy">Philosophy</a>
+      <a href="#contact" class="mobile-menu__link" id="mobile-contact">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §1 HERO                                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="hero" class="hero">
+      <div class="hero__orb hero__orb--1"></div>
+      <div class="hero__orb hero__orb--2"></div>
+      <div class="container">
+        <span class="label label--mono" id="hero-label">// product studio</span>
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__word">We</span>
+          <span class="hero__word">design,</span>
+          <span class="hero__word">build,</span>
+          <span class="hero__word">and</span>
+          <span class="hero__word">ship</span>
+          <span class="hero__word">products</span>
+          <span class="hero__word">that</span>
+          <span class="hero__word hero__word--accent">matter.</span>
+        </h1>
+        <p class="hero__subtitle" id="hero-subtitle">
+          Small team. Sharp tools.<br />
+          Own products + selective builds.
+        </p>
+        <a href="#products" class="hero__cta" id="hero-cta">
+          See what we're building <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §3 PRODUCTS                                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="products" class="products section">
+      <div class="container">
+        <span class="label label--mono" id="products-label">// products</span>
+
+        <!-- Kalvora — Hero Card -->
+        <div class="product-card product-card--hero reveal" id="product-kalvora">
+          <div class="product-card__header">
+            <div class="product-card__status product-card__status--live">
+              <span class="status-dot status-dot--live"></span>
+              LIVE
+            </div>
+          </div>
+          <h2 class="product-card__name">Kalvora</h2>
+          <p class="product-card__desc">
+            Proposal-to-invoice platform for interior designers.
+          </p>
+          <a href="https://kalvora.kaliprlabs.in" target="_blank" rel="noopener" class="product-card__link" id="link-kalvora">
+            Visit Kalvora <span class="arrow">→</span>
+          </a>
+          <div class="product-card__tags">
+            <span class="tag">Next.js 14</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">SaaS</span>
+          </div>
+        </div>
+
+        <!-- Secondary Products -->
+        <div class="products__grid" id="products-grid">
+
+          <div class="product-card product-card--secondary reveal" id="product-microtools">
+            <div class="product-card__header">
+              <div class="product-card__status product-card__status--soon">
+                <span class="status-dot status-dot--soon"></span>
+                COMING SOON
+              </div>
+            </div>
+            <h3 class="product-card__name product-card__name--sm">Micro Tools</h3>
+            <p class="product-card__desc">
+              Tiny, viral AI utilities. Built to spread. Designed to be useful in under 10 seconds.
+            </p>
+            <span class="product-card__link product-card__link--muted" id="link-microtools">
+              Coming Soon
+            </span>
+          </div>
+
+          <div class="product-card product-card--secondary reveal" id="product-costengine">
+            <div class="product-card__header">
+              <div class="product-card__status product-card__status--research">
+                <span class="status-dot status-dot--research"></span>
+                EXPLORING
+              </div>
+            </div>
+            <h3 class="product-card__name product-card__name--sm">AI Cost Engine</h3>
+            <p class="product-card__desc">
+              Token optimization + prompt audit platform for companies bleeding money on AI API calls.
+            </p>
+            <span class="product-card__link product-card__link--muted" id="link-costengine">
+              In Research
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §4 PHILOSOPHY                                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="philosophy" class="philosophy section">
+      <div class="container">
+        <span class="label label--mono" id="philosophy-label">// how we operate</span>
+
+        <div class="philosophy__grid" id="philosophy-grid">
+
+          <div class="philosophy__item reveal" id="principle-1">
+            <span class="philosophy__num">01</span>
+            <h3 class="philosophy__title">Ship &gt; Perfect</h3>
+            <p class="philosophy__desc">We ship early, learn fast, and iterate in public. Perfection is the enemy of products that exist.</p>
+          </div>
+
+          <div class="philosophy__item reveal" id="principle-2">
+            <span class="philosophy__num">02</span>
+            <h3 class="philosophy__title">Revenue on Day One</h3>
+            <p class="philosophy__desc">If it can't make money on day one, we probably shouldn't build it.</p>
+          </div>
+
+          <div class="philosophy__item reveal" id="principle-3">
+            <span class="philosophy__num">03</span>
+            <h3 class="philosophy__title">Small by Design</h3>
+            <p class="philosophy__desc">We don't want 200 people. Small teams build faster, think clearer, ship sharper.</p>
+          </div>
+
+          <div class="philosophy__item reveal" id="principle-4">
+            <span class="philosophy__num">04</span>
+            <h3 class="philosophy__title">Build What Hurts</h3>
+            <p class="philosophy__desc">We build for problems we've felt ourselves. Not market reports. Not trend analysis.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §5 PAST WORK (Bridge)                          -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="past-work" class="past-work section">
+      <div class="container">
+        <div class="past-work__content reveal">
+          <span class="label label--mono" id="past-work-label">// previously</span>
+          <p class="past-work__text">
+            Before Kalipr Labs became a product studio,<br />
+            we shipped web projects for clients.<br />
+            That work taught us how to build.<br />
+            Now we build for ourselves — and selectively, with others.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §6 FOOTER                                      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <footer id="contact" class="footer">
+      <div class="container">
+        <div class="footer__content">
+          <div class="footer__brand">
+            <span class="footer__name">KALIPR LABS</span>
+            <span class="footer__location">Pune, India</span>
+          </div>
+          <div class="footer__message">
+            <p>Building products. Selectively<br />taking on work worth building.</p>
+          </div>
+          <div class="footer__contact" id="footer-contact">
+            <p class="footer__prompt">Have something interesting?</p>
+            <a href="mailto:hello@kaliprlabs.in" class="footer__email" id="footer-email">hello@kaliprlabs.in</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__copy">© 2025 Kalipr Labs</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
