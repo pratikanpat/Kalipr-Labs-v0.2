@@ -776,8 +776,51 @@ button:hover .arrow {
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 
-/* Tablet */
+/* ─── Large Tablet / Small Desktop (1024px) ─── */
+@media (max-width: 1024px) {
+  :root {
+    --section-padding: clamp(64px, 8vw, 120px);
+  }
+
+  .hero__title {
+    font-size: clamp(40px, 5.5vw, 64px);
+    max-width: 90%;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(15px, 1.8vw, 18px);
+  }
+
+  .philosophy__grid {
+    gap: 48px 40px;
+  }
+
+  .footer__content {
+    gap: 32px;
+  }
+
+  .product-card {
+    padding: 32px;
+  }
+
+  .product-card--hero {
+    padding: 36px;
+  }
+}
+
+
+/* ─── Tablet (768px) ─── */
 @media (max-width: 768px) {
+  :root {
+    --section-padding: clamp(56px, 8vw, 100px);
+    --container-pad:   clamp(20px, 5vw, 32px);
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  /* Navbar */
   .navbar__links {
     display: none;
   }
@@ -786,37 +829,51 @@ button:hover .arrow {
     display: flex;
   }
 
+  .navbar__inner {
+    height: 64px;
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: 64px;
+    min-height: 85vh;
+  }
+
   .hero__title {
+    font-size: clamp(36px, 7vw, 52px);
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .hero__subtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
     max-width: 100%;
   }
 
-  .signal__grid {
-    grid-template-columns: 1fr;
+  .hero__orb--1 {
+    width: 350px;
+    height: 350px;
+    bottom: -60px;
+    right: -80px;
   }
 
+  .hero__orb--2 {
+    width: 250px;
+    height: 250px;
+    left: -60px;
+  }
+
+  /* Label */
+  .label {
+    margin-bottom: 28px;
+    font-size: 12px;
+  }
+
+  /* Products */
   .products__grid {
     grid-template-columns: 1fr;
-  }
-
-  .philosophy__grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-
-  .footer__content {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .hero {
-    min-height: 90vh;
-  }
-
-  .hero__title {
-    font-size: clamp(36px, 10vw, 48px);
+    gap: 16px;
   }
 
   .product-card {
@@ -825,18 +882,481 @@ button:hover .arrow {
 
   .product-card--hero {
     padding: 32px;
+    margin-bottom: 16px;
+  }
+
+  .product-card__name {
+    font-size: clamp(24px, 5vw, 32px);
+  }
+
+  .product-card__name--sm {
+    font-size: clamp(18px, 4vw, 22px);
+  }
+
+  .product-card__desc {
+    font-size: 14px;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .product-card__tags {
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  /* Signal */
+  .signal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Philosophy */
+  .philosophy__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .philosophy__num {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+
+  .philosophy__title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .philosophy__desc {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  /* Past Work */
+  .past-work__text {
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 100%;
+  }
+
+  /* Footer */
+  .footer__content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer__message p {
+    font-size: 14px;
+  }
+
+  .footer__bottom {
+    padding-top: 24px;
+  }
+}
+
+
+/* ─── Small Tablet / Landscape Phone (600px) ─── */
+@media (max-width: 600px) {
+  .hero {
+    min-height: 80vh;
+    align-items: flex-start;
+    padding-top: 100px;
+  }
+
+  .hero__title {
+    font-size: clamp(32px, 8vw, 44px);
+    line-height: 1.15;
+  }
+
+  .hero__cta {
+    font-size: 14px;
+  }
+
+  .philosophy__grid {
+    gap: 36px;
   }
 
   .philosophy__num {
     font-size: 36px;
+    margin-bottom: 14px;
   }
 
+  .product-card--hero::before {
+    border-radius: 12px;
+  }
+
+  .product-card {
+    border-radius: 12px;
+  }
+
+  .product-card--hero {
+    border-radius: 12px;
+  }
+
+  .mobile-menu__link {
+    font-size: 28px;
+  }
+
+  .mobile-menu__inner {
+    gap: 32px;
+  }
+}
+
+
+/* ─── Mobile (480px) ─── */
+@media (max-width: 480px) {
+  :root {
+    --section-padding: clamp(48px, 10vw, 72px);
+    --container-pad:   20px;
+  }
+
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Navbar */
+  .navbar__inner {
+    height: 56px;
+  }
+
+  .navbar__brand {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+  }
+
+  .navbar__toggle span {
+    width: 20px;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding-top: 88px;
+    padding-bottom: 56px;
+  }
+
+  .hero__title {
+    font-size: clamp(28px, 9vw, 40px);
+    margin-bottom: 20px;
+    line-height: 1.15;
+  }
+
+  .hero__subtitle {
+    font-size: 15px;
+    margin-bottom: 28px;
+    line-height: 1.65;
+  }
+
+  .hero__orb--1 {
+    width: 250px;
+    height: 250px;
+    bottom: -40px;
+    right: -60px;
+    opacity: 0.3;
+  }
+
+  .hero__orb--2 {
+    width: 180px;
+    height: 180px;
+    top: 5%;
+    left: -40px;
+    opacity: 0.15;
+  }
+
+  /* Products */
+  .product-card {
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .product-card--hero {
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  .product-card__header {
+    margin-bottom: 16px;
+  }
+
+  .product-card__status {
+    font-size: 10px;
+  }
+
+  .product-card__name {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-bottom: 10px;
+  }
+
+  .product-card__name--sm {
+    font-size: clamp(17px, 5vw, 20px);
+  }
+
+  .product-card__desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .product-card__link {
+    font-size: 13px;
+  }
+
+  .product-card__tags {
+    margin-top: 16px;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .products__grid {
+    gap: 12px;
+  }
+
+  /* Philosophy */
   .philosophy__grid {
-    gap: 40px;
+    gap: 32px;
   }
 
+  .philosophy__num {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .philosophy__title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .philosophy__desc {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Past Work */
+  .past-work {
+    padding: clamp(48px, 8vw, 80px) 0;
+  }
+
+  .past-work__text {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Footer */
+  .footer {
+    padding: clamp(48px, 8vw, 80px) 0 32px;
+  }
+
+  .footer__content {
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .footer__name {
+    font-size: 13px;
+  }
+
+  .footer__location {
+    font-size: 13px;
+  }
+
+  .footer__message p {
+    font-size: 13px;
+  }
+
+  .footer__prompt {
+    font-size: 13px;
+  }
+
+  .footer__email {
+    font-size: 13px;
+  }
+
+  .footer__bottom {
+    padding-top: 20px;
+  }
+
+  .footer__copy {
+    font-size: 11px;
+  }
+
+  /* Signal */
   .signal__manifesto p {
     font-size: 20px;
+  }
+
+  .signal__card {
+    padding: 20px;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu__link {
+    font-size: 26px;
+  }
+
+  .mobile-menu__inner {
+    gap: 28px;
+  }
+
+  /* Reveal — reduce motion offset on small screens */
+  .reveal {
+    transform: translateY(16px);
+  }
+}
+
+
+/* ─── Very Small Mobile (360px) ─── */
+@media (max-width: 360px) {
+  :root {
+    --container-pad: 16px;
+  }
+
+  .hero__title {
+    font-size: clamp(24px, 8vw, 34px);
+  }
+
+  .hero__subtitle {
+    font-size: 14px;
+  }
+
+  .product-card {
+    padding: 20px;
+  }
+
+  .product-card--hero {
+    padding: 24px;
+  }
+
+  .product-card__name {
+    font-size: 20px;
+  }
+
+  .product-card__name--sm {
+    font-size: 16px;
+  }
+
+  .philosophy__num {
+    font-size: 28px;
+  }
+
+  .philosophy__title {
+    font-size: 17px;
+  }
+
+  .mobile-menu__link {
+    font-size: 22px;
+  }
+
+  .navbar__brand {
+    font-size: 12px;
+    letter-spacing: 0.10em;
+  }
+
+  .footer__email {
+    font-size: 12px;
+    word-break: break-all;
+  }
+}
+
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero__word {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .hero .label,
+  .hero__subtitle,
+  .hero__cta {
+    opacity: 1;
+    animation: none;
+  }
+
+  .hero__orb {
+    animation: none;
+  }
+
+  .arrow {
+    transition: none;
+  }
+
+  .status-dot--live {
+    animation: none;
+  }
+}
+
+
+/* ─── Touch-device optimizations ─── */
+@media (hover: none) and (pointer: coarse) {
+  .product-card:hover {
+    border-color: var(--border-subtle);
+    box-shadow: none;
+  }
+
+  .product-card--hero:hover {
+    box-shadow: none;
+    border-color: rgba(109, 90, 205, 0.2);
+  }
+
+  /* Increase tap targets */
+  .navbar__toggle {
+    padding: 12px;
+    margin: -4px;
+  }
+
+  .hero__cta {
+    padding: 12px 0;
+  }
+
+  .product-card__link {
+    padding: 8px 0;
+  }
+
+  .mobile-menu__link {
+    padding: 8px 0;
+  }
+
+  .footer__email {
+    padding: 8px 0;
+    display: inline-block;
+  }
+}
+
+
+/* ─── Landscape Phone ─── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding-top: 72px;
+    padding-bottom: 40px;
+  }
+
+  .hero__title {
+    font-size: clamp(24px, 5vw, 36px);
+    margin-bottom: 16px;
+  }
+
+  .hero__subtitle {
+    margin-bottom: 20px;
+  }
+
+  .mobile-menu__inner {
+    gap: 20px;
+  }
+
+  .mobile-menu__link {
+    font-size: 22px;
   }
 }
 
