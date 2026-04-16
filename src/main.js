@@ -52,48 +52,53 @@ function initNavbar() {
 }
 
 
-// ─── Mobile Drawer ───
+// ─── Mobile Nav Overlay ───
 function initMobileMenu() {
   const toggle   = document.getElementById('nav-toggle');
-  const drawer   = document.getElementById('mobile-drawer');
-  const backdrop = document.getElementById('drawer-backdrop');
-  const closeBtn = document.getElementById('drawer-close');
-  const links    = drawer?.querySelectorAll('.mobile-drawer__link');
+  const overlay  = document.getElementById('nav-overlay');
+  const closeBtn = document.getElementById('nav-close');
+  const links    = overlay?.querySelectorAll('.nav-overlay__link');
+  const navEl    = overlay?.querySelector('.nav-overlay__nav');
+  const footerEl = overlay?.querySelector('.nav-overlay__footer');
 
-  if (!toggle || !drawer || !backdrop) return;
+  if (!toggle || !overlay) return;
 
-  function openDrawer() {
-    drawer.classList.add('open');
-    backdrop.classList.add('open');
+  function openMenu() {
+    overlay.classList.add('open');
     toggle.classList.add('active');
     toggle.setAttribute('aria-expanded', 'true');
-    drawer.setAttribute('aria-hidden', 'false');
+    overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeDrawer() {
-    drawer.classList.remove('open');
-    backdrop.classList.remove('open');
+  function closeMenu() {
+    overlay.classList.remove('open');
     toggle.classList.remove('active');
     toggle.setAttribute('aria-expanded', 'false');
-    drawer.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
+  // Hamburger toggle
   toggle.addEventListener('click', () => {
-    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    overlay.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  closeBtn?.addEventListener('click', closeDrawer);
-  backdrop.addEventListener('click', closeDrawer);
+  // Elegant text close button
+  closeBtn?.addEventListener('click', closeMenu);
 
-  links?.forEach((link) => {
-    link.addEventListener('click', closeDrawer);
-  });
+  // Clicking a nav link navigates + closes
+  links?.forEach((link) => link.addEventListener('click', closeMenu));
 
-  // Close on Escape key
+  // Tapping the bare overlay background (not on nav content) also closes
+  overlay.addEventListener('click', closeMenu);
+  navEl?.addEventListener('click', (e) => e.stopPropagation());
+  footerEl?.addEventListener('click', (e) => e.stopPropagation());
+  closeBtn?.addEventListener('click', (e) => e.stopPropagation()); // prevent double-fire
+
+  // Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeMenu();
   });
 }
 

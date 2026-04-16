@@ -56,38 +56,42 @@
     </div>
   </nav>
 
-  <!-- Mobile Drawer Backdrop -->
-  <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+  <!-- Full-Screen Nav Overlay -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true">
+    <div class="nav-overlay__glow"></div>
+    <button class="nav-overlay__close" id="nav-close" aria-label="Close navigation">close</button>
+    <nav class="nav-overlay__nav">
+      <div class="nav-overlay__item">
+        <a href="#products" class="nav-overlay__link" id="mobile-products">
+          <span class="nav-overlay__num">01</span>
+          <span class="nav-overlay__label">Products</span>
+          <span class="nav-overlay__arrow">→</span>
+        </a>
+      </div>
+      <div class="nav-overlay__item">
+        <a href="#philosophy" class="nav-overlay__link" id="mobile-philosophy">
+          <span class="nav-overlay__num">02</span>
+          <span class="nav-overlay__label">Philosophy</span>
+          <span class="nav-overlay__arrow">→</span>
+        </a>
+      </div>
+      <div class="nav-overlay__item">
+        <a href="#contact" class="nav-overlay__link" id="mobile-contact">
+          <span class="nav-overlay__num">03</span>
+          <span class="nav-overlay__label">Contact</span>
+          <span class="nav-overlay__arrow">→</span>
+        </a>
+      </div>
+    </nav>
 
-  <!-- Mobile Drawer -->
-  <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation" aria-hidden="true">
-    <div class="mobile-drawer__header">
-      <span class="mobile-drawer__brand">KALIPR LABS</span>
-      <button class="mobile-drawer__close" id="drawer-close" aria-label="Close menu">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
+    <div class="nav-overlay__footer">
+      <div class="nav-overlay__footer-left">
+        <span class="nav-overlay__tagline">// product studio</span>
+        <span class="nav-overlay__location">Pune, India</span>
+      </div>
+      <a href="mailto:contact@kaliprlabs.in" class="nav-overlay__email">contact@kaliprlabs.in</a>
     </div>
-    <div class="mobile-drawer__links">
-      <a href="#products" class="mobile-drawer__link" id="mobile-products">
-        <span class="mobile-drawer__link-num">01</span>
-        Products
-      </a>
-      <a href="#philosophy" class="mobile-drawer__link" id="mobile-philosophy">
-        <span class="mobile-drawer__link-num">02</span>
-        Philosophy
-      </a>
-      <a href="#contact" class="mobile-drawer__link" id="mobile-contact">
-        <span class="mobile-drawer__link-num">03</span>
-        Contact
-      </a>
-    </div>
-    <div class="mobile-drawer__footer">
-      <a href="mailto:contact@kaliprlabs.in" class="mobile-drawer__email">contact@kaliprlabs.in</a>
-      <span class="mobile-drawer__location">Pune, India</span>
-    </div>
-  </nav>
+  </div>
 
   <main>
 
