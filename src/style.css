@@ -55,6 +55,16 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background: rgba(200, 169, 119, 0.30);
+  color: #F5F5F5;
+}
+
+::-moz-selection {
+  background: rgba(200, 169, 119, 0.30);
+  color: #F5F5F5;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
