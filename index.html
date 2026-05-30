@@ -5,26 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO & Identity -->
-  <title>Kalipr Labs - Product Studio</title>
-  <meta name="description" content="We design, build, and ship products that matter. A focused product studio from Pune, India." />
-  <meta name="keywords" content="Kalipr Labs, product studio, AI tools, software products, Pune India" />
-  <meta name="author" content="Kalipr Labs" />
+  <title>Kalipr Labs — Software Products & Digital Tools</title>
+  <meta name="description" content="Kalipr Labs builds software products and digital tools. Founded by Pratik Anpat in Pune, India. Creators of Kalvora." />
+  <meta name="keywords" content="Kalipr Labs, Pratik Anpat, Kalvora, software products, digital tools, Pune India" />
+  <meta name="author" content="Pratik Anpat" />
   <link rel="canonical" href="https://kaliprlabs.in/" />
   <meta name="theme-color" content="#09090b" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kaliprlabs.in/" />
-  <meta property="og:title" content="Kalipr Labs - Product Studio" />
-  <meta property="og:description" content="We design, build, and ship products that matter. A focused product studio from Pune, India." />
+  <meta property="og:title" content="Kalipr Labs — Software Products & Digital Tools" />
+  <meta property="og:description" content="Kalipr Labs builds software products and digital tools. Founded by Pratik Anpat in Pune, India. Creators of Kalvora." />
   <meta property="og:image" content="https://kaliprlabs.in/og-image.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://kaliprlabs.in/" />
-  <meta property="twitter:title" content="Kalipr Labs - Product Studio" />
-  <meta property="twitter:description" content="We design, build, and ship products that matter. A focused product studio from Pune, India." />
+  <meta property="twitter:title" content="Kalipr Labs — Software Products & Digital Tools" />
+  <meta property="twitter:description" content="Kalipr Labs builds software products and digital tools. Founded by Pratik Anpat. Creators of Kalvora." />
   <meta property="twitter:image" content="https://kaliprlabs.in/og-image.png" />
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Kalipr Labs",
+    "url": "https://kaliprlabs.in",
+    "logo": "https://kaliprlabs.in/og-image.png",
+    "description": "Kalipr Labs builds software products and digital tools.",
+    "founder": {
+      "@type": "Person",
+      "name": "Pratik Anpat",
+      "url": "https://pratik.kaliprlabs.in"
+    },
+    "foundingDate": "2024",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pune",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/kalipr-labs"
+    ]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,7 +72,8 @@
       <a href="#" class="navbar__brand" id="nav-brand">KALIPR LABS</a>
       <div class="navbar__links" id="nav-links">
         <a href="#products" class="navbar__link" id="nav-products">Products</a>
-        <a href="#philosophy" class="navbar__link" id="nav-philosophy">Philosophy</a>
+        <a href="#what-we-do" class="navbar__link" id="nav-what-we-do">About</a>
+        <a href="#founder" class="navbar__link" id="nav-founder">Founder</a>
         <a href="#contact" class="navbar__link" id="nav-contact">Contact</a>
       </div>
       <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -69,15 +96,22 @@
         </a>
       </div>
       <div class="nav-overlay__item">
-        <a href="#philosophy" class="nav-overlay__link" id="mobile-philosophy">
+        <a href="#what-we-do" class="nav-overlay__link" id="mobile-about">
           <span class="nav-overlay__num">02</span>
-          <span class="nav-overlay__label">Philosophy</span>
+          <span class="nav-overlay__label">About</span>
+          <span class="nav-overlay__arrow">→</span>
+        </a>
+      </div>
+      <div class="nav-overlay__item">
+        <a href="#founder" class="nav-overlay__link" id="mobile-founder">
+          <span class="nav-overlay__num">03</span>
+          <span class="nav-overlay__label">Founder</span>
           <span class="nav-overlay__arrow">→</span>
         </a>
       </div>
       <div class="nav-overlay__item">
         <a href="#contact" class="nav-overlay__link" id="mobile-contact">
-          <span class="nav-overlay__num">03</span>
+          <span class="nav-overlay__num">04</span>
           <span class="nav-overlay__label">Contact</span>
           <span class="nav-overlay__arrow">→</span>
         </a>
@@ -86,7 +120,7 @@
 
     <div class="nav-overlay__footer">
       <div class="nav-overlay__footer-left">
-        <span class="nav-overlay__tagline">// product studio</span>
+        <span class="nav-overlay__tagline">// software products & tools</span>
         <span class="nav-overlay__location">Pune, India</span>
       </div>
       <a href="mailto:contact@kaliprlabs.in" class="nav-overlay__email">contact@kaliprlabs.in</a>
@@ -99,26 +133,18 @@
     <!-- §1 HERO                                        -->
     <!-- ═══════════════════════════════════════════════ -->
     <section id="hero" class="hero">
-      <div class="hero__orb hero__orb--1"></div>
-      <div class="hero__orb hero__orb--2"></div>
       <div class="container">
-        <span class="label label--mono" id="hero-label">// product studio</span>
+        <span class="label label--mono" id="hero-label">// software products & tools</span>
         <h1 class="hero__title" id="hero-title">
-          <span class="hero__word">We</span>
-          <span class="hero__word">design,</span>
-          <span class="hero__word">build,</span>
-          <span class="hero__word">and</span>
-          <span class="hero__word">ship</span>
-          <span class="hero__word">products</span>
-          <span class="hero__word">that</span>
-          <span class="hero__word hero__word--accent">matter.</span>
+          <span class="hero__word">Kalipr</span>
+          <span class="hero__word hero__word--accent">Labs</span>
         </h1>
         <p class="hero__subtitle" id="hero-subtitle">
-          Small team. Sharp tools.<br />
-          Own products + selective builds.
+          We build software products and digital tools.<br />
+          Founded by <a href="https://pratik.kaliprlabs.in" class="hero__founder-link">Pratik Anpat</a> in Pune, India.
         </p>
         <a href="#products" class="hero__cta" id="hero-cta">
-          See what we're building <span class="arrow">→</span>
+          See what we build <span class="arrow">→</span>
         </a>
       </div>
     </section>
@@ -136,58 +162,34 @@
           <div class="product-card__header">
             <div class="product-card__status product-card__status--live">
               <span class="status-dot status-dot--live"></span>
-              LIVE
+              LIVE — 100+ Users
             </div>
           </div>
           <h2 class="product-card__name">Kalvora</h2>
           <p class="product-card__desc">
-            Proposal-to-invoice platform for interior designers.
+            Proposal and invoice software for interior designers.
+            Create branded proposals, collect approvals, and
+            auto-generate GST invoices — all in one place.
           </p>
           <a href="https://kalvora.kaliprlabs.in" target="_blank" rel="noopener" class="product-card__link" id="link-kalvora">
             Visit Kalvora <span class="arrow">→</span>
           </a>
-          <div class="product-card__tags">
-            <span class="tag">Next.js 14</span>
-            <span class="tag">Supabase</span>
-            <span class="tag">SaaS</span>
-          </div>
         </div>
 
-        <!-- Secondary Products -->
+        <!-- Exploring -->
         <div class="products__grid" id="products-grid">
-
-          <div class="product-card product-card--secondary reveal" id="product-microtools">
-            <div class="product-card__header">
-              <div class="product-card__status product-card__status--soon">
-                <span class="status-dot status-dot--soon"></span>
-                COMING SOON
-              </div>
-            </div>
-            <h3 class="product-card__name product-card__name--sm">Micro Tools</h3>
-            <p class="product-card__desc">
-              Tiny, viral AI utilities. Built to spread. Designed to be useful in under 10 seconds.
-            </p>
-            <span class="product-card__link product-card__link--muted" id="link-microtools">
-              Coming Soon
-            </span>
-          </div>
-
-          <div class="product-card product-card--secondary reveal" id="product-costengine">
+          <div class="product-card product-card--secondary reveal" id="product-exploring">
             <div class="product-card__header">
               <div class="product-card__status product-card__status--research">
                 <span class="status-dot status-dot--research"></span>
                 EXPLORING
               </div>
             </div>
-            <h3 class="product-card__name product-card__name--sm">AI Cost Engine</h3>
+            <h3 class="product-card__name product-card__name--sm">What's Next</h3>
             <p class="product-card__desc">
-              Token optimization + prompt audit platform for companies bleeding money on AI API calls.
+              Experimenting with ideas for future software products and tools. More soon.
             </p>
-            <span class="product-card__link product-card__link--muted" id="link-costengine">
-              In Research
-            </span>
           </div>
-
         </div>
       </div>
     </section>
@@ -195,53 +197,114 @@
     <!-- ═══════════════════════════════════════════════ -->
     <!-- §4 PHILOSOPHY                                  -->
     <!-- ═══════════════════════════════════════════════ -->
-    <section id="philosophy" class="philosophy section">
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §4 WHAT WE DO                                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="what-we-do" class="philosophy section">
       <div class="container">
-        <span class="label label--mono" id="philosophy-label">// how we operate</span>
+        <span class="label label--mono" id="what-we-do-label">// what we do</span>
+
+        <div class="philosophy__statement reveal">
+          <p class="philosophy__lead">
+            We build software products for specific operational problems.<br />
+            We also work with select clients on custom digital projects.
+          </p>
+          <p class="philosophy__sub">
+            If we work with you, it's because we find the problem interesting.
+          </p>
+        </div>
 
         <div class="philosophy__grid" id="philosophy-grid">
-
           <div class="philosophy__item reveal" id="principle-1">
             <span class="philosophy__num">01</span>
-            <h3 class="philosophy__title">Ship &gt; Perfect</h3>
-            <p class="philosophy__desc">We ship early, learn fast, and iterate in public. Perfection is the enemy of products that exist.</p>
+            <h3 class="philosophy__title">Build What Hurts</h3>
+            <p class="philosophy__desc">We only build things we've experienced the problem of. Not market reports. Not trend analysis.</p>
           </div>
 
           <div class="philosophy__item reveal" id="principle-2">
             <span class="philosophy__num">02</span>
-            <h3 class="philosophy__title">Revenue on Day One</h3>
-            <p class="philosophy__desc">If it can't make money on day one, we probably shouldn't build it.</p>
+            <h3 class="philosophy__title">Ship First, Perfect Later</h3>
+            <p class="philosophy__desc">Products that exist beat products being planned. We ship early, learn fast, and iterate from real feedback.</p>
           </div>
-
-          <div class="philosophy__item reveal" id="principle-3">
-            <span class="philosophy__num">03</span>
-            <h3 class="philosophy__title">Small by Design</h3>
-            <p class="philosophy__desc">We don't want 200 people. Small teams build faster, think clearer, ship sharper.</p>
-          </div>
-
-          <div class="philosophy__item reveal" id="principle-4">
-            <span class="philosophy__num">04</span>
-            <h3 class="philosophy__title">Build What Hurts</h3>
-            <p class="philosophy__desc">We build for problems we've felt ourselves. Not market reports. Not trend analysis.</p>
-          </div>
-
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════ -->
-    <!-- §5 PAST WORK (Bridge)                          -->
+    <!-- §5 TIMELINE                                    -->
     <!-- ═══════════════════════════════════════════════ -->
-    <section id="past-work" class="past-work section">
+    <section id="timeline" class="timeline section">
       <div class="container">
-        <div class="past-work__content reveal">
-          <span class="label label--mono" id="past-work-label">// previously</span>
-          <p class="past-work__text">
-            Before Kalipr Labs became a product studio,<br />
-            we shipped web projects for clients.<br />
-            That work taught us how to build.<br />
-            Now we build for ourselves - and selectively, with others.
+        <span class="label label--mono" id="timeline-label">// timeline</span>
+        <div class="timeline__list">
+          <div class="timeline__item reveal">
+            <span class="timeline__year">2024</span>
+            <span class="timeline__event">Started Kalipr Labs</span>
+          </div>
+          <div class="timeline__item reveal">
+            <span class="timeline__year">2024</span>
+            <span class="timeline__event">First client projects</span>
+          </div>
+          <div class="timeline__item reveal">
+            <span class="timeline__year">2025</span>
+            <span class="timeline__event">Built Kalvora</span>
+          </div>
+          <div class="timeline__item reveal">
+            <span class="timeline__year">2025</span>
+            <span class="timeline__event">100+ users on Kalvora</span>
+          </div>
+          <div class="timeline__item timeline__item--next reveal">
+            <span class="timeline__year">Next</span>
+            <span class="timeline__event">Growing Kalvora · Exploring new products</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §6 NOTES FROM BUILDING                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="notes" class="notes section">
+      <div class="container">
+        <div class="notes__content reveal">
+          <span class="label label--mono" id="notes-label">// notes from building</span>
+          <p class="notes__text">
+            Building Kalvora taught me that software isn't the hard part.<br />
+            Understanding users is.
           </p>
+          <p class="notes__text notes__text--sub">
+            Most of my time now is spent talking to customers,<br />
+            finding where they get stuck, and simplifying workflows.<br />
+            That's the job.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- §7 FOUNDER                                     -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section id="founder" class="founder section">
+      <div class="container">
+        <span class="label label--mono" id="founder-label">// founder</span>
+        <div class="founder__content reveal">
+          <div class="founder__info">
+            <h2 class="founder__name">Pratik Anpat</h2>
+            <span class="founder__role">Founder</span>
+            <p class="founder__bio">
+              Building software products and tools from Pune, India.<br />
+              Creator of <a href="https://kalvora.kaliprlabs.in" target="_blank" rel="noopener">Kalvora</a>. Working with a small number of clients
+              whose problems are worth solving.
+            </p>
+            <div class="founder__links">
+              <a href="https://pratik.kaliprlabs.in" target="_blank" rel="noopener" class="founder__link" id="link-portfolio">
+                Portfolio <span class="arrow">→</span>
+              </a>
+              <a href="https://www.linkedin.com/in/pratikanpat" target="_blank" rel="noopener" class="founder__link" id="link-linkedin">
+                LinkedIn <span class="arrow">→</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -256,15 +319,13 @@
             <span class="footer__name">KALIPR LABS</span>
             <span class="footer__location">Pune, India</span>
           </div>
-          <div class="footer__message">
-            <p>Building products. Selectively<br />taking on work worth building.</p>
-          </div>
           <div class="footer__contact" id="footer-contact">
-            <p class="footer__prompt">Have something interesting?</p>
-            <a href="mailto:contact@kaliprlabs.in" class="footer__email" id="footer-email">hello@kaliprlabs.in</a>
+            <p class="footer__prompt">Working on an interesting problem?</p>
+            <a href="mailto:contact@kaliprlabs.in" class="footer__email" id="footer-email">Get in touch → contact@kaliprlabs.in</a>
           </div>
         </div>
         <div class="footer__bottom">
+          <span class="footer__founder">Founded by <a href="https://pratik.kaliprlabs.in" target="_blank" rel="noopener">Pratik Anpat</a> · Creators of <a href="https://kalvora.kaliprlabs.in" target="_blank" rel="noopener">Kalvora</a></span>
           <span class="footer__copy">© 2025 Kalipr Labs</span>
         </div>
       </div>
