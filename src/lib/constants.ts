@@ -233,19 +233,19 @@ export const PHILOSOPHY_PRINCIPLES = [
 // ─── Screenshot asset paths ───────────────────────────────
 export const SCREENSHOT_PATHS = {
   kalvora: {
-    proposalEditor: '/screenshots/kalvora/01.png',
-    clientView:     '/screenshots/kalvora/02.png',
-    viewTracking:   '/screenshots/kalvora/03.png',
-    approval:       '/screenshots/kalvora/04.png',
-    invoice:        '/screenshots/kalvora/05.png',
-    dashboard:      '/screenshots/kalvora/06.png',
+    proposalEditor: '/screenshots/kalvora/Screenshot 2026-05-01 153123.png',
+    clientView:     '/screenshots/kalvora/Screenshot 2026-05-01 165050.png',
+    viewTracking:   '/screenshots/kalvora/Screenshot 2026-05-01 182525.png',
+    approval:       '/screenshots/kalvora/Screenshot 2026-05-07 042109.png',
+    invoice:        '/screenshots/kalvora/Screenshot 2026-05-07 043145.png',
+    dashboard:      '/screenshots/kalvora/Screenshot 2026-05-07 043145.png',
   },
   sill: {
-    commandPalette: '/screenshots/sill/01.png',
-    taskbarWidget:  '/screenshots/sill/02.png',
-    systemControls: '/screenshots/sill/03.png',
-    notes:          '/screenshots/sill/04.png',
-    downloads:      '/screenshots/sill/05.png',
-    presets:        '/screenshots/sill/06.png',
+    commandPalette: '/screenshots/sill/Screenshot 2026-11-06 050754.png',
+    taskbarWidget:  '/screenshots/sill/Screenshot 2026-11-06 050838.png',
+    systemControls: '/screenshots/sill/Screenshot 2026-11-06 050905.png',
+    notes:          '/screenshots/sill/Screenshot 2026-11-06 050917.png',
+    downloads:      '/screenshots/sill/Screenshot 2026-11-06 050917.png',
+    presets:        '/screenshots/sill/Screenshot 2026-11-06 050754.png',
   },
 } as const
