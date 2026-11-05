@@ -1,11 +1,11 @@
-'use client'
+﻿'use client'
 
 import { motion } from 'motion/react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/animations/Reveal'
 import { ProductPreview } from '@/components/visuals/ProductPreview'
-import { KALVORA_FEATURES, SOCIAL_LINKS } from '@/lib/constants'
+import { KALVORA, SOCIAL_LINKS } from '@/lib/constants'
 import { ease } from '@/lib/utils'
 
 export default function KalvoraShowcase() {
@@ -13,10 +13,10 @@ export default function KalvoraShowcase() {
     <section className="bg-inverse section-pad">
       <div className="container-width">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          {/* ── Left: Content ── */}
+          {/* â”€â”€ Left: Content â”€â”€ */}
           <div>
             <Reveal>
-              <Badge variant="live">LIVE · 500+ Users</Badge>
+              <Badge variant="live">LIVE Â· 500+ Users</Badge>
             </Reveal>
 
             <Reveal delay={0.08}>
@@ -33,7 +33,7 @@ export default function KalvoraShowcase() {
 
             <Reveal delay={0.16}>
               <p className="mt-6 text-[1.0625rem] leading-relaxed text-on-inverse-muted max-w-[460px]">
-                Kalvora is our flagship product — purpose-built for individual interior
+                Kalvora is our flagship product â€” purpose-built for individual interior
                 designers and small-to-medium interior design studios. From branded proposal
                 generation to GST invoicing, it handles the business side so designers can
                 focus on the design.
@@ -43,9 +43,9 @@ export default function KalvoraShowcase() {
             {/* Feature list */}
             <Reveal delay={0.2}>
               <ul className="mt-8 space-y-3">
-                {KALVORA_FEATURES.map((feature) => (
+                {KALVORA.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3 text-sm text-on-inverse-muted">
-                    <span className="shrink-0 font-mono text-accent">✓</span>
+                    <span className="shrink-0 font-mono text-accent">âœ“</span>
                     {feature}
                   </li>
                 ))}
@@ -62,7 +62,7 @@ export default function KalvoraShowcase() {
                   external
                 >
                   Explore Kalvora
-                  <span aria-hidden>→</span>
+                  <span aria-hidden>â†’</span>
                 </Button>
                 <Button
                   href="/products/kalvora"
@@ -70,13 +70,13 @@ export default function KalvoraShowcase() {
                   size="lg"
                   className="text-on-inverse-muted hover:text-on-inverse"
                 >
-                  View product details →
+                  View product details â†’
                 </Button>
               </div>
             </Reveal>
           </div>
 
-          {/* ── Right: Screenshot ── */}
+          {/* â”€â”€ Right: Screenshot â”€â”€ */}
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -90,3 +90,5 @@ export default function KalvoraShowcase() {
     </section>
   )
 }
+
+

@@ -1,38 +1,59 @@
 @import "tailwindcss";
 
 /* ─── Design Tokens ─────────────────────────────────────── */
+/* Palette: The Curious Workshop
+   65% warm paper · 25% deep ink · 8% cobalt · 2% vermilion */
 @theme {
-  /* Backgrounds */
-  --color-canvas:         #FAFAF8;
-  --color-surface:        #F3F3EF;
-  --color-surface-hover:  #EAEAE5;
-  --color-inverse:        #0E1812;
+  /* ── Backgrounds (65% warm paper) */
+  --color-canvas:         #F5F1E9;
+  --color-surface:        #EAE6DC;
+  --color-surface-hover:  #E0DBD0;
+  --color-inverse:        #191B22;   /* deep charcoal ink */
+  --color-inverse-soft:   #22242E;   /* slightly lighter dark */
 
-  /* Text */
-  --color-primary:        #111110;
-  --color-secondary:      #4A4A45;
-  --color-muted:          #767670;
-  --color-on-inverse:     #EFF0EB;
-  --color-on-inverse-muted: #9EB3A6;
+  /* ── Text */
+  --color-primary:        #191B22;   /* deep charcoal — matches inverse */
+  --color-secondary:      #4A4B55;
+  --color-muted:          #7A7B85;
+  --color-on-inverse:     #EDE9DF;
+  --color-on-inverse-muted: #8E8F9A;
 
-  /* Accent — Forest Green */
-  --color-accent:         #1A5C3A;
-  --color-accent-hover:   #164D31;
-  --color-accent-light:   #2D7A52;
-  --color-accent-subtle:  rgba(26, 92, 58, 0.08);
+  /* ── Accent — Electric Cobalt (8%) */
+  --color-accent:         #4359E8;
+  --color-accent-hover:   #3447CC;
+  --color-accent-light:   #6B7FEE;
+  --color-accent-subtle:  rgba(67, 89, 232, 0.08);
+  --color-accent-on-dark: #7B8FF0;   /* cobalt on dark backgrounds */
 
-  /* Borders */
-  --color-border:         rgba(0, 0, 0, 0.09);
-  --color-border-strong:  rgba(0, 0, 0, 0.16);
-  --color-border-inverse: rgba(255, 255, 255, 0.10);
+  /* ── Accent 2 — Warm Vermilion (2%) */
+  --color-pop:            #F07852;
+  --color-pop-subtle:     rgba(240, 120, 82, 0.10);
 
-  /* Typography */
-  --font-heading: var(--font-geist-sans), 'Inter', system-ui, sans-serif;
-  --font-sans:    var(--font-inter), system-ui, sans-serif;
+  /* ── Product sub-brand: Kalvora */
+  --color-kalvora:        #E8DCC8;   /* warm sand */
+  --color-kalvora-accent: #8B6F47;   /* warm brown */
+  --color-kalvora-ink:    #2C1F0E;
+
+  /* ── Product sub-brand: Sill */
+  --color-sill:           #C8D4E8;   /* cool slate */
+  --color-sill-accent:    #3A5A8B;   /* technical blue */
+  --color-sill-ink:       #0A1428;
+
+  /* ── Borders */
+  --color-border:         rgba(25, 27, 34, 0.09);
+  --color-border-strong:  rgba(25, 27, 34, 0.16);
+  --color-border-inverse: rgba(255, 255, 255, 0.08);
+  --color-border-accent:  rgba(67, 89, 232, 0.20);
+
+  /* ── Typography — Geist only, JetBrains Mono for labels */
+  --font-heading: var(--font-geist-sans), system-ui, sans-serif;
+  --font-sans:    var(--font-geist-sans), system-ui, sans-serif;
   --font-mono:    var(--font-jetbrains-mono), 'Courier New', monospace;
 
-  /* Animation */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* ── Animation */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ─── Base Styles ────────────────────────────────────────── */
@@ -57,6 +78,7 @@
   h1, h2, h3, h4, h5, h6 {
     @apply text-primary font-heading;
     line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   img, video {
@@ -65,26 +87,20 @@
   }
 
   ::selection {
-    background-color: rgba(26, 92, 58, 0.18);
-    color: #111110;
+    background-color: rgba(67, 89, 232, 0.14);
+    color: #191B22;
   }
 
   :focus-visible {
-    outline: 2px solid #1A5C3A;
+    outline: 2px solid #4359E8;
     outline-offset: 3px;
     border-radius: 4px;
   }
 
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #F3F3EF;
-  }
-
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #EAE6DC; }
   ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.14);
+    background: rgba(25, 27, 34, 0.14);
     border-radius: 3px;
   }
 }
@@ -92,11 +108,11 @@
 /* ─── Layout Utilities ───────────────────────────────────── */
 @layer utilities {
   .container-width {
-    max-width: 1200px;
+    max-width: 1360px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: clamp(20px, 5vw, 48px);
-    padding-right: clamp(20px, 5vw, 48px);
+    padding-left: clamp(20px, 5vw, 56px);
+    padding-right: clamp(20px, 5vw, 56px);
   }
 
   .section-pad {
@@ -109,16 +125,65 @@
     padding-bottom: clamp(48px, 6vw, 80px);
   }
 
+  .section-pad-lg {
+    padding-top: clamp(100px, 14vw, 180px);
+    padding-bottom: clamp(100px, 14vw, 180px);
+  }
+
+  /* Editorial section number */
+  .section-num {
+    @apply font-mono text-xs tracking-widest text-muted;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+
+  /* Technical label: // PRODUCTS */
+  .section-label {
+    @apply font-mono text-xs tracking-widest uppercase;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
   /* Dot grid background texture */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.11) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(25, 27, 34, 0.09) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
-  /* Text balance for headlines */
-  .text-balance {
-    text-wrap: balance;
+  /* Fine line grid */
+  .line-grid {
+    background-image:
+      linear-gradient(rgba(25, 27, 34, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(25, 27, 34, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
+
+  /* Kalvora product surface */
+  .surface-kalvora {
+    background-color: #F0E8D8;
+  }
+
+  /* Sill product surface */
+  .surface-sill {
+    background-color: #191B22;
+  }
+
+  /* Cobalt accent button base */
+  .btn-accent {
+    @apply bg-accent text-white font-medium rounded-full transition-colors;
+    padding: 12px 28px;
+  }
+  .btn-accent:hover { background-color: #3447CC; }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply border border-border-strong text-primary font-medium rounded-full transition-colors;
+    padding: 11px 27px;
+  }
+  .btn-ghost:hover { @apply bg-surface; }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
 }
 
 /* ─── Reduced Motion ─────────────────────────────────────── */
@@ -130,4 +195,3 @@
     scroll-behavior: auto !important;
   }
 }
-

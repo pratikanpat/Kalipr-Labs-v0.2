@@ -1,15 +1,15 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { Reveal } from '@/components/animations/Reveal'
-import { KALVORA_FEATURES, SOCIAL_LINKS } from '@/lib/constants'
+import { KALVORA, SOCIAL_LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Products',
   description:
-    'Software products built by Kalipr Labs. Kalvora — proposal and invoice software for interior designers. 500+ users.',
+    'Software products built by Kalipr Labs. Kalvora â€” proposal and invoice software for interior designers. 500+ users.',
 }
 
 export default function ProductsPage() {
@@ -29,7 +29,7 @@ export default function ProductsPage() {
           <Reveal delay={0.14}>
             <p className="mt-5 text-base leading-relaxed text-secondary max-w-[480px]">
               We build our own products as well as software for clients. Products we own are
-              maintained, improved, and operated by us — not handed off.
+              maintained, improved, and operated by us â€” not handed off.
             </p>
           </Reveal>
         </div>
@@ -43,7 +43,7 @@ export default function ProductsPage() {
               <div className="p-8 md:p-12">
                 <div className="flex flex-wrap items-start justify-between gap-6">
                   <div className="flex-1 min-w-[280px]">
-                    <Badge variant="live">LIVE · 500+ Users</Badge>
+                    <Badge variant="live">LIVE Â· 500+ Users</Badge>
 
                     <h2 className="mt-5 font-heading text-3xl font-semibold text-primary">
                       Kalvora
@@ -53,15 +53,15 @@ export default function ProductsPage() {
                     </p>
                     <p className="mt-5 text-base leading-relaxed text-secondary max-w-[500px]">
                       Kalvora is Kalipr Labs&apos; flagship product. Built for individual interior
-                      designers and small-to-medium interior design studios — it handles branded
+                      designers and small-to-medium interior design studios â€” it handles branded
                       proposals, client approvals, and GST invoicing so designers can focus on
                       the actual design work.
                     </p>
 
                     <ul className="mt-6 space-y-2.5">
-                      {KALVORA_FEATURES.map((feature) => (
+                      {KALVORA.features.map((feature) => (
                         <li key={feature} className="flex items-center gap-3 text-sm text-secondary">
-                          <span className="text-accent font-mono shrink-0">✓</span>
+                          <span className="text-accent font-mono shrink-0">âœ“</span>
                           {feature}
                         </li>
                       ))}
@@ -69,7 +69,7 @@ export default function ProductsPage() {
 
                     <div className="mt-8 flex flex-wrap items-center gap-3">
                       <Button href={SOCIAL_LINKS.kalvora} variant="primary" size="md" external>
-                        Open Kalvora →
+                        Open Kalvora â†’
                       </Button>
                       <Button href="/products/kalvora" variant="secondary" size="md">
                         Product details
@@ -94,14 +94,14 @@ export default function ProductsPage() {
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-secondary">
                     We&apos;re exploring the next product to build. If you have a software problem
-                    worth solving — in a space that lacks good tooling — we&apos;d like to hear about
+                    worth solving â€” in a space that lacks good tooling â€” we&apos;d like to hear about
                     it.
                   </p>
                   <Link
                     href="/contact"
                     className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:text-accent-hover transition-colors"
                   >
-                    Tell us about a problem →
+                    Tell us about a problem â†’
                   </Link>
                 </div>
               </div>
@@ -112,4 +112,6 @@ export default function ProductsPage() {
     </div>
   )
 }
+
+
 

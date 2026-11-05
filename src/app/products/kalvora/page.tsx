@@ -1,17 +1,17 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { Reveal } from '@/components/animations/Reveal'
-import { KALVORA_FEATURES, SOCIAL_LINKS } from '@/lib/constants'
+import { KALVORA, SOCIAL_LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Kalvora — Proposal & Invoice Software for Interior Designers',
+  title: 'Kalvora â€” Proposal & Invoice Software for Interior Designers',
   description:
     'Kalvora by Kalipr Labs. Branded proposals, client approvals, and GST invoicing built specifically for interior designers and studios. 500+ users.',
   openGraph: {
-    title: 'Kalvora — Proposal & Invoice Software for Interior Designers',
+    title: 'Kalvora â€” Proposal & Invoice Software for Interior Designers',
     description:
       'Kalvora helps interior designers and studios manage proposals, client approvals, and invoicing in one place.',
   },
@@ -21,7 +21,7 @@ const FEATURES_DETAIL = [
   {
     title: 'Branded Proposal Generation',
     description:
-      'Create professional, branded proposals that reflect your studio identity. Clients receive a polished document — not a generic template.',
+      'Create professional, branded proposals that reflect your studio identity. Clients receive a polished document â€” not a generic template.',
   },
   {
     title: 'Client Approval Workflows',
@@ -36,7 +36,7 @@ const FEATURES_DETAIL = [
   {
     title: 'GST Invoice Generation',
     description:
-      'Generate GST-compliant invoices directly from approved proposals. The numbers flow through — no duplicate data entry.',
+      'Generate GST-compliant invoices directly from approved proposals. The numbers flow through â€” no duplicate data entry.',
   },
   {
     title: 'Studio Management Workflows',
@@ -61,7 +61,7 @@ export default function KalvoraPage() {
           <Reveal>
             <div className="flex flex-wrap items-center gap-3">
               <SectionLabel>// kalvora</SectionLabel>
-              <Badge variant="live">LIVE · 500+ Users</Badge>
+              <Badge variant="live">LIVE Â· 500+ Users</Badge>
             </div>
           </Reveal>
 
@@ -74,7 +74,7 @@ export default function KalvoraPage() {
           <Reveal delay={0.14}>
             <p className="mt-6 text-base leading-relaxed text-secondary max-w-[520px]">
               Kalvora is Kalipr Labs&apos; flagship product. It handles the business side of
-              interior design — proposals, client approvals, and GST invoicing — so
+              interior design â€” proposals, client approvals, and GST invoicing â€” so
               designers can focus entirely on the design work.
             </p>
           </Reveal>
@@ -82,7 +82,7 @@ export default function KalvoraPage() {
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button href={SOCIAL_LINKS.kalvora} variant="primary" size="lg" external>
-                Open Kalvora →
+                Open Kalvora â†’
               </Button>
               <span className="text-sm text-muted">Free to get started</span>
             </div>
@@ -112,7 +112,7 @@ export default function KalvoraPage() {
             ))}
           </div>
           <p className="mt-5 text-xs text-muted text-center">
-            Screenshots from the live Kalvora product — real interface, real users.
+            Screenshots from the live Kalvora product â€” real interface, real users.
           </p>
         </div>
       </section>
@@ -134,7 +134,7 @@ export default function KalvoraPage() {
               <Reveal key={feature.title} delay={i * 0.06}>
                 <div className="rounded-xl border border-border bg-white p-6">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-accent font-mono text-sm">✓</span>
+                    <span className="text-accent font-mono text-sm">âœ“</span>
                     <h3 className="font-heading text-sm font-semibold text-primary">
                       {feature.title}
                     </h3>
@@ -165,7 +165,7 @@ export default function KalvoraPage() {
           <Reveal delay={0.14}>
             <div className="mt-8">
               <Button href={SOCIAL_LINKS.kalvora} variant="inverse" size="lg" external>
-                Open Kalvora →
+                Open Kalvora â†’
               </Button>
             </div>
           </Reveal>
@@ -174,4 +174,6 @@ export default function KalvoraPage() {
     </div>
   )
 }
+
+
 

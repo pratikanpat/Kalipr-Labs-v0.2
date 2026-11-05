@@ -1,107 +1,155 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { NAV_LINKS, COMPANY, SOCIAL_LINKS } from '@/lib/constants'
+import { COMPANY, SOCIAL_LINKS } from '@/lib/constants'
+
+const studioLinks = [
+  { href: '/about',    label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/work',     label: 'Work' },
+  { href: '/contact',  label: 'Contact' },
+]
+
+const productLinks = [
+  { href: SOCIAL_LINKS.kalvora, label: 'Kalvora', external: true },
+  { href: SOCIAL_LINKS.sill,    label: 'Sill',    external: true },
+  { href: '/products',          label: 'All products', external: false },
+]
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="bg-inverse text-on-inverse">
-      {/* ── CTA Band ── */}
+
+      {/* ── Main footer grid ── */}
       <div className="section-pad border-b border-border-inverse">
         <div className="container-width">
-          <div className="max-w-2xl">
-            <p className="font-mono text-xs tracking-widest uppercase text-on-inverse-muted mb-6">
-              // contact
-            </p>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-on-inverse tracking-tight text-balance mb-6">
-              Have a problem worth solving?
-            </h2>
-            <p className="text-on-inverse-muted text-lg mb-10 max-w-lg leading-relaxed">
-              Tell us what you&apos;re building. We&apos;ll let you know if we&apos;re the right fit.
-            </p>
-            <div className="flex flex-wrap items-center gap-5">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-on-inverse text-primary font-medium px-7 py-3.5 rounded-full text-base hover:bg-on-inverse/90 transition-colors"
-              >
-                Start a Project
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href={`mailto:${COMPANY.email}`}
-                className="font-mono text-sm text-on-inverse-muted hover:text-on-inverse transition-colors"
-              >
-                {COMPANY.email}
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
-      {/* ── Footer Links ── */}
-      <div className="section-pad-sm">
-        <div className="container-width">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
-            {/* Brand */}
-            <div>
-              <p className="font-heading font-semibold text-sm tracking-[0.14em] text-on-inverse mb-2">
+            {/* Brand column */}
+            <div className="lg:col-span-1">
+              <p className="font-heading font-bold tracking-[0.12em] text-on-inverse text-sm mb-3">
                 KALIPR LABS
               </p>
-              <p className="font-mono text-xs text-on-inverse-muted uppercase tracking-widest">
-                {COMPANY.tagline}
+              <p className="text-[0.8125rem] text-on-inverse-muted leading-relaxed mb-6 max-w-[200px]">
+                Independent software studio building products and digital solutions.
               </p>
-              <p className="text-sm text-on-inverse-muted mt-1">{COMPANY.location}</p>
+              <p className="font-mono text-[10px] tracking-widest uppercase text-on-inverse-muted/60">
+                {COMPANY.location} · Est. {COMPANY.foundedYear}
+              </p>
             </div>
 
-            {/* Nav links */}
-            <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-10 gap-y-3">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link href="/contact" className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors">
-                Contact
-              </Link>
-            </nav>
+            {/* Studio column */}
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-on-inverse-muted/60 mb-5">
+                Studio
+              </p>
+              <nav aria-label="Footer studio links">
+                <ul className="space-y-3">
+                  {studioLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
 
-            {/* LinkedIn */}
-            <a
-              href={SOCIAL_LINKS.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors flex items-center gap-1.5"
-            >
-              LinkedIn
-              <ArrowRight className="w-3 h-3 -rotate-45" />
-            </a>
-          </div>
+            {/* Products column */}
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-on-inverse-muted/60 mb-5">
+                Our Products
+              </p>
+              <nav aria-label="Footer product links">
+                <ul className="space-y-3">
+                  {productLinks.map((link) => (
+                    <li key={link.href}>
+                      {link.external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors inline-flex items-center gap-1"
+                        >
+                          {link.label}
+                          <ArrowRight className="w-3 h-3 -rotate-45 opacity-50" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
 
-          {/* Bottom strip */}
-          <div className="mt-14 pt-6 border-t border-border-inverse flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-            <p className="font-mono text-xs text-on-inverse-muted">
-              © {year} Kalipr Labs · Creators of{' '}
-              <a
-                href={SOCIAL_LINKS.kalvora}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-on-inverse transition-colors"
-              >
-                Kalvora
-              </a>
-            </p>
-            <p className="font-mono text-xs text-on-inverse-muted">
-              Built by Kalipr Labs · Pune, India
-            </p>
+            {/* Connect column */}
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-on-inverse-muted/60 mb-5">
+                Connect
+              </p>
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href={SOCIAL_LINKS.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors inline-flex items-center gap-1"
+                  >
+                    LinkedIn
+                    <ArrowRight className="w-3 h-3 -rotate-45 opacity-50" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${COMPANY.email}`}
+                    className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors break-all"
+                  >
+                    {COMPANY.email}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </div>
+
+      {/* ── Bottom strip ── */}
+      <div className="section-pad-sm">
+        <div className="container-width">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <p className="font-mono text-[11px] text-on-inverse-muted">
+              © {year} Kalipr Labs. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              {/* Privacy & Terms — only add hrefs when real pages exist */}
+              <span className="font-mono text-[11px] text-on-inverse-muted/40">
+                Privacy Policy
+              </span>
+              <span className="text-on-inverse-muted/20">·</span>
+              <span className="font-mono text-[11px] text-on-inverse-muted/40">
+                Terms of Use
+              </span>
+              <span className="text-on-inverse-muted/20">·</span>
+              <span className="font-mono text-[11px] text-on-inverse-muted/40">
+                Made in Pune, India.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </footer>
   )
 }
-

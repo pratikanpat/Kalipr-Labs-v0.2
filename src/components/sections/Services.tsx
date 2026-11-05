@@ -1,68 +1,88 @@
+'use client'
+
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { Reveal } from '@/components/animations/Reveal'
-import { SectionLabel } from '@/components/ui/SectionLabel'
 import { SERVICES } from '@/lib/constants'
 
 export default function Services() {
   return (
-    <section className="section-pad bg-canvas border-t border-border">
+    <section aria-labelledby="services-heading" className="bg-canvas section-pad border-t border-border">
       <div className="container-width">
+
         {/* Header */}
         <Reveal>
-          <SectionLabel>// services</SectionLabel>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <h2 className="mt-4 font-heading text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-tight text-primary text-balance">
-            Four areas. One standard of work.
-          </h2>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted">// Services</span>
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+            <h2
+              id="services-heading"
+              className="font-heading font-bold text-primary text-balance"
+              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', letterSpacing: '-0.025em', lineHeight: 1.1 }}
+            >
+              Some problems need more
+              <br className="hidden sm:block" /> than an off-the-shelf tool.
+            </h2>
+            <p className="text-secondary text-[0.9375rem] leading-relaxed max-w-sm text-pretty">
+              We work with businesses to understand their operations and engineer
+              software around the way they actually work.
+            </p>
+          </div>
         </Reveal>
 
-        {/* Asymmetric bento grid */}
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {SERVICES.map((service, i) => {
-            // Asymmetric spans: 01 → md:col-span-2, 04 → md:col-span-2, rest 1
-            const colSpan =
-              service.id === '01' || service.id === '04'
-                ? 'md:col-span-2'
-                : 'md:col-span-1'
-            const delay = i * 0.08
+        {/* Service cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+          {SERVICES.map((service, i) => (
+            <Reveal key={service.id} delay={i * 0.08}>
+              <div className="bg-canvas p-8 lg:p-10 group h-full flex flex-col hover:bg-surface transition-colors duration-300">
+                {/* Number */}
+                <span className="font-mono text-[11px] tracking-[0.18em] text-muted mb-6">{service.id}</span>
 
-            return (
-              <Reveal key={service.id} delay={delay} className={colSpan}>
-                <Link
-                  href={service.link}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-white p-7 md:p-9
-                             transition-all duration-300
-                             hover:border-border-strong hover:shadow-[0_4px_24px_rgba(0,0,0,0.07)]"
+                {/* Title */}
+                <h3
+                  className="font-heading font-semibold text-primary mb-4"
+                  style={{ fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', letterSpacing: '-0.02em', lineHeight: 1.2 }}
                 >
-                  <span className="font-mono text-xs text-muted tracking-widest uppercase">
-                    {service.id}
-                  </span>
+                  {service.title}
+                </h3>
 
-                  <h3 className="mt-5 font-heading text-lg font-semibold text-primary leading-snug">
-                    {service.title}
-                  </h3>
+                {/* Problem */}
+                <p className="font-medium text-sm text-accent mb-3 leading-snug">
+                  {service.problem}
+                </p>
 
-                  <p className="mt-3 text-sm leading-relaxed text-secondary flex-1">
-                    {service.description}
+                {/* Description */}
+                <p className="text-[0.9rem] text-secondary leading-[1.7] mb-6 flex-1">
+                  {service.description}
+                </p>
+
+                {/* Deliverable */}
+                <div className="pt-5 border-t border-border mt-auto">
+                  <p className="font-mono text-[10px] tracking-widest uppercase text-muted mb-1">
+                    What we deliver
                   </p>
-
-                  <div className="mt-6 flex items-center gap-1.5 font-mono text-xs text-accent">
-                    <span>Learn more</span>
-                    <span
-                      aria-hidden
-                      className="transition-transform duration-200 group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            )
-          })}
+                  <p className="text-sm text-primary font-medium">{service.deliverable}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
+
+        {/* CTA */}
+        <Reveal delay={0.3}>
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors group"
+            >
+              Learn more about how we work
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </Reveal>
+
       </div>
     </section>
   )
 }
-
