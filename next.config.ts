@@ -5,8 +5,6 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [],
-    // Required for Cloudflare Pages static image serving
-    unoptimized: true,
   },
   async headers() {
     return [

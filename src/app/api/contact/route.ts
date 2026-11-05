@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { contactSchema } from '@/features/contact/schema'
 
 // ── POST handler ─────────────────────────────────────────────
-// Note: Runs on Cloudflare Workers (Node.js compat mode).
+// Note: Runs on Vercel Edge/Node.js runtime.
 // In-memory rate limiting is intentionally omitted — stateless per-request env.
-// Use Cloudflare Rate Limiting rules in the dashboard for production rate control.
+// Use Vercel Firewall or middleware-based rate limiting for production.
 
 export async function POST(req: NextRequest) {
   // Parse body
