@@ -68,38 +68,13 @@ export default function Footer() {
             <p style={mutedStyle}>{COMPANY.name}</p>
             <p style={mutedStyle}>{COMPANY.location}</p>
             <p style={mutedStyle}>Est. {COMPANY.foundedYear}</p>
-            {/* System status indicator */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginTop: '6px' }}>
-              <span
-                style={{
-                  width: '7px',
-                  height: '7px',
-                  borderRadius: '50%',
-                  background: '#4ade80',
-                  flexShrink: 0,
-                  boxShadow: '0 0 6px rgba(74,222,128,0.6)',
-                  animation: 'status-pulse 2.5s ease-in-out infinite',
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(230,234,212,0.35)',
-                }}
-              >
-                All Systems Operational
-              </span>
-            </div>
           </div>
 
           {/* Col 2 — Studio links */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <p style={labelStyle}>Navigation</p>
             {studioLinks.map((l) => (
-              <Link key={l.href} href={l.href} style={linkStyle}>
+              <Link key={l.href} href={l.href} className="link-underline" style={linkStyle}>
                 {l.label}
               </Link>
             ))}
@@ -113,6 +88,7 @@ export default function Footer() {
                 key={l.href}
                 href={l.href}
                 {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="link-underline"
                 style={linkStyle}
               >
                 {l.label}
@@ -124,7 +100,7 @@ export default function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <p style={labelStyle}>Legal</p>
             {legalLinks.map((l) => (
-              <Link key={l.href} href={l.href} style={linkStyle}>
+              <Link key={l.href} href={l.href} className="link-underline" style={linkStyle}>
                 {l.label}
               </Link>
             ))}
@@ -132,6 +108,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={() => {/* cookie consent reset hook — extend as needed */}}
+              className="link-underline"
               style={{
                 ...linkStyle,
                 background: 'none',
@@ -145,10 +122,10 @@ export default function Footer() {
             </button>
             <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <p style={labelStyle}>Social</p>
-              <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+              <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline" style={linkStyle}>
                 LinkedIn
               </Link>
-              <Link href={SOCIAL_LINKS.founderPortfolio} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+              <Link href={SOCIAL_LINKS.founderPortfolio} target="_blank" rel="noopener noreferrer" className="link-underline" style={linkStyle}>
                 Founder
               </Link>
             </div>

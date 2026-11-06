@@ -270,38 +270,6 @@
   .btn-pill-elev:hover  { letter-spacing: 0.03em; transform: none; box-shadow: none !important; }
   .btn-pill-elev:active { transform: scale(0.96); }
 
-  /* ── Kinetic Slide-Through Underline ───────────────────────────────
-     Enter: line slides in from left  (transform-origin: left,  scaleX 0→1)
-     Leave: line slides out to right  (transform-origin: right, scaleX 1→0)
-     Trick: We switch transform-origin on :hover so the exit uses 'right'.     */
-  .link-underline { position: relative; display: inline-block; }
-  .link-underline::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    background: currentColor;
-    border-radius: 1px;
-    transform: scaleX(0);
-    transform-origin: right;                       /* exit: slides out to right */
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
-                transform-origin 0s 0.4s;         /* swap origin after exit completes */
-  }
-  .link-underline:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;                        /* enter: slides in from left */
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
-                transform-origin 0s;               /* swap origin instantly on hover */
-  }
-
-  /* Heavy variant — for the giant footer email link (2px, -6px gap) */
-  .link-underline--heavy::after {
-    height: 2px;
-    bottom: -6px;
-  }
-
   /* Bento grid helpers */
   .bento-grid {
     display: grid;
@@ -321,6 +289,44 @@
 
   /* Section divider */
   .divider { height: 1px; background: var(--color-border); }
+}
+
+/* ================================================================
+   KINETIC SLIDE-THROUGH UNDERLINE
+   ─────────────────────────────────────────────────────────────────
+   IMPORTANT: Intentionally OUTSIDE @layer utilities — same cascade
+   authority as .btn-text-arrow so pseudo-elements win reliably.
+
+   Enter: hairline slides in from left  (transform-origin: left)
+   Leave: hairline exits  to   right    (transform-origin: right)
+   ================================================================ */
+
+.link-underline { position: relative; display: inline-block; }
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+              transform-origin 0s 0.4s;
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+              transform-origin 0s;
+}
+
+/* Heavy variant — giant footer email link (2px weight, -6px gap) */
+.link-underline--heavy::after {
+  height: 2px;
+  bottom: -6px;
 }
 
 /* ================================================================
