@@ -1,10 +1,57 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { COMPANY, SOCIAL_LINKS } from '@/lib/constants'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// ── Live Pune Clock with animated digit-flip on each tick ──────────────
+function PuneClock() {
+  const [time, setTime] = useState('')
+
+  useEffect(() => {
+    function tick() {
+      setTime(
+        new Date().toLocaleTimeString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })
+      )
+    }
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  if (!time) return null
+
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+      PUNE, IN —&nbsp;
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={time}
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 4 }}
+          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            display: 'inline-block',
+            fontVariantNumeric: 'tabular-nums',
+          }}
+        >
+          {time}
+        </motion.span>
+      </AnimatePresence>
+      &nbsp;<span style={{ opacity: 0.45 }}>UTC+5:30</span>
+    </span>
+  )
+}
 
 function item(delay: number) {
   return {
@@ -39,6 +86,43 @@ export default function Hero() {
       aria-label="Hero"
     >
       <div className="container-width relative z-10 w-full">
+
+        {/* ── Structural Grid Guide — hairline with live Pune clock ───────── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.4, delay: 0.0, ease: EASE }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '24px',
+          }}
+        >
+          {/* Full-width hairline */}
+          <div
+            style={{
+              flex: 1,
+              height: '1px',
+              background: 'rgba(26,29,22,0.08)',
+            }}
+          />
+          {/* Live clock — far right */}
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              letterSpacing: '0.07em',
+              color: 'rgba(26,29,22,0.38)',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              paddingLeft: '14px',
+            }}
+          >
+            <PuneClock />
+          </span>
+        </motion.div>
 
         {/* Top micro-label */}
         <motion.p
