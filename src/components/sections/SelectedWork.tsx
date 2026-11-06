@@ -62,48 +62,34 @@ function ProjectCard({ project, delay }: { project: (typeof PROJECTS)[number]; d
         y: -4,
       }}
     >
-      {/* Top row */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.65rem',
-              fontWeight: 600,
-              letterSpacing: '0.10em',
-              color: 'rgba(26,29,22,0.35)',
-              textTransform: 'uppercase',
-              display: 'block',
-              marginBottom: '8px',
-            }}
-          >
-            {project.industry}
-          </span>
-          <h3
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontWeight: 700,
-              fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
-              letterSpacing: '-0.03em',
-              color: '#1A1D16',
-              lineHeight: 1.2,
-            }}
-          >
-            {project.type}
-          </h3>
-        </div>
+      {/* Top row — industry label + project title, no year */}
+      <div>
         <span
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
-            color: 'rgba(26,29,22,0.30)',
-            letterSpacing: '0.06em',
-            flexShrink: 0,
-            paddingTop: '4px',
+            fontSize: '0.65rem',
+            fontWeight: 600,
+            letterSpacing: '0.10em',
+            color: 'rgba(26,29,22,0.35)',
+            textTransform: 'uppercase',
+            display: 'block',
+            marginBottom: '8px',
           }}
         >
-          {project.year}
+          {project.industry}
         </span>
+        <h3
+          style={{
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 700,
+            fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+            letterSpacing: '-0.03em',
+            color: '#1A1D16',
+            lineHeight: 1.2,
+          }}
+        >
+          {project.type}
+        </h3>
       </div>
 
       {/* Divider */}
@@ -246,7 +232,7 @@ export default function SelectedWork() {
                 maxWidth: '32ch',
               }}
             >
-              Want to become project #6? Let's talk about what you're building.
+              Want to work with us? Let's talk about what you're building.
             </p>
             <Link
               href="/contact"

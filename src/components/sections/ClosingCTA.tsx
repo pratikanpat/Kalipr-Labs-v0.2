@@ -81,27 +81,50 @@ export default function ClosingCTA() {
             let's talk about it.
           </p>
 
-          {/* CTAs */}
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* CTAs — asymmetric: solid pill + bare text email link */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '32px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <Link href="/contact" className="btn-primary">
               Start a conversation
               <ArrowRight size={15} />
             </Link>
-            <Link
+            <a
               href={`mailto:${COMPANY.email}`}
-              className="btn-ghost"
+              className="btn-text-arrow"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.9375rem',
+                color: 'rgba(26,29,22,0.65)',
+                letterSpacing: '-0.01em',
+              }}
             >
-              {COMPANY.email}
-            </Link>
+              <span className="btn-label">{COMPANY.email}</span>
+              <svg
+                className="btn-arrow"
+                width="15"
+                height="15"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
           </div>
 
-          {/* Footnote */}
+          {/* Footnote — matches hero micro-meta contrast */}
           <p
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
-              color: 'rgba(26,29,22,0.30)',
-              letterSpacing: '0.04em',
+              color: 'rgba(26,29,22,0.45)',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
             }}
           >
             Based in {COMPANY.location} · Est. {COMPANY.foundedYear} · Independent studio

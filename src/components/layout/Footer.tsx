@@ -119,7 +119,7 @@ export default function Footer() {
             borderTop: '1px solid rgba(255,255,255,0.06)',
             padding: '20px 0',
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'baseline',
             justifyContent: 'space-between',
             gap: '12px',
             flexWrap: 'wrap',
@@ -147,7 +147,7 @@ export default function Footer() {
             fontWeight: 900,
             fontSize: 'clamp(80px, 18vw, 180px)',
             letterSpacing: '-0.05em',
-            color: 'rgba(255,255,255,0.025)',
+            color: 'rgba(255,255,255,0.015)',
             whiteSpace: 'nowrap',
             padding: '0 clamp(16px, 4vw, 48px)',
           }}
