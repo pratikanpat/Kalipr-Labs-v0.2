@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SectionLabel } from '@/components/ui/SectionLabel'
-import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/animations/Reveal'
 import { SERVICES, PROCESS_STEPS } from '@/lib/constants'
 
@@ -14,7 +13,8 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <div className="bg-canvas pt-[72px]">
-      {/* Header */}
+
+      {/* ── Header ─────────────────────────────────────────────────── */}
       <section className="section-pad border-b border-border">
         <div className="container-width">
           <Reveal>
@@ -34,89 +34,331 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services detail */}
+      {/* ── Services — Z-Pattern alternating 50/50 layout ──────────── */}
       <section className="section-pad border-b border-border">
         <div className="container-width">
-          <div className="space-y-5">
-            {SERVICES.map((service, i) => (
-              <Reveal key={service.id} delay={i * 0.06}>
-                <div className="group rounded-2xl border border-border bg-white p-7 md:p-10 hover:border-border-strong hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
-                  <div className="flex flex-wrap items-start justify-between gap-6">
-                    <div className="flex-1 min-w-[260px]">
-                      <span className="font-mono text-xs text-muted uppercase tracking-widest">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+            {SERVICES.map((service, i) => {
+              const isEven = i % 2 === 0
+              return (
+                <Reveal key={service.id} delay={i * 0.06}>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gap: '0',
+                      borderBottom: i < SERVICES.length - 1 ? '1px solid rgba(26,29,22,0.08)' : 'none',
+                      padding: '56px 0',
+                    }}
+                    className="grid-cols-1 md:grid-cols-2"
+                  >
+                    {/* Content block — alternates left/right */}
+                    <div
+                      style={{
+                        order: isEven ? 1 : 2,
+                        paddingRight: isEven ? '64px' : '0',
+                        paddingLeft: isEven ? '0' : '64px',
+                        borderRight: isEven ? '1px solid rgba(26,29,22,0.08)' : 'none',
+                        borderLeft: !isEven ? '1px solid rgba(26,29,22,0.08)' : 'none',
+                      }}
+                      className={isEven ? 'pr-0 md:pr-16' : 'pl-0 md:pl-16'}
+                    >
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.65rem',
+                          fontWeight: 600,
+                          letterSpacing: '0.10em',
+                          color: 'rgba(26,29,22,0.30)',
+                          textTransform: 'uppercase',
+                          display: 'block',
+                          marginBottom: '16px',
+                        }}
+                      >
                         {service.id}
                       </span>
-                      <h2 className="mt-3 font-heading text-xl font-semibold text-primary">
+                      <h2
+                        style={{
+                          fontFamily: 'var(--font-heading)',
+                          fontWeight: 700,
+                          fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+                          letterSpacing: '-0.03em',
+                          color: '#1A1D16',
+                          marginBottom: '16px',
+                        }}
+                      >
                         {service.title}
                       </h2>
-                      <p className="mt-3 text-base leading-relaxed text-secondary max-w-[560px]">
+                      <p
+                        style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.9375rem',
+                          lineHeight: 1.75,
+                          color: 'rgba(26,29,22,0.60)',
+                          maxWidth: '44ch',
+                          marginBottom: '24px',
+                        }}
+                      >
                         {service.description}
                       </p>
+                      <Link href="/contact" className="btn-text-arrow" style={{ color: 'rgba(26,29,22,0.55)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                        <span className="btn-label">Start a project</span>
+                        <svg className="btn-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </Link>
                     </div>
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 font-mono text-xs text-accent hover:text-accent-hover transition-colors mt-1 shrink-0"
+
+                    {/* Meta block — the opposing half */}
+                    <div
+                      style={{
+                        order: isEven ? 2 : 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        padding: isEven ? '0 0 0 64px' : '0 64px 0 0',
+                        gap: '16px',
+                      }}
+                      className={isEven ? 'pl-0 md:pl-16' : 'pr-0 md:pr-16'}
                     >
-                      Start a project →
-                    </Link>
+                      {/* Problem statement */}
+                      <div
+                        style={{
+                          background: 'rgba(26,29,22,0.03)',
+                          border: '1px solid rgba(26,29,22,0.07)',
+                          borderRadius: '10px',
+                          padding: '20px 24px',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.65rem',
+                            fontWeight: 600,
+                            letterSpacing: '0.10em',
+                            color: 'rgba(26,29,22,0.30)',
+                            textTransform: 'uppercase',
+                            display: 'block',
+                            marginBottom: '8px',
+                          }}
+                        >
+                          // The Problem
+                        </span>
+                        <p
+                          style={{
+                            fontFamily: 'var(--font-sans)',
+                            fontSize: '0.875rem',
+                            lineHeight: 1.65,
+                            color: 'rgba(26,29,22,0.55)',
+                            fontStyle: 'italic',
+                          }}
+                        >
+                          &ldquo;{service.problem}&rdquo;
+                        </p>
+                      </div>
+                      {/* Deliverable */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            background: '#1A1D16',
+                            flexShrink: 0,
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-sans)',
+                            fontSize: '0.875rem',
+                            color: 'rgba(26,29,22,0.65)',
+                          }}
+                        >
+                          {service.deliverable}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* Process */}
+      {/* ── Process — Horizontal Pipeline Strip ────────────────────── */}
       <section className="section-pad border-b border-border bg-surface">
         <div className="container-width">
           <Reveal>
             <SectionLabel>// how we work</SectionLabel>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-4 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-tight text-primary">
+            <h2
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                letterSpacing: '-0.03em',
+                color: '#1A1D16',
+                marginTop: '16px',
+                marginBottom: '48px',
+              }}
+            >
               Working with us.
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {PROCESS_STEPS.map((step, i) => (
-              <Reveal key={step.step} delay={i * 0.06}>
-                <div className="rounded-xl border border-border bg-white p-6 h-full">
-                  <span className="font-mono text-xs text-accent uppercase tracking-widest">
-                    {step.step}
-                  </span>
-                  <h3 className="mt-2 font-heading text-base font-semibold text-primary">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-secondary">
-                    {step.description}
-                  </p>
+          {/* Horizontal pipeline — single axis */}
+          <Reveal delay={0.1}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'stretch',
+                gap: 0,
+                borderTop: '1px solid rgba(26,29,22,0.08)',
+                borderBottom: '1px solid rgba(26,29,22,0.08)',
+                overflowX: 'auto',
+              }}
+            >
+              {PROCESS_STEPS.map((step, i) => (
+                <div
+                  key={step.step}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'stretch',
+                    flex: 1,
+                    minWidth: '200px',
+                  }}
+                >
+                  {/* Step block */}
+                  <div
+                    style={{
+                      flex: 1,
+                      padding: '32px 28px',
+                      borderRight: i < PROCESS_STEPS.length - 1 ? '1px solid rgba(26,29,22,0.08)' : 'none',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.65rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.10em',
+                        color: 'rgba(26,29,22,0.30)',
+                        textTransform: 'uppercase',
+                        display: 'block',
+                        marginBottom: '16px',
+                      }}
+                    >
+                      Step {step.step}
+                    </span>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontWeight: 700,
+                        fontSize: '1.0625rem',
+                        letterSpacing: '-0.02em',
+                        color: '#1A1D16',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.875rem',
+                        lineHeight: 1.65,
+                        color: 'rgba(26,29,22,0.55)',
+                        marginBottom: '16px',
+                      }}
+                    >
+                      {step.description}
+                    </p>
+                    {/* Deliverable tag */}
+                    <div
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        paddingTop: '12px',
+                        borderTop: '1px solid rgba(26,29,22,0.07)',
+                        width: '100%',
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.65rem',
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          color: 'rgba(26,29,22,0.28)',
+                        }}
+                      >
+                        Output:
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.65rem',
+                          letterSpacing: '0.04em',
+                          color: 'rgba(26,29,22,0.45)',
+                        }}
+                      >
+                        {step.deliverable}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Arrow connector between steps */}
+                  {i < PROCESS_STEPS.length - 1 && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '32px',
+                        flexShrink: 0,
+                        color: 'rgba(26,29,22,0.20)',
+                        fontSize: '18px',
+                        fontFamily: 'var(--font-heading)',
+                      }}
+                      aria-hidden
+                    >
+                      →
+                    </div>
+                  )}
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── CTA ────────────────────────────────────────────────────── */}
       <section className="section-pad">
-        <div className="container-width text-center">
+        <div className="container-width">
           <Reveal>
-            <h2 className="font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-tight text-primary">
-              Have a project in mind?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="mt-4 text-base text-secondary max-w-[400px] mx-auto">
-              Tell us what you&apos;re working on. We&apos;ll take it from there.
-            </p>
-          </Reveal>
-          <Reveal delay={0.14}>
-            <div className="mt-8">
-              <Button href="/contact" variant="primary" size="lg">
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
+              <div>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 700,
+                    fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+                    letterSpacing: '-0.02em',
+                    color: '#1A1D16',
+                  }}
+                >
+                  Have a project in mind?
+                </h2>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9375rem', lineHeight: 1.65, color: 'rgba(26,29,22,0.55)', marginTop: '8px', maxWidth: '44ch' }}>
+                  Tell us what you&apos;re working on. We&apos;ll take it from there.
+                </p>
+              </div>
+              <Link href="/contact" className="btn-primary" style={{ flexShrink: 0 }}>
                 Start a Project
-              </Button>
+              </Link>
             </div>
           </Reveal>
         </div>
@@ -124,4 +366,3 @@ export default function ServicesPage() {
     </div>
   )
 }
-

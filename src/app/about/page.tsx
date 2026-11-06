@@ -24,7 +24,7 @@ const TIMELINE = [
     events: [
       'Kalvora launched publicly and reached 500+ active users.',
       '3 additional client projects delivered across product development and automation.',
-      'Kalipr Labs reaches 5+ client projects milestone.',
+      'Kalipr Labs reaches 5 client projects milestone.',
     ],
   },
   {
@@ -40,7 +40,8 @@ const TIMELINE = [
 export default function AboutPage() {
   return (
     <div className="bg-canvas pt-[72px]">
-      {/* Company intro */}
+
+      {/* ── Company intro ──────────────────────────────────────────── */}
       <section className="section-pad border-b border-border">
         <div className="container-width">
           <Reveal>
@@ -51,7 +52,6 @@ export default function AboutPage() {
               An independent software product studio.
             </h1>
           </Reveal>
-
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 max-w-[840px]">
             <Reveal delay={0.1}>
               <p className="text-base leading-relaxed text-secondary">
@@ -72,7 +72,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Philosophy */}
+      {/* ── Philosophy ─────────────────────────────────────────────── */}
       <section className="section-pad border-b border-border bg-surface">
         <div className="container-width">
           <Reveal>
@@ -83,18 +83,52 @@ export default function AboutPage() {
               How we think about software.
             </h2>
           </Reveal>
-
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {PHILOSOPHY_PRINCIPLES.map((principle, i) => (
               <Reveal key={principle.num} delay={i * 0.06}>
-                <div className="rounded-xl border border-border bg-white p-6 h-full">
-                  <span className="font-mono text-xs text-muted uppercase tracking-widest">
+                <div
+                  style={{
+                    borderRadius: '14px',
+                    border: '1px solid rgba(26,29,22,0.08)',
+                    background: '#FAFBF7',
+                    padding: '24px',
+                    height: '100%',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.65rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.10em',
+                      color: 'rgba(26,29,22,0.30)',
+                      textTransform: 'uppercase',
+                      display: 'block',
+                    }}
+                  >
                     {principle.num}
                   </span>
-                  <h3 className="mt-3 font-heading text-base font-semibold text-primary">
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontWeight: 600,
+                      fontSize: '0.9375rem',
+                      color: '#1A1D16',
+                      marginTop: '12px',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
                     {principle.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-secondary">
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.875rem',
+                      lineHeight: 1.65,
+                      color: 'rgba(26,29,22,0.55)',
+                      marginTop: '8px',
+                    }}
+                  >
                     {principle.description}
                   </p>
                 </div>
@@ -104,7 +138,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* ── Timeline — 2-column Comparative Ledger ─────────────────── */}
       <section className="section-pad border-b border-border">
         <div className="container-width">
           <Reveal>
@@ -116,37 +150,107 @@ export default function AboutPage() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 space-y-0">
-            {TIMELINE.map((entry, i) => (
-              <Reveal key={entry.year} delay={i * 0.08}>
-                <div className="flex gap-8 border-t border-border py-8 first:border-t-0">
-                  <div className="w-16 shrink-0 pt-0.5">
-                    <span
-                      className={`font-heading text-base font-semibold ${
-                        entry.year === 'Now' ? 'text-accent' : 'text-primary'
-                      }`}
-                    >
-                      {entry.year}
-                    </span>
-                  </div>
-                  <div className="flex-1">
-                    <ul className="space-y-2">
-                      {entry.events.map((event) => (
-                        <li key={event} className="flex items-start gap-3 text-sm text-secondary">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60" />
-                          {event}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+          {/* Ledger header */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '120px 1fr',
+              gap: '0 48px',
+              marginTop: '48px',
+              paddingBottom: '16px',
+              borderBottom: '1px solid rgba(26,29,22,0.12)',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                fontWeight: 600,
+                letterSpacing: '0.10em',
+                color: 'rgba(26,29,22,0.30)',
+                textTransform: 'uppercase',
+              }}
+            >
+              Period
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                fontWeight: 600,
+                letterSpacing: '0.10em',
+                color: 'rgba(26,29,22,0.30)',
+                textTransform: 'uppercase',
+              }}
+            >
+              Milestones
+            </span>
           </div>
+
+          {/* Ledger rows */}
+          {TIMELINE.map((entry, i) => (
+            <Reveal key={entry.year} delay={i * 0.08}>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '120px 1fr',
+                  gap: '0 48px',
+                  borderBottom: '1px solid rgba(26,29,22,0.07)',
+                  paddingTop: '32px',
+                  paddingBottom: '32px',
+                  alignItems: 'start',
+                }}
+              >
+                {/* Left — year marker */}
+                <div>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontWeight: 800,
+                      fontSize: 'clamp(2rem, 4vw, 3rem)',
+                      letterSpacing: '-0.04em',
+                      lineHeight: 1,
+                      color: entry.year === 'Now' ? '#1A1D16' : 'rgba(26,29,22,0.18)',
+                      display: 'block',
+                    }}
+                  >
+                    {entry.year}
+                  </span>
+                </div>
+
+                {/* Right — milestone paragraphs, hairline-separated */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  {entry.events.map((event, j) => (
+                    <div key={event}>
+                      {j > 0 && (
+                        <div
+                          style={{
+                            height: '1px',
+                            background: 'rgba(26,29,22,0.06)',
+                            margin: '14px 0',
+                          }}
+                        />
+                      )}
+                      <p
+                        style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.9375rem',
+                          lineHeight: 1.65,
+                          color: 'rgba(26,29,22,0.65)',
+                        }}
+                      >
+                        {event}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* Founder */}
+      {/* ── Founder — Asymmetric Framework ─────────────────────────── */}
       <section className="section-pad border-b border-border bg-surface">
         <div className="container-width">
           <Reveal>
@@ -154,60 +258,214 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="mt-8 max-w-[600px]">
-              <h2 className="font-heading text-2xl font-semibold text-primary">
-                Pratik Anpat
-              </h2>
-              <p className="mt-1 font-mono text-xs text-muted uppercase tracking-widest">
-                Founder, Kalipr Labs · {COMPANY.location}
-              </p>
-              <p className="mt-5 text-base leading-relaxed text-secondary">
-                Pratik founded Kalipr Labs to build software that solves real problems —
-                not software built to look impressive in a portfolio. He handles product
-                strategy, engineering, and design across all Kalipr Labs work.
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a
-                  href={SOCIAL_LINKS.founderPortfolio}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:text-accent-hover transition-colors"
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '0 64px',
+                marginTop: '40px',
+                alignItems: 'start',
+              }}
+              className="grid-cols-1 md:grid-cols-2"
+            >
+              {/* Left — structural label block */}
+              <div
+                style={{
+                  borderRight: '1px solid rgba(26,29,22,0.08)',
+                  paddingRight: '64px',
+                }}
+                className="hidden md:block"
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.65rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.12em',
+                    color: 'rgba(26,29,22,0.30)',
+                    textTransform: 'uppercase',
+                    display: 'block',
+                    marginBottom: '24px',
+                  }}
                 >
-                  Portfolio →
-                </a>
-                <a
-                  href={SOCIAL_LINKS.founderLinkedIn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:text-accent-hover transition-colors"
+                  // FOUNDER ENGINE
+                </span>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 800,
+                    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                    letterSpacing: '-0.04em',
+                    lineHeight: 1.0,
+                    color: 'rgba(26,29,22,0.08)',
+                    userSelect: 'none',
+                  }}
+                  aria-hidden
                 >
-                  LinkedIn →
-                </a>
+                  P.A.
+                </p>
+                <div style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {[
+                    { label: 'Role', value: 'Founder' },
+                    { label: 'Studio', value: 'Kalipr Labs' },
+                    { label: 'Location', value: COMPANY.location },
+                    { label: 'Est.', value: String(COMPANY.foundedYear) },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        gap: '12px',
+                        borderBottom: '1px solid rgba(26,29,22,0.06)',
+                        paddingBottom: '8px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.65rem',
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          color: 'rgba(26,29,22,0.30)',
+                          width: '64px',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '0.875rem',
+                          color: 'rgba(26,29,22,0.65)',
+                        }}
+                      >
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right — bio copy */}
+              <div>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 700,
+                    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                    letterSpacing: '-0.03em',
+                    color: '#1A1D16',
+                  }}
+                >
+                  Pratik Anpat
+                </h2>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.7rem',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(26,29,22,0.38)',
+                    marginTop: '6px',
+                  }}
+                >
+                  Founder · Kalipr Labs · {COMPANY.location}
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.9375rem',
+                    lineHeight: 1.75,
+                    color: 'rgba(26,29,22,0.65)',
+                    marginTop: '24px',
+                    maxWidth: '44ch',
+                  }}
+                >
+                  Pratik founded Kalipr Labs to build software that solves real problems —
+                  not software built to look impressive in a portfolio. He handles product
+                  strategy, engineering, and design across all Kalipr Labs work.
+                </p>
+                <div style={{ marginTop: '28px', display: 'flex', gap: '24px' }}>
+                  <a
+                    href={SOCIAL_LINKS.founderPortfolio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-text-arrow"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(26,29,22,0.55)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <span className="btn-label">Portfolio</span>
+                    <svg className="btn-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                  <a
+                    href={SOCIAL_LINKS.founderLinkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-text-arrow"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(26,29,22,0.55)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <span className="btn-label">LinkedIn</span>
+                    <svg className="btn-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── CTA ────────────────────────────────────────────────────── */}
       <section className="section-pad">
         <div className="container-width">
           <Reveal>
-            <div className="flex flex-wrap items-center justify-between gap-6">
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
               <div>
-                <h2 className="font-heading text-xl font-semibold text-primary">
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 700,
+                    fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+                    letterSpacing: '-0.02em',
+                    color: '#1A1D16',
+                  }}
+                >
                   Working on something worth building?
                 </h2>
-                <p className="mt-2 text-sm text-secondary max-w-[400px]">
+                <p
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.9375rem',
+                    lineHeight: 1.65,
+                    color: 'rgba(26,29,22,0.55)',
+                    marginTop: '8px',
+                    maxWidth: '44ch',
+                  }}
+                >
                   We&apos;re selective about the projects we take on. If your problem is
                   worth solving properly, we&apos;d like to hear about it.
                 </p>
               </div>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-on-inverse hover:bg-primary/90 transition-colors shrink-0"
-              >
-                Start a conversation →
+              <Link href="/contact" className="btn-primary" style={{ flexShrink: 0 }}>
+                Start a conversation
               </Link>
             </div>
           </Reveal>
@@ -216,4 +474,3 @@ export default function AboutPage() {
     </div>
   )
 }
-

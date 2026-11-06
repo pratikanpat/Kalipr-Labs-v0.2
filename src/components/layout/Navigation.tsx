@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS, COMPANY } from '@/lib/constants'
@@ -11,6 +12,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 // ── Shared-layout magnetic slider nav pill ──────────────────────────
 function NavPill() {
   const [hoveredHref, setHoveredHref] = useState<string | null>(null)
+  const pathname = usePathname()
 
   return (
     <nav
@@ -22,30 +24,40 @@ function NavPill() {
       aria-label="Main navigation"
       onMouseLeave={() => setHoveredHref(null)}
     >
-      {NAV_LINKS.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="relative px-3.5 py-1.5 text-[13px] font-medium rounded-full"
-          style={{
-            color: hoveredHref === link.href ? '#1A1D16' : 'rgba(26,29,22,0.52)',
-            transition: 'color 0.25s ease',
-            fontFamily: 'var(--font-heading)',
-            letterSpacing: '-0.01em',
-          }}
-          onMouseEnter={() => setHoveredHref(link.href)}
-        >
-          {hoveredHref === link.href && (
-            <motion.span
-              layoutId="nav-pill"
-              className="absolute inset-0 rounded-full"
-              style={{ background: 'rgba(26,29,22,0.06)' }}
-              transition={{ type: 'spring', stiffness: 380, damping: 36, mass: 0.6 }}
-            />
-          )}
-          <span className="relative z-10">{link.label}</span>
-        </Link>
-      ))}
+      {NAV_LINKS.map((link) => {
+        const isActive = pathname === link.href || pathname.startsWith(link.href)
+        const isHovered = hoveredHref === link.href
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="relative px-3.5 py-1.5 text-[13px] font-medium rounded-full"
+            style={{
+              color: isHovered || isActive ? '#1A1D16' : 'rgba(26,29,22,0.45)',
+              transition: 'color 0.25s ease',
+              fontFamily: 'var(--font-heading)',
+              letterSpacing: '-0.01em',
+            }}
+            onMouseEnter={() => setHoveredHref(link.href)}
+          >
+            {isHovered && (
+              <motion.span
+                layoutId="nav-pill"
+                className="absolute inset-0 rounded-full"
+                style={{ background: 'rgba(26,29,22,0.06)' }}
+                transition={{ type: 'spring', stiffness: 380, damping: 36, mass: 0.6 }}
+              />
+            )}
+            <span className="relative z-10">
+              {isActive && !isHovered && (
+                <span style={{ marginRight: '4px', opacity: 0.5 }}>·</span>
+              )}
+              {link.label}
+            </span>
+          </Link>
+        )
+      })}
     </nav>
   )
 }
