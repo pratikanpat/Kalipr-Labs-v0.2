@@ -1,76 +1,88 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens ─────────────────────────────────────── */
-/* Palette: The Curious Workshop
-   65% warm paper · 25% deep ink · 8% cobalt · 2% vermilion */
+/* ================================================================
+   KALIPR LABS — Design System v2
+   Warm Organic Minimalism
+   60% Canvas #E6EAD4  |  30% Ink #1A1D16  |  10% Surface #F5F7EF
+   ================================================================ */
+
 @theme {
-  /* ── Backgrounds (65% warm paper) */
-  --color-canvas:         #F5F1E9;
-  --color-surface:        #EAE6DC;
-  --color-surface-hover:  #E0DBD0;
-  --color-inverse:        #191B22;   /* deep charcoal ink */
-  --color-inverse-soft:   #22242E;   /* slightly lighter dark */
+  /* ---- Canvas & Surfaces ------------------------------------ */
+  --color-canvas:        #E6EAD4;   /* 60% warm greenish-cream base */
+  --color-surface:       #F5F7EF;   /* 10% ivory card surfaces */
+  --color-surface-alt:   #F9FAF6;   /* hover elevation */
+  --color-surface-warm:  #EDE5D5;   /* kalvora warm block */
 
-  /* ── Text */
-  --color-primary:        #191B22;   /* deep charcoal — matches inverse */
-  --color-secondary:      #4A4B55;
-  --color-muted:          #7A7B85;
-  --color-on-inverse:     #EDE9DF;
-  --color-on-inverse-muted: #8E8F9A;
+  /* ---- Ink & Dark surfaces ---------------------------------- */
+  --color-inverse:       #1A1D16;   /* 30% deep matte ink */
+  --color-inverse-soft:  #2A2D22;   /* slightly lifted ink */
 
-  /* ── Accent — Electric Cobalt (8%) */
-  --color-accent:         #4359E8;
-  --color-accent-hover:   #3447CC;
-  --color-accent-light:   #6B7FEE;
-  --color-accent-subtle:  rgba(67, 89, 232, 0.08);
-  --color-accent-on-dark: #7B8FF0;   /* cobalt on dark backgrounds */
+  /* ---- Text ------------------------------------------------- */
+  --color-primary:       #1A1D16;
+  --color-secondary:     rgba(26, 29, 22, 0.65);
+  --color-muted:         rgba(26, 29, 22, 0.40);
+  --color-on-inverse:    #E6EAD4;
+  --color-on-inverse-muted: rgba(230, 234, 212, 0.50);
 
-  /* ── Accent 2 — Warm Vermilion (2%) */
-  --color-pop:            #F07852;
-  --color-pop-subtle:     rgba(240, 120, 82, 0.10);
+  /* ---- Accent (Ink replaces cobalt) ------------------------- */
+  --color-accent:        #1A1D16;
+  --color-accent-hover:  #2A2D22;
+  --color-accent-light:  rgba(26, 29, 22, 0.70);
+  --color-accent-subtle: rgba(26, 29, 22, 0.06);
 
-  /* ── Product sub-brand: Kalvora */
-  --color-kalvora:        #E8DCC8;   /* warm sand */
-  --color-kalvora-accent: #8B6F47;   /* warm brown */
-  --color-kalvora-ink:    #2C1F0E;
+  /* ---- Borders --------------------------------------------- */
+  --color-border:        rgba(26, 29, 22, 0.07);
+  --color-border-strong: rgba(26, 29, 22, 0.14);
+  --color-border-inverse:rgba(255, 255, 255, 0.08);
 
-  /* ── Product sub-brand: Sill */
-  --color-sill:           #C8D4E8;   /* cool slate */
-  --color-sill-accent:    #3A5A8B;   /* technical blue */
-  --color-sill-ink:       #0A1428;
+  /* ---- Product sub-brands (kept for product section) -------- */
+  --color-kalvora-bg:    #EDE5D5;
+  --color-kalvora-ink:   #2C1F0E;
+  --color-kalvora-mid:   #8B6F47;
+  --color-sill-bg:       #1A1D16;
+  --color-sill-surface:  #22262B;
+  --color-sill-mid:      #3A5A8B;
 
-  /* ── Borders */
-  --color-border:         rgba(25, 27, 34, 0.09);
-  --color-border-strong:  rgba(25, 27, 34, 0.16);
-  --color-border-inverse: rgba(255, 255, 255, 0.08);
-  --color-border-accent:  rgba(67, 89, 232, 0.20);
-
-  /* ── Typography — Geist only, JetBrains Mono for labels */
-  --font-heading: var(--font-geist-sans), system-ui, sans-serif;
+  /* ---- Typography ------------------------------------------ */
+  --font-heading: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-sans:    var(--font-geist-sans), system-ui, sans-serif;
   --font-mono:    var(--font-jetbrains-mono), 'Courier New', monospace;
 
-  /* ── Animation */
-  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  /* Tailwind v4 font-family utility aliases (--font-family-{key} → font-{key} class) */
+  --font-family-heading: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-family-sans:    var(--font-geist-sans), system-ui, sans-serif;
+  --font-family-mono:    var(--font-jetbrains-mono), 'Courier New', monospace;
+
+  /* ---- Geometry -------------------------------------------- */
+  --radius-card:  24px;
+  --radius-inner: 14px;
+  --radius-pill:  9999px;
+  --gap-desktop:  24px;
+  --gap-mobile:   14px;
+
+  /* ---- Animation ------------------------------------------- */
+  --ease-premium:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
   --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-std:  all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Base Styles ────────────────────────────────────────── */
+/* ================================================================
+   BASE
+   ================================================================ */
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-canvas text-secondary font-sans;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.65;
     overflow-x: hidden;
   }
@@ -78,35 +90,35 @@
   h1, h2, h3, h4, h5, h6 {
     @apply text-primary font-heading;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
-  img, video {
-    max-width: 100%;
-    display: block;
-  }
+  img, video { max-width: 100%; display: block; }
 
   ::selection {
-    background-color: rgba(67, 89, 232, 0.14);
-    color: #191B22;
+    background-color: rgba(26, 29, 22, 0.12);
+    color: #1A1D16;
   }
 
   :focus-visible {
-    outline: 2px solid #4359E8;
+    outline: 2px solid #1A1D16;
     outline-offset: 3px;
     border-radius: 4px;
   }
 
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: #EAE6DC; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #E6EAD4; }
   ::-webkit-scrollbar-thumb {
-    background: rgba(25, 27, 34, 0.14);
-    border-radius: 3px;
+    background: rgba(26, 29, 22, 0.18);
+    border-radius: 2px;
   }
 }
 
-/* ─── Layout Utilities ───────────────────────────────────── */
+/* ================================================================
+   LAYOUT UTILITIES
+   ================================================================ */
 @layer utilities {
+
   .container-width {
     max-width: 1360px;
     margin-left: auto;
@@ -130,87 +142,150 @@
     padding-bottom: clamp(100px, 14vw, 180px);
   }
 
-  /* Editorial section number */
-  .section-num {
-    @apply font-mono text-xs tracking-widest text-muted;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-  }
-
-  /* Technical label: // PRODUCTS */
+  /* Section label — geist mono, all caps, spaced */
   .section-label {
-    @apply font-mono text-xs tracking-widest uppercase;
+    font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-muted);
   }
 
-  /* Dot grid background texture */
-  .dot-grid {
-    background-image: radial-gradient(circle, rgba(25, 27, 34, 0.09) 1px, transparent 1px);
-    background-size: 28px 28px;
+  /* Bento card base */
+  .card-bento {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    transition: var(--transition-std);
+  }
+  .card-bento:hover {
+    background: var(--color-surface-alt);
+    transform: scale(1.015);
+    box-shadow: 0 20px 60px rgba(26, 29, 22, 0.08);
   }
 
-  /* Fine line grid */
-  .line-grid {
-    background-image:
-      linear-gradient(rgba(25, 27, 34, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(25, 27, 34, 0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  /* Kalvora product surface */
-  .surface-kalvora {
-    background-color: #F0E8D8;
-  }
-
-  /* Sill product surface */
-  .surface-sill {
-    background-color: #191B22;
-  }
-
-  /* Cobalt accent button base */
-  .btn-accent {
-    @apply bg-accent text-white font-medium rounded-full transition-colors;
+  /* Pill button — solid ink */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1A1D16;
+    color: #E6EAD4;
+    font-weight: 600;
+    font-size: 14px;
     padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-std);
   }
-  .btn-accent:hover { background-color: #3447CC; }
+  .btn-primary:hover { background: #2A2D22; transform: scale(0.98); }
+  .btn-primary:active { transform: scale(0.97); }
 
-  /* Ghost button */
+  /* Pill button — ghost outline */
   .btn-ghost {
-    @apply border border-border-strong text-primary font-medium rounded-full transition-colors;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: #1A1D16;
+    font-weight: 500;
+    font-size: 14px;
     padding: 11px 27px;
+    border-radius: var(--radius-pill);
+    border: 1px solid #1A1D16;
+    cursor: pointer;
+    transition: var(--transition-std);
   }
-  .btn-ghost:hover { @apply bg-surface; }
+  .btn-ghost:hover { background: rgba(26,29,22,0.05); transform: scale(0.98); }
+  .btn-ghost:active { transform: scale(0.97); }
 
-  /* ── Card hover lift */
-  .card-hover {
-    @apply transition-all duration-300 ease-out;
+  /* Legacy compat aliases */
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1A1D16;
+    color: #E6EAD4;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-std);
   }
-  .card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 40px rgba(25, 27, 34, 0.10);
-  }
+  .btn-accent:hover { background: #2A2D22; transform: scale(0.98); }
+  .bg-inverse  { background-color: #1A1D16; }
 
-  /* ── Animated underline for inline links */
-  .link-underline {
-    @apply relative inline-block;
-  }
+  /* Animated underline link */
+  .link-underline { position: relative; display: inline-block; }
   .link-underline::after {
     content: '';
-    @apply absolute -bottom-0.5 left-0 h-px w-full rounded-full bg-current;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    border-radius: 1px;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
   }
-  .link-underline:hover::after {
-    transform: scaleX(1);
+  .link-underline:hover::after { transform: scaleX(1); }
+
+  /* Bento grid helpers */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--gap-desktop);
   }
 
+  /* Structural text helpers */
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
+
+  /* Kalvora product surface */
+  .surface-kalvora { background-color: #EDE5D5; }
+
+  /* Sill product surface */
+  .surface-sill { background-color: #1A1D16; }
+
+  /* Section divider */
+  .divider { height: 1px; background: var(--color-border); }
 }
 
-/* ─── Reduced Motion ─────────────────────────────────────── */
+/* ================================================================
+   SKELETON LOADING ANIMATION (for Services section)
+   ================================================================ */
+@keyframes skeleton-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes pulse-node {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.3); }
+}
+
+@keyframes fill-bar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes dash-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ================================================================
+   REDUCED MOTION
+   ================================================================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

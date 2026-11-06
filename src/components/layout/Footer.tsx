@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
 import { COMPANY, SOCIAL_LINKS } from '@/lib/constants'
 
 const studioLinks = [
@@ -10,172 +9,179 @@ const studioLinks = [
 ]
 
 const productLinks = [
-  { href: SOCIAL_LINKS.kalvora, label: 'Kalvora', external: true },
-  { href: SOCIAL_LINKS.sill,    label: 'Sill',    external: true },
+  { href: SOCIAL_LINKS.kalvora, label: 'Kalvora', external: true  },
+  { href: SOCIAL_LINKS.sill,    label: 'Sill',    external: true  },
   { href: '/products',          label: 'All products', external: false },
 ]
 
+const legalLinks = [
+  { href: '/privacy',  label: 'Privacy' },
+  { href: '/terms',    label: 'Terms' },
+]
+
 export default function Footer() {
-  const year = new Date().getFullYear()
-
   return (
-    <footer style={{ background: '#0C0C0E', color: '#EDE9DF' }}>
-
-      {/* Top separator */}
-      <div className="container-width">
-        <div className="h-px" style={{ background: 'rgba(255,255,255,0.07)' }} />
-      </div>
-
-      {/* Main footer grid */}
-      <div className="section-pad">
-        <div className="container-width">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-
-            {/* Brand column */}
-            <div className="lg:col-span-1">
-              <p className="font-heading font-bold tracking-[0.12em] text-white text-sm mb-3">
-                KALIPR LABS
-              </p>
-              <p className="text-[0.8125rem] leading-relaxed mb-6 max-w-[200px]" style={{ color: 'rgba(255,255,255,0.4)' }}>
-                Independent software studio building products and digital solutions.
-              </p>
-              <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                {COMPANY.location} &middot; Est. {COMPANY.foundedYear}
-              </p>
-            </div>
-
-            {/* Studio column */}
-            <div>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
-                Studio
-              </p>
-              <nav aria-label="Footer studio links">
-                <ul className="space-y-3">
-                  {studioLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm transition-colors duration-200 hover:text-white"
-                        style={{ color: 'rgba(255,255,255,0.45)' }}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-
-            {/* Products column */}
-            <div>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
-                Our Products
-              </p>
-              <nav aria-label="Footer product links">
-                <ul className="space-y-3">
-                  {productLinks.map((link) => (
-                    <li key={link.href}>
-                      {link.external ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm transition-colors duration-200 hover:text-white inline-flex items-center gap-1"
-                          style={{ color: 'rgba(255,255,255,0.45)' }}
-                        >
-                          {link.label}
-                          <ArrowRight className="w-3 h-3 -rotate-45 opacity-50" />
-                        </a>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          className="text-sm transition-colors duration-200 hover:text-white"
-                          style={{ color: 'rgba(255,255,255,0.45)' }}
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-
-            {/* Connect column */}
-            <div>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
-                Connect
-              </p>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href={SOCIAL_LINKS.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm transition-colors duration-200 hover:text-white inline-flex items-center gap-1"
-                    style={{ color: 'rgba(255,255,255,0.45)' }}
-                  >
-                    LinkedIn
-                    <ArrowRight className="w-3 h-3 -rotate-45 opacity-50" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={`mailto:${COMPANY.email}`}
-                    className="text-sm transition-colors duration-200 hover:text-white break-all"
-                    style={{ color: 'rgba(255,255,255,0.45)' }}
-                  >
-                    {COMPANY.email}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom strip */}
-      <div className="section-pad-sm" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-        <div className="container-width">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              &copy; {year} Kalipr Labs. All rights reserved.
-            </p>
-            <div className="flex items-center gap-4">
-              {/* Privacy & Terms — only add hrefs when real pages exist */}
-              <span className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.18)' }}>
-                Privacy Policy
-              </span>
-              <span style={{ color: 'rgba(255,255,255,0.12)' }}>&middot;</span>
-              <span className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.18)' }}>
-                Terms of Use
-              </span>
-              <span style={{ color: 'rgba(255,255,255,0.12)' }}>&middot;</span>
-              <span className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.18)' }}>
-                Made in Pune, India.
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Cal.com-style giant brand text — decorative background art */}
-      <div className="overflow-hidden select-none" aria-hidden>
-        <p
-          className="font-heading font-black text-center leading-none whitespace-nowrap"
+    <footer
+      style={{ background: '#1A1D16', position: 'relative', overflow: 'hidden' }}
+      aria-label="Site footer"
+    >
+      {/* ── Main content ─────────────────────────────────────────── */}
+      <div
+        className="container-width"
+        style={{ paddingTop: '80px', paddingBottom: '0', position: 'relative', zIndex: 1 }}
+      >
+        {/* Big email CTA */}
+        <a
+          href={`mailto:${COMPANY.email}`}
+          className="link-underline"
           style={{
+            display: 'inline-block',
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 700,
+            fontSize: 'clamp(1.5rem, 4vw, 3rem)',
+            letterSpacing: '-0.03em',
+            color: '#E6EAD4',
+            textDecoration: 'none',
+            marginBottom: '48px',
+          }}
+        >
+          {COMPANY.email}
+        </a>
+
+        {/* Separator */}
+        <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', marginBottom: '40px' }} />
+
+        {/* 4-column grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '40px 24px',
+            paddingBottom: '48px',
+          }}
+        >
+          {/* Col 1 — Studio info */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={labelStyle}>Studio</p>
+            <p style={mutedStyle}>{COMPANY.name}</p>
+            <p style={mutedStyle}>{COMPANY.location}</p>
+            <p style={mutedStyle}>Est. {COMPANY.foundedYear}</p>
+          </div>
+
+          {/* Col 2 — Studio links */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={labelStyle}>Navigation</p>
+            {studioLinks.map((l) => (
+              <Link key={l.href} href={l.href} style={linkStyle}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Col 3 — Products */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={labelStyle}>Products</p>
+            {productLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                style={linkStyle}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Col 4 — Legal & social */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <p style={labelStyle}>Legal</p>
+            {legalLinks.map((l) => (
+              <span key={l.href} style={{ ...mutedStyle, cursor: 'default' }}>
+                {l.label}
+              </span>
+            ))}
+            <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <p style={labelStyle}>Social</p>
+              <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                LinkedIn
+              </Link>
+              <Link href={SOCIAL_LINKS.founderPortfolio} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                Founder
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.06)',
+            padding: '20px 0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <p style={mutedStyle}>© 2026 {COMPANY.name}. All rights reserved.</p>
+          <p style={mutedStyle}>Independent software product studio.</p>
+        </div>
+      </div>
+
+      {/* ── Giant brand text ─────────────────────────────────────── */}
+      <div
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          lineHeight: 0.85,
+          userSelect: 'none',
+          pointerEvents: 'none',
+        }}
+        aria-hidden
+      >
+        <p
+          style={{
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 900,
             fontSize: 'clamp(80px, 18vw, 180px)',
             letterSpacing: '-0.05em',
-            lineHeight: 0.9,
             color: 'rgba(255,255,255,0.025)',
-            paddingBottom: 'clamp(24px, 4vw, 48px)',
+            whiteSpace: 'nowrap',
+            padding: '0 clamp(16px, 4vw, 48px)',
           }}
         >
           KALIPR LABS
         </p>
       </div>
-
     </footer>
   )
+}
+
+/* ── Shared style objects ─────────────────────────────────────────── */
+const labelStyle: React.CSSProperties = {
+  fontFamily: 'var(--font-mono)',
+  fontSize: '0.65rem',
+  fontWeight: 600,
+  letterSpacing: '0.10em',
+  color: 'rgba(230,234,212,0.30)',
+  textTransform: 'uppercase',
+  marginBottom: '4px',
+}
+
+const mutedStyle: React.CSSProperties = {
+  fontFamily: 'var(--font-sans)',
+  fontSize: '0.8125rem',
+  color: 'rgba(230,234,212,0.35)',
+  lineHeight: 1.5,
+}
+
+const linkStyle: React.CSSProperties = {
+  fontFamily: 'var(--font-sans)',
+  fontSize: '0.8125rem',
+  color: 'rgba(230,234,212,0.40)',
+  textDecoration: 'none',
+  lineHeight: 1.5,
+  transition: 'color 0.3s ease',
 }

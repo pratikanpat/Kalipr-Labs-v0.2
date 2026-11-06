@@ -2,59 +2,112 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { Reveal } from '@/components/animations/Reveal'
+import { motion, useInView } from 'motion/react'
+import { useRef } from 'react'
 import { COMPANY } from '@/lib/constants'
 
 export default function ClosingCTA() {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-80px 0px' } as any)
+
   return (
-    <section aria-labelledby="cta-heading" className="bg-canvas section-pad border-t border-border">
-      <div className="container-width">
-        <Reveal>
-          <div className="max-w-3xl">
-            <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted mb-6">
-              // Start a conversation
-            </p>
-            <h2
-              id="cta-heading"
-              className="font-heading font-bold text-primary text-balance mb-6"
-              style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.75rem)', letterSpacing: '-0.03em', lineHeight: 1.07 }}
+    <section
+      aria-labelledby="cta-heading"
+      style={{ background: '#E6EAD4' }}
+    >
+      {/* Top separator */}
+      <div style={{ height: '1px', background: 'rgba(26,29,22,0.07)' }} />
+
+      <div className="container-width section-pad">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 32 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            background: '#F5F7EF',
+            borderRadius: 'var(--radius-card)',
+            padding: 'clamp(40px, 7vw, 80px)',
+            border: '1px solid rgba(26,29,22,0.07)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            gap: '32px',
+          }}
+        >
+          {/* Label */}
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.7rem',
+              fontWeight: 600,
+              letterSpacing: '0.12em',
+              color: 'rgba(26,29,22,0.35)',
+              textTransform: 'uppercase',
+            }}
+          >
+            Start a project
+          </span>
+
+          {/* Headline */}
+          <h2
+            id="cta-heading"
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 800,
+              fontSize: 'clamp(2.25rem, 5vw, 4rem)',
+              letterSpacing: '-0.04em',
+              lineHeight: 1.08,
+              color: '#1A1D16',
+              maxWidth: '22ch',
+            }}
+          >
+            Have something worth building?
+          </h2>
+
+          {/* Sub-copy */}
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 'clamp(0.9375rem, 1.5vw, 1.0625rem)',
+              lineHeight: 1.7,
+              color: 'rgba(26,29,22,0.55)',
+              maxWidth: '44ch',
+            }}
+          >
+            We work with a small number of clients at a time — which means every
+            project gets our full attention. If you have a problem worth solving,
+            let's talk about it.
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link href="/contact" className="btn-primary">
+              Start a conversation
+              <ArrowRight size={15} />
+            </Link>
+            <Link
+              href={`mailto:${COMPANY.email}`}
+              className="btn-ghost"
             >
-              Have something
-              {' '}<span className="relative inline-block">
-                worth fixing?
-                <span
-                  aria-hidden
-                  className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
-                  style={{ background: '#F07852', opacity: 0.6 }}
-                />
-              </span>
-            </h2>
-            <p className="text-[1.0625rem] leading-[1.7] text-secondary mb-10 max-w-xl text-pretty">
-              Tell us about the problem you&apos;re trying to solve. We&apos;d love to understand it.
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-accent text-white font-medium px-7 py-3.5 rounded-full text-[0.9375rem] hover:bg-accent-hover transition-colors"
-              >
-                Start a conversation
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors group"
-              >
-                Explore our products
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-            <p className="mt-8 font-mono text-[11px] tracking-widest uppercase text-muted">
-              {COMPANY.location} · {COMPANY.email}
-            </p>
+              {COMPANY.email}
+            </Link>
           </div>
-        </Reveal>
+
+          {/* Footnote */}
+          <p
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.72rem',
+              color: 'rgba(26,29,22,0.30)',
+              letterSpacing: '0.04em',
+            }}
+          >
+            Based in {COMPANY.location} · Est. {COMPANY.foundedYear} · Independent studio
+          </p>
+        </motion.div>
       </div>
     </section>
   )
 }
-

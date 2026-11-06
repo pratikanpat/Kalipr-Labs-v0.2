@@ -1,13 +1,22 @@
 import type { Metadata } from 'next'
-import { JetBrains_Mono } from 'next/font/google'
+import { JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Navigation from '@/components/layout/Navigation'
-import Footer from '@/components/layout/Footer'
+import Footer     from '@/components/layout/Footer'
 import SmoothScroll from '@/components/layout/SmoothScroll'
+import FilmGrain  from '@/components/layout/FilmGrain'
 import { COMPANY } from '@/lib/constants'
 
-// Geist covers all sans-serif roles — Inter dropped
+// Display / headings — Plus Jakarta Sans
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+
+// Labels / mono
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
@@ -55,7 +64,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-// JSON-LD structured data
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -85,7 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${jetbrainsMono.variable}`}
+      className={`${GeistSans.variable} ${jetbrainsMono.variable} ${jakarta.variable}`}
     >
       <head>
         <script
@@ -94,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-canvas text-secondary font-sans antialiased overflow-x-hidden">
+        <FilmGrain />
         <SmoothScroll />
         <Navigation />
         <main>{children}</main>

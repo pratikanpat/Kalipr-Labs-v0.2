@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AnimatePresence, motion } from 'motion/react'
+import { ChevronDown, Check } from 'lucide-react'
 import { contactSchema, type ContactFormData } from './schema'
-import { cn } from '@/lib/utils'
-import { COMPANY } from '@/lib/constants'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -17,21 +17,188 @@ const PROJECT_TYPES = [
   'Not sure yet',
 ] as const
 
-const BUDGET_OPTIONS = [
+const TIMELINE_OPTIONS = [
   'Under ₹1L',
   '₹1L – ₹3L',
   '₹3L – ₹7L',
   '₹7L – ₹15L',
   '₹15L+',
-  'Let\'s discuss',
-]
+  "Let's discuss",
+] as const
 
-const inputBase =
-  'w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-primary placeholder:text-muted ' +
-  'transition-colors duration-200 outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 ' +
-  'disabled:opacity-50 disabled:cursor-not-allowed'
+/* ── NarrativeInput ──────────────────────────────────────────────── */
+interface NarrativeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: string
+}
 
-export default function ContactForm() {
+function NarrativeInput({ error, style, ...props }: NarrativeInputProps) {
+  return (
+    <span style={{ display: 'inline-flex', flexDirection: 'column', gap: '2px', verticalAlign: 'baseline' }}>
+      <input
+        {...props}
+        style={{
+          display: 'inline-block',
+          fontFamily: 'var(--font-heading)',
+          fontWeight: 600,
+          fontSize: 'inherit',
+          letterSpacing: 'inherit',
+          lineHeight: 'inherit',
+          color: '#1A1D16',
+          background: 'transparent',
+          border: 'none',
+          borderBottom: `1.5px dashed ${error ? 'rgba(200,60,40,0.60)' : 'rgba(26,29,22,0.25)'}`,
+          outline: 'none',
+          minWidth: '120px',
+          maxWidth: '300px',
+          padding: '0 2px 2px',
+          transition: 'border-color 0.3s ease',
+          ...style,
+        }}
+        onFocus={(e) => {
+          e.currentTarget.style.borderBottomColor = '#1A1D16'
+          e.currentTarget.style.borderBottomStyle = 'solid'
+          props.onFocus?.(e)
+        }}
+        onBlur={(e) => {
+          e.currentTarget.style.borderBottomColor = error ? 'rgba(200,60,40,0.60)' : 'rgba(26,29,22,0.25)'
+          e.currentTarget.style.borderBottomStyle = 'dashed'
+          props.onBlur?.(e)
+        }}
+      />
+      {error && (
+        <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'rgba(200,60,40,0.80)' }}>
+          {error}
+        </span>
+      )}
+    </span>
+  )
+}
+
+/* ── NarrativeSelect ─────────────────────────────────────────────── */
+interface NarrativeSelectProps {
+  options: readonly string[]
+  value: string
+  onChange: (v: string) => void
+  placeholder: string
+  error?: string
+}
+
+function NarrativeSelect({ options, value, onChange, placeholder, error }: NarrativeSelectProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onClickOutside)
+    return () => document.removeEventListener('mousedown', onClickOutside)
+  }, [])
+
+  return (
+    <span ref={ref} style={{ display: 'inline-flex', flexDirection: 'column', gap: '2px', verticalAlign: 'baseline', position: 'relative' }}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '4px',
+          fontFamily: 'var(--font-heading)',
+          fontWeight: 600,
+          fontSize: 'inherit',
+          letterSpacing: 'inherit',
+          lineHeight: 'inherit',
+          color: value ? '#1A1D16' : 'rgba(26,29,22,0.35)',
+          background: 'transparent',
+          border: 'none',
+          borderBottom: `1.5px dashed ${error ? 'rgba(200,60,40,0.60)' : 'rgba(26,29,22,0.25)'}`,
+          outline: 'none',
+          cursor: 'pointer',
+          padding: '0 2px 2px',
+        }}
+      >
+        {value || placeholder}
+        <ChevronDown
+          size={14}
+          style={{
+            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 0.3s ease',
+            opacity: 0.5,
+          }}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.span
+            initial={{ opacity: 0, y: -6, scaleY: 0.95 }}
+            animate={{ opacity: 1, y: 0, scaleY: 1 }}
+            exit={{ opacity: 0, y: -6, scaleY: 0.95 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              zIndex: 50,
+              background: '#F5F7EF',
+              border: '1px solid rgba(26,29,22,0.10)',
+              borderRadius: '12px',
+              padding: '6px',
+              minWidth: '220px',
+              boxShadow: '0 8px 32px rgba(26,29,22,0.12)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '2px',
+              transformOrigin: 'top left',
+            }}
+          >
+            {options.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => { onChange(opt); setOpen(false) }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.875rem',
+                  fontWeight: opt === value ? 600 : 400,
+                  color: '#1A1D16',
+                  background: opt === value ? 'rgba(26,29,22,0.07)' : 'transparent',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '8px 12px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'background 0.2s ease',
+                }}
+                onMouseEnter={(e) => { if (opt !== value) e.currentTarget.style.background = 'rgba(26,29,22,0.04)' }}
+                onMouseLeave={(e) => { if (opt !== value) e.currentTarget.style.background = 'transparent' }}
+              >
+                {opt}
+                {opt === value && <Check size={13} style={{ opacity: 0.6 }} />}
+              </button>
+            ))}
+          </motion.span>
+        )}
+      </AnimatePresence>
+
+      {error && (
+        <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'rgba(200,60,40,0.80)' }}>
+          {error}
+        </span>
+      )}
+    </span>
+  )
+}
+
+/* ── ContactForm ─────────────────────────────────────────────────── */
+export function ContactForm() {
   const [formState, setFormState] = useState<FormState>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -39,35 +206,35 @@ export default function ContactForm() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   })
 
-  // Set submittedAt on mount for bot timing check
+  const projectTypeValue = watch('projectType') as string | undefined
+  const budgetValue      = watch('budget') as string | undefined
+
+  // Set submittedAt on mount (honeypot timing)
   useEffect(() => {
     setValue('submittedAt', Date.now())
   }, [setValue])
 
-  const onSubmit = async (data: ContactFormData) => {
+  async function onSubmit(data: ContactFormData) {
+    if (data.honeypot) return // bot trap
     setFormState('loading')
     setErrorMessage('')
-
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-
       if (res.ok) {
         setFormState('success')
       } else {
-        const json = await res.json().catch(() => ({}))
-        setErrorMessage(
-          (json as { error?: string }).error ??
-            'Something went wrong. Please try again.',
-        )
+        const body = await res.json().catch(() => ({}))
+        setErrorMessage(body?.message ?? 'Something went wrong. Please try again.')
         setFormState('error')
       }
     } catch {
@@ -76,235 +243,175 @@ export default function ContactForm() {
     }
   }
 
-  // ── Success state ──────────────────────────────────────────
+  /* Success screen */
   if (formState === 'success') {
     return (
-      <div className="rounded-2xl border border-border bg-white p-10 text-center">
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent-subtle">
-          <span className="text-xl text-accent">✓</span>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '40px 0' }}
+      >
+        <div
+          style={{
+            width: '48px', height: '48px', borderRadius: '50%',
+            background: 'rgba(26,29,22,0.07)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <Check size={22} style={{ color: '#1A1D16' }} />
         </div>
-        <h3 className="font-heading text-lg font-semibold text-primary">
-          Message received.
+        <h3
+          style={{
+            fontFamily: 'var(--font-heading)', fontWeight: 700,
+            fontSize: '1.5rem', letterSpacing: '-0.03em', color: '#1A1D16',
+          }}
+        >
+          Message sent.
         </h3>
-        <p className="mt-2 text-sm text-secondary">
-          Thank you for reaching out. We&apos;ll review your inquiry and reply to{' '}
-          <span className="text-primary font-medium">your email</span> within 1–2
-          business days.
+        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9375rem', lineHeight: 1.65, color: 'rgba(26,29,22,0.55)', maxWidth: '36ch' }}>
+          We'll review your message and reply within 24 hours. If it's urgent, email us directly at{' '}
+          <a href="mailto:contact@kaliprlabs.in" style={{ color: '#1A1D16', fontWeight: 600 }}>
+            contact@kaliprlabs.in
+          </a>.
         </p>
-        <p className="mt-4 text-xs text-muted">
-          In a hurry? Email us directly at{' '}
-          <a
-            href={`mailto:${COMPANY.email}`}
-            className="text-accent underline underline-offset-2"
-          >
-            {COMPANY.email}
-          </a>
-        </p>
-      </div>
+      </motion.div>
     )
   }
 
-  const isLoading = formState === 'loading'
+  /* Shared paragraph style */
+  const paraStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-heading)',
+    fontWeight: 500,
+    fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
+    letterSpacing: '-0.02em',
+    lineHeight: 1.65,
+    color: '#1A1D16',
+  }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-      className="space-y-5"
-      aria-label="Project inquiry form"
-    >
-      {/* Honeypot — hidden from real users */}
+    <form onSubmit={handleSubmit(onSubmit)} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      {/* Honeypot — hidden from humans */}
       <input
+        {...register('honeypot')}
         type="text"
         tabIndex={-1}
         aria-hidden="true"
+        style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
         autoComplete="off"
-        className="sr-only"
-        {...register('honeypot')}
       />
+      <input {...register('submittedAt', { valueAsNumber: true })} type="hidden" />
 
-      {/* Name + Email */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-primary">
-            Name <span className="text-accent">*</span>
-          </label>
-          <input
-            id="name"
-            type="text"
-            autoComplete="name"
-            placeholder="Rahul Sharma"
-            disabled={isLoading}
-            className={cn(inputBase, errors.name && 'border-red-400')}
-            {...register('name')}
-          />
-          {errors.name && (
-            <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-primary">
-            Email <span className="text-accent">*</span>
-          </label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            placeholder="rahul@company.com"
-            disabled={isLoading}
-            className={cn(inputBase, errors.email && 'border-red-400')}
-            {...register('email')}
-          />
-          {errors.email && (
-            <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
-          )}
-        </div>
-      </div>
-
-      {/* Company */}
-      <div>
-        <label htmlFor="company" className="mb-1.5 block text-sm font-medium text-primary">
-          Company{' '}
-          <span className="text-muted font-normal">(optional)</span>
-        </label>
-        <input
-          id="company"
-          type="text"
-          autoComplete="organization"
-          placeholder="Your company or studio"
-          disabled={isLoading}
-          className={inputBase}
-          {...register('company')}
+      {/* Narrative paragraph */}
+      <div style={paraStyle}>
+        Hello Kalipr Labs, my name is{' '}
+        <NarrativeInput
+          {...register('name')}
+          placeholder="your name"
+          error={errors.name?.message}
+          aria-label="Your name"
         />
+        {' '}and I represent{' '}
+        <NarrativeInput
+          {...register('company')}
+          placeholder="your company"
+          aria-label="Company name"
+        />
+        .{' '}
+        <br className="hidden md:block" />
+        We are looking for help with{' '}
+        <NarrativeSelect
+          options={PROJECT_TYPES}
+          value={projectTypeValue ?? ''}
+          onChange={(v) => setValue('projectType', v as ContactFormData['projectType'], { shouldValidate: true })}
+          placeholder="type of project"
+          error={errors.projectType?.message}
+        />
+        .{' '}
+        <br className="hidden md:block" />
+        Our budget is around{' '}
+        <NarrativeSelect
+          options={TIMELINE_OPTIONS}
+          value={budgetValue ?? ''}
+          onChange={(v) => setValue('budget', v)}
+          placeholder="estimated budget"
+        />
+        .{' '}
+        <br className="hidden md:block" />
+        Reach me at{' '}
+        <NarrativeInput
+          {...register('email')}
+          type="email"
+          placeholder="your email"
+          error={errors.email?.message}
+          aria-label="Email address"
+          style={{ minWidth: '180px' }}
+        />
+        .
       </div>
 
-      {/* Project type */}
-      <div>
-        <label
-          htmlFor="projectType"
-          className="mb-1.5 block text-sm font-medium text-primary"
-        >
-          Project Type <span className="text-accent">*</span>
-        </label>
-        <select
-          id="projectType"
-          disabled={isLoading}
-          className={cn(inputBase, 'cursor-pointer', errors.projectType && 'border-red-400')}
-          {...register('projectType')}
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Select a project type
-          </option>
-          {PROJECT_TYPES.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select>
-        {errors.projectType && (
-          <p className="mt-1 text-xs text-red-500">{errors.projectType.message}</p>
-        )}
-      </div>
-
-      {/* Budget */}
-      <div>
-        <label htmlFor="budget" className="mb-1.5 block text-sm font-medium text-primary">
-          Approximate Budget{' '}
-          <span className="text-muted font-normal">(optional)</span>
-        </label>
-        <select
-          id="budget"
-          disabled={isLoading}
-          className={cn(inputBase, 'cursor-pointer')}
-          {...register('budget')}
-          defaultValue=""
-        >
-          <option value="">Select a range (optional)</option>
-          {BUDGET_OPTIONS.map((b) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Description */}
-      <div>
+      {/* Additional details textarea */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <label
           htmlFor="description"
-          className="mb-1.5 block text-sm font-medium text-primary"
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            color: 'rgba(26,29,22,0.60)',
+            letterSpacing: '-0.01em',
+          }}
         >
-          Tell us about your project <span className="text-accent">*</span>
+          Any additional details?{' '}
+          <span style={{ color: 'rgba(26,29,22,0.35)', fontWeight: 400 }}>(required · min 50 chars)</span>
         </label>
         <textarea
           id="description"
-          rows={5}
-          placeholder="Describe your idea, the problem you're solving, and what you need help with. The more context you share, the better we can respond."
-          disabled={isLoading}
-          className={cn(inputBase, 'resize-y min-h-[120px]', errors.description && 'border-red-400')}
           {...register('description')}
+          rows={5}
+          placeholder="Tell us more about the problem, your timeline, any constraints, or what a good outcome looks like..."
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.9375rem',
+            lineHeight: 1.6,
+            color: '#1A1D16',
+            background: '#F5F7EF',
+            border: `1.5px solid ${errors.description ? 'rgba(200,60,40,0.40)' : 'rgba(26,29,22,0.10)'}`,
+            borderRadius: '14px',
+            padding: '16px 20px',
+            outline: 'none',
+            resize: 'vertical',
+            width: '100%',
+            transition: 'border-color 0.3s ease',
+          }}
+          onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(26,29,22,0.30)' }}
+          onBlur={(e) => { e.currentTarget.style.borderColor = errors.description ? 'rgba(200,60,40,0.40)' : 'rgba(26,29,22,0.10)' }}
         />
         {errors.description && (
-          <p className="mt-1 text-xs text-red-500">{errors.description.message}</p>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'rgba(200,60,40,0.80)' }}>
+            {errors.description.message}
+          </p>
         )}
       </div>
 
       {/* Error message */}
-      {formState === 'error' && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
-          {errorMessage}{' '}
-          <a
-            href={`mailto:${COMPANY.email}`}
-            className="underline underline-offset-2 hover:text-red-700"
-          >
-            {COMPANY.email}
-          </a>
-        </div>
+      {formState === 'error' && errorMessage && (
+        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.875rem', color: 'rgba(200,60,40,0.80)' }}>
+          {errorMessage}
+        </p>
       )}
 
       {/* Submit */}
       <button
         type="submit"
-        disabled={isLoading}
-        className={cn(
-          'inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5',
-          'font-sans text-sm font-medium text-on-inverse',
-          'bg-primary transition-all duration-200 hover:bg-primary/90',
-          'focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:outline-none',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-        )}
+        disabled={formState === 'loading'}
+        className="btn-primary"
+        style={{ justifyContent: 'center', width: '100%', opacity: formState === 'loading' ? 0.6 : 1, cursor: formState === 'loading' ? 'wait' : 'pointer' }}
       >
-        {isLoading ? (
-          <>
-            <svg
-              className="animate-spin h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-              />
-            </svg>
-            Sending…
-          </>
-        ) : (
-          'Send Inquiry'
-        )}
+        {formState === 'loading' ? 'Sending…' : 'Send it →'}
       </button>
     </form>
   )
 }
 
+export default ContactForm
