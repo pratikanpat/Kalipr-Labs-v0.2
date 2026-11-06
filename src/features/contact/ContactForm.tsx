@@ -26,47 +26,69 @@ const TIMELINE_OPTIONS = [
   "Let's discuss",
 ] as const
 
-/* ── NarrativeInput ──────────────────────────────────────────────── */
+/* ── NarrativeInput — Editorial Line Accent ─────────────────────── */
+// Empty:   muted text (#1A1D16 @35%), dashed underline 1.5px
+// Filled:  bold dark olive text (#1A1D16 @100%), solid underline 1.5px
+// Focused: solid underline, full ink, shadow glow
 interface NarrativeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string
 }
 
 function NarrativeInput({ error, style, ...props }: NarrativeInputProps) {
+  const [focused, setFocused] = useState(false)
+  const [localVal, setLocalVal] = useState('')
+  // hasValue checks local state (reliable for react-hook-form register() spreads)
+  // as well as any explicitly passed value/defaultValue
+  const hasValue = Boolean(localVal || props.value || props.defaultValue)
+
+  const underlineColor = error
+    ? 'rgba(200,60,40,0.70)'
+    : focused
+    ? '#1A1D16'
+    : hasValue
+    ? 'rgba(26,29,22,0.55)'
+    : 'rgba(26,29,22,0.22)'
+
+  const underlineStyle = focused || hasValue ? 'solid' : 'dashed'
+
   return (
-    <span style={{ display: 'inline-flex', flexDirection: 'column', gap: '2px', verticalAlign: 'baseline' }}>
+    <span style={{ display: 'inline-flex', flexDirection: 'column', gap: '3px', verticalAlign: 'baseline' }}>
       <input
         {...props}
         style={{
-          display: 'inline-block',
-          fontFamily: 'var(--font-heading)',
-          fontWeight: 600,
-          fontSize: 'inherit',
-          letterSpacing: 'inherit',
-          lineHeight: 'inherit',
-          color: '#1A1D16',
-          background: 'transparent',
-          border: 'none',
-          borderBottom: `1.5px dashed ${error ? 'rgba(200,60,40,0.60)' : 'rgba(26,29,22,0.25)'}`,
-          outline: 'none',
-          minWidth: '120px',
-          maxWidth: '300px',
-          padding: '0 2px 2px',
-          transition: 'border-color 0.3s ease',
+          display:        'inline-block',
+          fontFamily:     'var(--font-heading)',
+          fontWeight:     focused || hasValue ? 700 : 500,
+          fontSize:       'inherit',
+          letterSpacing:  hasValue ? '-0.02em' : '-0.01em',
+          lineHeight:     'inherit',
+          color:          hasValue ? '#1A1D16' : 'rgba(26,29,22,0.35)',
+          background:     'transparent',
+          border:         'none',
+          borderBottom:   `1.5px ${underlineStyle} ${underlineColor}`,
+          outline:        'none',
+          minWidth:       '120px',
+          maxWidth:       '300px',
+          padding:        '0 4px 3px',
+          transition:     'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+          boxShadow:      focused ? `0 2px 0 ${underlineColor}` : 'none',
           ...style,
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderBottomColor = '#1A1D16'
-          e.currentTarget.style.borderBottomStyle = 'solid'
+          setFocused(true)
           props.onFocus?.(e)
         }}
         onBlur={(e) => {
-          e.currentTarget.style.borderBottomColor = error ? 'rgba(200,60,40,0.60)' : 'rgba(26,29,22,0.25)'
-          e.currentTarget.style.borderBottomStyle = 'dashed'
+          setFocused(false)
           props.onBlur?.(e)
+        }}
+        onChange={(e) => {
+          setLocalVal(e.target.value)
+          props.onChange?.(e)
         }}
       />
       {error && (
-        <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'rgba(200,60,40,0.80)' }}>
+        <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.68rem', color: 'rgba(200,60,40,0.80)', letterSpacing: '0.01em' }}>
           {error}
         </span>
       )}

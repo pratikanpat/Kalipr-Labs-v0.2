@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 import { COMPANY } from '@/lib/constants'
+import { MagneticButton } from '@/components/ui/MagneticButton'
 
 export default function ClosingCTA() {
   const ref = useRef<HTMLDivElement>(null)
@@ -83,16 +83,17 @@ export default function ClosingCTA() {
 
           {/* CTAs */}
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link href="/contact" className="btn-primary">
+            <MagneticButton href="/contact" className="btn-primary">
               Start a conversation
               <ArrowRight size={15} />
-            </Link>
-            <Link
+            </MagneticButton>
+            <MagneticButton
               href={`mailto:${COMPANY.email}`}
+              external
               className="btn-ghost"
             >
               {COMPANY.email}
-            </Link>
+            </MagneticButton>
           </div>
 
           {/* Footnote */}

@@ -1,16 +1,15 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS, COMPANY } from '@/lib/constants'
+import { MagneticButton } from '@/components/ui/MagneticButton'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 // ── Shared-layout magnetic slider nav pill ──────────────────────────
-// A single background element (layoutId="nav-pill") slides
-// fluidly under whichever link is hovered — no per-item backgrounds.
 function NavPill() {
   const [hoveredHref, setHoveredHref] = useState<string | null>(null)
 
@@ -18,7 +17,7 @@ function NavPill() {
     <nav
       className="hidden md:flex items-center gap-0.5 px-1.5 py-1.5 rounded-full"
       style={{
-        background: '#F5F7EF',
+        background: 'rgba(245,247,239,0.85)',
         border: '1px solid rgba(26,29,22,0.07)',
       }}
       aria-label="Main navigation"
@@ -37,7 +36,6 @@ function NavPill() {
           }}
           onMouseEnter={() => setHoveredHref(link.href)}
         >
-          {/* Shared sliding background */}
           {hoveredHref === link.href && (
             <motion.span
               layoutId="nav-pill"
@@ -55,11 +53,13 @@ function NavPill() {
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled]     = useState(false)
   const closeMenu = () => setMobileOpen(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    // Fire immediately on mount to catch SSR mismatch
+    setScrolled(window.scrollY > 10)
+    const onScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -71,13 +71,21 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Desktop header */}
+      {/* ── Desktop header ───────────────────────────────────────── */}
       <header
         className="fixed top-0 left-0 right-0 z-50"
         style={{
           height: 76,
-          transition: 'box-shadow 0.5s cubic-bezier(0.16,1,0.3,1)',
-          boxShadow: scrolled ? '0 1px 0 rgba(26,29,22,0.06)' : 'none',
+          // Glass tray: at top → fully transparent canvas; on scroll → ivory + blur
+          background: scrolled
+            ? 'rgba(245,247,239,0.80)'
+            : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px) saturate(160%)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(16px) saturate(160%)' : 'none',
+          borderBottom: scrolled
+            ? '1px solid rgba(26,29,22,0.07)'
+            : '1px solid transparent',
+          transition: 'background 0.45s cubic-bezier(0.16,1,0.3,1), backdrop-filter 0.45s ease, border-color 0.45s ease',
         }}
       >
         <div className="container-width h-full flex items-center justify-between">
@@ -85,18 +93,27 @@ export default function Navigation() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-heading font-bold text-[15px] tracking-[0.06em] text-primary transition-opacity hover:opacity-70"
             onClick={closeMenu}
-            style={{ fontFamily: 'var(--font-heading)', letterSpacing: '0.06em' }}
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 700,
+              fontSize: '15px',
+              letterSpacing: '0.06em',
+              color: '#1A1D16',
+              textDecoration: 'none',
+              transition: 'opacity 0.3s ease',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.6' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1' }}
           >
             KALIPR LABS
           </Link>
 
-          {/* Center — magnetic floating pill */}
+          {/* Center — magnetic floating pill with scroll-aware shadow */}
           <div
             style={{
-              boxShadow: scrolled ? '0 4px 24px rgba(26,29,22,0.08)' : 'none',
               borderRadius: '9999px',
+              boxShadow: scrolled ? '0 4px 24px rgba(26,29,22,0.08)' : 'none',
               transition: 'box-shadow 0.5s cubic-bezier(0.16,1,0.3,1)',
             }}
           >
@@ -105,9 +122,9 @@ export default function Navigation() {
 
           {/* Right CTA */}
           <div className="hidden md:flex items-center">
-            <Link href="/contact" className="btn-primary text-[13px] px-5 py-2.5">
+            <MagneticButton href="/contact" className="btn-primary text-[13px] px-5 py-2.5">
               Start Project
-            </Link>
+            </MagneticButton>
           </div>
 
           {/* Mobile hamburger */}
@@ -134,7 +151,7 @@ export default function Navigation() {
         </div>
       </header>
 
-      {/* Mobile overlay */}
+      {/* ── Mobile overlay ───────────────────────────────────────── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

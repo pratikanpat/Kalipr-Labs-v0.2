@@ -1,13 +1,11 @@
 'use client'
 
-import Link from 'next/link'
-import { motion, AnimatePresence } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { motion } from 'motion/react'
 import { COMPANY, SOCIAL_LINKS } from '@/lib/constants'
+import { MagneticButton } from '@/components/ui/MagneticButton'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// ── Staggered line reveal (clip-path mask approach) ─────────────────
 function item(delay: number) {
   return {
     initial:    { opacity: 0, y: 28 },
@@ -16,81 +14,20 @@ function item(delay: number) {
   }
 }
 
-// ── Haptic Snap-to-Grid for "fixes it." ────────────────────────────
-// Letters drop from chaos (random tilt + y offset) and snap to baseline
-// with a spring bounce, staggered per character.
-const SNAP_LETTERS = ['f','i','x','e','s',' ','i','t','.']
-const SPRING = { type: 'spring', stiffness: 220, damping: 22 } as const
-
-// Pre-computed stable chaos values (avoid re-randomising each render)
-const CHAOS: Array<{ y: number; rotate: number }> = [
-  { y: -72, rotate: -22 },
-  { y: -88, rotate:  18 },
-  { y: -65, rotate: -31 },
-  { y: -91, rotate:  12 },
-  { y: -78, rotate: -8  },
-  { y: 0,   rotate:  0  }, // space — no animation
-  { y: -83, rotate:  27 },
-  { y: -61, rotate: -19 },
-  { y: -95, rotate:  35 },
-]
-
-function HapticSnap() {
-  const [mounted, setMounted] = useState(false)
-  // Micro-flash line on page load
-  const [flash, setFlash] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-    // Flash fires when last letter lands: 0.3 + 8*0.04 = 0.62s delay + ~0.4s spring = ~1s
-    const t = setTimeout(() => {
-      setFlash(true)
-      setTimeout(() => setFlash(false), 100)
-    }, 1050)
-    return () => clearTimeout(t)
-  }, [])
-
+// ── Lens Compression Reveal for "fixes it." ─────────────────────────
+// Letters emerge wide-spaced (like an out-of-focus lens) then compress
+// into their tight final tracking — a camera coming perfectly into focus.
+function LensReveal() {
   return (
-    <span className="inline-block whitespace-nowrap relative">
-      {SNAP_LETTERS.map((char, i) => {
-        if (char === ' ') return <span key={i}>&thinsp;&thinsp;</span>
-        const chaos = CHAOS[i]
-        return (
-          <motion.span
-            key={i}
-            className="inline-block"
-            style={{ originY: 1 }}
-            initial={{ y: chaos.y, rotate: chaos.rotate, opacity: 0 }}
-            animate={mounted ? { y: 0, rotate: 0, opacity: 1 } : {}}
-            transition={{ ...SPRING, delay: 0.3 + i * 0.04 }}
-          >
-            {char}
-          </motion.span>
-        )
-      })}
-      {/* Micro flash-line — fires on snap completion */}
-      <AnimatePresence>
-        {flash && (
-          <motion.span
-            aria-hidden
-            initial={{ scaleX: 0, opacity: 1 }}
-            animate={{ scaleX: 1, opacity: 0 }}
-            exit={{}}
-            transition={{ duration: 0.1, ease: 'linear' }}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '2px',
-              background: '#1A1D16',
-              transformOrigin: 'left',
-              borderRadius: '1px',
-            }}
-          />
-        )}
-      </AnimatePresence>
-    </span>
+    <motion.span
+      className="inline-block"
+      initial={{ letterSpacing: '0.15em', opacity: 0, filter: 'blur(5px)' }}
+      animate={{ letterSpacing: '-0.03em', opacity: 1, filter: 'blur(0px)' }}
+      transition={{ duration: 0.85, delay: 0.42, ease: EASE }}
+      style={{ fontFamily: 'inherit', fontWeight: 'inherit' }}
+    >
+      fixes it.
+    </motion.span>
   )
 }
 
@@ -114,7 +51,7 @@ export default function Hero() {
 
         {/* Main headline */}
         <div
-          className="font-heading font-bold text-primary mb-10 text-balance"
+          className="font-heading font-bold text-primary mb-10"
           style={{
             fontSize: 'clamp(3rem, 7vw, 5.5rem)',
             lineHeight: 1.08,
@@ -122,7 +59,7 @@ export default function Hero() {
             maxWidth: '900px',
           }}
         >
-          {/* Line 1 — mask reveal with asymmetric ease */}
+          {/* Line 1 — mask reveal */}
           <div className="overflow-hidden">
             <motion.span
               className="block"
@@ -151,42 +88,45 @@ export default function Hero() {
             </motion.span>
           </div>
 
-          {/* Line 2 — haptic snap for "fixes it." */}
-          <div className="overflow-visible">
+          {/* Line 2 — mask reveal + lens compression on "fixes it." */}
+          <div className="overflow-hidden">
             <motion.span
               className="block"
               initial={{ y: '110%' }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+              transition={{ duration: 0.8, delay: 0.22, ease: EASE }}
             >
+              {/* "We build what" slides up first… */}
               We build what{' '}
-              <HapticSnap />
+              {/* …then "fixes it." blooms out of blur/wide-track */}
+              <LensReveal />
             </motion.span>
           </div>
         </div>
 
         {/* Twin CTAs */}
-        <motion.div {...item(0.55)} className="flex flex-wrap items-center gap-3 mb-14">
-          <Link href="/products" className="btn-primary">
+        <motion.div {...item(0.6)} className="flex flex-wrap items-center gap-3 mb-14">
+          <MagneticButton href="/products" className="btn-primary">
             Explore Products
-          </Link>
-          <Link href="/contact" className="btn-ghost">
+          </MagneticButton>
+          <MagneticButton href="/contact" className="btn-ghost">
             Partner With Us
-          </Link>
+          </MagneticButton>
         </motion.div>
 
         {/* Product quick-links row */}
         <motion.div
-          {...item(0.72)}
+          {...item(0.78)}
           className="flex items-center gap-6 pt-8"
           style={{ borderTop: '1px solid rgba(26,29,22,0.08)' }}
         >
           <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-muted shrink-0">
             Our Products
           </span>
+
           {[
             { label: 'Kalvora', sub: 'Interior Design SaaS', href: SOCIAL_LINKS.kalvora },
-            { label: 'Sill',    sub: 'Windows 11 Utility',   href: SOCIAL_LINKS.sill },
+            { label: 'Sill',    sub: 'Windows 11 Utility',   href: SOCIAL_LINKS.sill    },
           ].map(p => (
             <a
               key={p.label}
@@ -217,15 +157,12 @@ export default function Hero() {
           {/* Stats strip */}
           <div className="ml-auto hidden lg:flex items-center gap-6">
             {[
-              { val: '500+', label: 'Kalvora users' },
-              { val: '5',    label: 'Client projects' },
+              { val: '500+',                     label: 'Kalvora users'   },
+              { val: '5',                         label: 'Client projects' },
               { val: String(COMPANY.foundedYear), label: 'Est. Pune, India' },
             ].map(s => (
               <div key={s.label} className="text-right">
-                <div
-                  className="font-heading font-bold text-xl text-primary"
-                  style={{ letterSpacing: '-0.03em' }}
-                >
+                <div className="font-heading font-bold text-xl text-primary" style={{ letterSpacing: '-0.03em' }}>
                   {s.val}
                 </div>
                 <div className="font-mono text-[9px] uppercase tracking-widest text-muted">

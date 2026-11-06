@@ -2,45 +2,63 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, useInView } from 'motion/react'
+import { motion, useInView, useScroll, useMotionValueEvent } from 'motion/react'
 import { useRef, useState } from 'react'
 
 /* ── Animated Wireframes ─────────────────────────────────────────── */
 
-function WireframeSoftware({ hovered }: { hovered: boolean }) {
+// scrollProgress: 0–1 from parent card's scroll position in viewport.
+// Active milestone threshold: each node activates at progress > i/4.
+function WireframeSoftware({ hovered, scrollProgress = 0 }: { hovered: boolean; scrollProgress?: number }) {
   const nodes = [0, 1, 2, 3, 4]
+  const LABELS = ['Idea','Design','Build','Test','Ship']
+  // A node is "active" if scroll has passed its threshold OR card is hovered
+  const isActive  = (i: number) => hovered || scrollProgress >= i / 4
+  const lineActive = (i: number) => hovered || scrollProgress >= (i + 1) / 4
+
   return (
     <svg width="100%" height="80" viewBox="0 0 220 80" fill="none" aria-hidden>
-      {[[0,1],[1,2],[2,3],[3,4]].map(([a,b], i) => (
+      {/* Dashed ghost track */}
+      {[[0,1],[1,2],[2,3],[3,4]].map(([a, b], i) => (
         <line
-          key={i}
+          key={`ghost-${i}`}
           x1={20 + a * 45} y1="40" x2={20 + b * 45} y2="40"
           strokeDasharray="4 4"
+          style={{ stroke: 'rgba(26,29,22,0.10)', strokeWidth: 1.5 }}
+        />
+      ))}
+      {/* Animated ink fill overlay */}
+      {[[0,1],[1,2],[2,3],[3,4]].map(([a, b], i) => (
+        <line
+          key={`ink-${i}`}
+          x1={20 + a * 45} y1="40" x2={20 + b * 45} y2="40"
           style={{
-            stroke: hovered ? 'rgba(26,29,22,0.35)' : 'rgba(26,29,22,0.12)',
-            strokeWidth: 1.5,
-            transition: `stroke 0.4s ease ${i * 0.08}s`,
+            stroke: lineActive(i) ? 'rgba(26,29,22,0.50)' : 'transparent',
+            strokeWidth: 2,
+            transition: `stroke 0.45s cubic-bezier(0.16,1,0.3,1) ${i * 0.09}s`,
           }}
         />
       ))}
+      {/* Milestone nodes */}
       {nodes.map((n, i) => (
         <circle
           key={n}
           cx={20 + n * 45} cy="40" r={i === 0 || i === 4 ? 8 : 6}
           style={{
-            fill: hovered ? (i === 0 ? '#1A1D16' : 'rgba(26,29,22,0.15)') : 'rgba(26,29,22,0.08)',
-            stroke: hovered ? 'rgba(26,29,22,0.4)' : 'rgba(26,29,22,0.12)',
+            fill:   isActive(i) ? (i === 0 ? '#1A1D16' : 'rgba(26,29,22,0.20)') : 'rgba(26,29,22,0.07)',
+            stroke: isActive(i) ? 'rgba(26,29,22,0.50)' : 'rgba(26,29,22,0.12)',
             strokeWidth: 1.5,
             transition: `all 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.07}s`,
           }}
         />
       ))}
-      {['Idea','Design','Build','Test','Ship'].map((label, i) => (
+      {/* Labels */}
+      {LABELS.map((label, i) => (
         <text
           key={label} x={20 + i * 45} y={62} textAnchor="middle"
           style={{
             fontFamily: 'var(--font-mono)', fontSize: '8px',
-            fill: hovered ? 'rgba(26,29,22,0.5)' : 'rgba(26,29,22,0.25)',
+            fill: isActive(i) ? 'rgba(26,29,22,0.55)' : 'rgba(26,29,22,0.22)',
             transition: `fill 0.4s ease ${i * 0.06}s`,
           }}
         >
@@ -162,8 +180,15 @@ interface CardProps {
 function ServiceCard({ num, title, problem, description, deliverable, colSpan, wireframe, cta, ctaHref, staggerIndex = 0 }: CardProps) {
   const [hovered, setHovered] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  // Use section-level inView so all 4 cards share the same trigger threshold
   const inView = useInView(ref, { once: true, margin: '-80px 0px' } as any)
+
+  // Scroll-bound progress for WireframeSoftware pipeline
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.9', 'center 0.4'],
+  })
+  const [scrollProg, setScrollProg] = useState(0)
+  useMotionValueEvent(scrollYProgress, 'change', (v) => setScrollProg(v))
 
   return (
     <motion.div
@@ -196,7 +221,7 @@ function ServiceCard({ num, title, problem, description, deliverable, colSpan, w
 
       {/* Wireframe */}
       <div>
-        {wireframe === 'software' && <WireframeSoftware hovered={hovered} />}
+        {wireframe === 'software' && <WireframeSoftware hovered={hovered} scrollProgress={scrollProg} />}
         {wireframe === 'webapp'   && <WireframeWebApp   hovered={hovered} />}
         {wireframe === 'ai'       && <WireframeAI       hovered={hovered} />}
         {wireframe === 'website'  && <WireframeWebsite  hovered={hovered} />}
