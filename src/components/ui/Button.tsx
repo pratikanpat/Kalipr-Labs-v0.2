@@ -19,22 +19,21 @@ interface ButtonProps {
 
 const variants: Record<ButtonVariant, string> = {
   /**
-   * Cobalt filled — primary action.
-   * Hover: scale up slightly + glow shadow.
+   * Solid ink pill — primary action.
+   * Flat ink stamp: letter-spacing tracks open on hover, compresses on press.
    */
   primary: cn(
-    'bg-accent text-white',
-    'hover:bg-accent-hover hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(67,89,232,0.35)]',
-    'active:scale-[0.98]',
+    'bg-inverse text-on-inverse',
+    'hover:bg-inverse-soft',
+    'active:scale-[0.96]',
   ),
   /**
    * Ghost — secondary action.
-   * Hover: background slides in from bottom via pseudo (via CSS group trick).
    */
   ghost: cn(
-    'text-secondary border border-border-strong bg-transparent',
-    'hover:text-primary hover:border-primary hover:bg-surface-hover',
-    'active:scale-[0.98]',
+    'text-primary border border-border-strong bg-transparent',
+    'hover:text-primary hover:border-primary hover:bg-accent-subtle',
+    'active:scale-[0.96]',
   ),
   /**
    * Outline — same visual as ghost but with stronger border.
@@ -42,15 +41,15 @@ const variants: Record<ButtonVariant, string> = {
   outline: cn(
     'border border-border-strong text-primary bg-transparent',
     'hover:bg-surface hover:border-primary',
-    'active:scale-[0.98]',
+    'active:scale-[0.96]',
   ),
   /**
    * On dark backgrounds.
    */
   inverse: cn(
     'bg-on-inverse text-primary',
-    'hover:bg-on-inverse/90 hover:scale-[1.03]',
-    'active:scale-[0.98]',
+    'hover:bg-on-inverse/90',
+    'active:scale-[0.96]',
   ),
 }
 
@@ -74,7 +73,7 @@ export function Button({
 }: ButtonProps) {
   const classes = cn(
     'inline-flex items-center font-medium rounded-full',
-    'transition-all duration-200 ease-out cursor-pointer',
+    'transition-[background,letter-spacing,border-color,transform] duration-300 ease-out cursor-pointer',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
     variants[variant],
     sizes[size],
