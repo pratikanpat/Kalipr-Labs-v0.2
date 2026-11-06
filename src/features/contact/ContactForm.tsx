@@ -27,9 +27,9 @@ const TIMELINE_OPTIONS = [
 ] as const
 
 /* ── NarrativeInput — Editorial Line Accent ─────────────────────── */
-// Empty:   muted text (#1A1D16 @35%), dashed underline 1.5px
-// Filled:  bold dark olive text (#1A1D16 @100%), solid underline 1.5px
-// Focused: solid underline, full ink, shadow glow
+// Empty:   muted text (#1A1D16 @35%), solid soft line rgba(26,29,22,0.15)
+// Filled:  bold dark text (#1A1D16 @100%), solid 1.5px rgba(26,29,22,0.45)
+// Focused: 2px solid #1A1D16, warm bg tint rgba(26,29,22,0.02)
 interface NarrativeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string
 }
@@ -37,19 +37,16 @@ interface NarrativeInputProps extends React.InputHTMLAttributes<HTMLInputElement
 function NarrativeInput({ error, style, ...props }: NarrativeInputProps) {
   const [focused, setFocused] = useState(false)
   const [localVal, setLocalVal] = useState('')
-  // hasValue checks local state (reliable for react-hook-form register() spreads)
-  // as well as any explicitly passed value/defaultValue
   const hasValue = Boolean(localVal || props.value || props.defaultValue)
 
+  const underlineWidth = focused ? '2px' : '1.5px'
   const underlineColor = error
     ? 'rgba(200,60,40,0.70)'
     : focused
     ? '#1A1D16'
     : hasValue
-    ? 'rgba(26,29,22,0.55)'
-    : 'rgba(26,29,22,0.22)'
-
-  const underlineStyle = focused || hasValue ? 'solid' : 'dashed'
+    ? 'rgba(26,29,22,0.45)'
+    : 'rgba(26,29,22,0.15)'
 
   return (
     <span style={{ display: 'inline-flex', flexDirection: 'column', gap: '3px', verticalAlign: 'baseline' }}>
@@ -58,20 +55,20 @@ function NarrativeInput({ error, style, ...props }: NarrativeInputProps) {
         style={{
           display:        'inline-block',
           fontFamily:     'var(--font-heading)',
-          fontWeight:     focused || hasValue ? 700 : 500,
+          fontWeight:     hasValue ? 700 : 500,
           fontSize:       'inherit',
-          letterSpacing:  hasValue ? '-0.02em' : '-0.01em',
+          letterSpacing:  hasValue ? '-0.025em' : '-0.01em',
           lineHeight:     'inherit',
-          color:          hasValue ? '#1A1D16' : 'rgba(26,29,22,0.35)',
-          background:     'transparent',
+          color:          hasValue ? '#1A1D16' : 'rgba(26,29,22,0.38)',
+          background:     focused ? 'rgba(26,29,22,0.02)' : 'transparent',
           border:         'none',
-          borderBottom:   `1.5px ${underlineStyle} ${underlineColor}`,
+          borderBottom:   `${underlineWidth} solid ${underlineColor}`,
+          borderRadius:   focused ? '4px 4px 0 0' : '0',
           outline:        'none',
           minWidth:       '120px',
           maxWidth:       '300px',
-          padding:        '0 4px 3px',
-          transition:     'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-          boxShadow:      focused ? `0 2px 0 ${underlineColor}` : 'none',
+          padding:        focused ? '2px 6px 3px' : '0 4px 3px',
+          transition:     'all 0.25s cubic-bezier(0.16,1,0.3,1)',
           ...style,
         }}
         onFocus={(e) => {
@@ -96,7 +93,10 @@ function NarrativeInput({ error, style, ...props }: NarrativeInputProps) {
   )
 }
 
-/* ── NarrativeSelect ─────────────────────────────────────────────── */
+/* ── NarrativeSelect — Ivory Surface Pill Tag ───────────────────── */
+// Resting empty : ivory pill (#F5F7EF), low-opacity border, muted text
+// Resting filled: same pill, full ink text, bold weight
+// Open          : border darkens, chevron flips
 interface NarrativeSelectProps {
   options: readonly string[]
   value: string
@@ -127,28 +127,31 @@ function NarrativeSelect({ options, value, onChange, placeholder, error }: Narra
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '4px',
+          gap: '5px',
           fontFamily: 'var(--font-heading)',
-          fontWeight: 600,
+          fontWeight: value ? 700 : 500,
           fontSize: 'inherit',
-          letterSpacing: 'inherit',
-          lineHeight: 'inherit',
-          color: value ? '#1A1D16' : 'rgba(26,29,22,0.35)',
-          background: 'transparent',
-          border: 'none',
-          borderBottom: `1.5px dashed ${error ? 'rgba(200,60,40,0.60)' : 'rgba(26,29,22,0.25)'}`,
+          letterSpacing: value ? '-0.025em' : '-0.01em',
+          lineHeight: 1,
+          color: value ? '#1A1D16' : 'rgba(26,29,22,0.45)',
+          background: '#F5F7EF',
+          border: `1.5px solid ${error ? 'rgba(200,60,40,0.50)' : open ? 'rgba(26,29,22,0.22)' : 'rgba(26,29,22,0.12)'}`,
+          borderRadius: '100px',
           outline: 'none',
           cursor: 'pointer',
-          padding: '0 2px 2px',
+          padding: '3px 10px 3px 12px',
+          transition: 'border-color 0.2s ease, color 0.2s ease',
+          whiteSpace: 'nowrap',
         }}
       >
         {value || placeholder}
         <ChevronDown
-          size={14}
+          size={13}
           style={{
             transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
             transition: 'transform 0.3s ease',
-            opacity: 0.5,
+            opacity: 0.45,
+            flexShrink: 0,
           }}
         />
       </button>
@@ -162,7 +165,7 @@ function NarrativeSelect({ options, value, onChange, placeholder, error }: Narra
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'absolute',
-              top: '100%',
+              top: 'calc(100% + 6px)',
               left: 0,
               zIndex: 50,
               background: '#F5F7EF',
@@ -424,14 +427,19 @@ export function ContactForm() {
       )}
 
       {/* Submit */}
-      <button
-        type="submit"
-        disabled={formState === 'loading'}
-        className="btn-primary"
-        style={{ justifyContent: 'center', width: '100%', opacity: formState === 'loading' ? 0.6 : 1, cursor: formState === 'loading' ? 'wait' : 'pointer' }}
-      >
-        {formState === 'loading' ? 'Sending…' : 'Send it →'}
-      </button>
+      <div style={{ display: 'flex', justifyContent: 'flex-start', paddingTop: '8px' }}>
+        <button
+          type="submit"
+          disabled={formState === 'loading'}
+          className="btn-primary"
+          style={{
+            opacity: formState === 'loading' ? 0.6 : 1,
+            cursor: formState === 'loading' ? 'wait' : 'pointer',
+          }}
+        >
+          {formState === 'loading' ? 'Sending…' : 'Send it →'}
+        </button>
+      </div>
     </form>
   )
 }
