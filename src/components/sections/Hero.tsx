@@ -87,7 +87,16 @@ export default function Hero() {
     >
       <div className="container-width relative z-10 w-full">
 
-        {/* ── Structural Grid Guide — hairline with live Pune clock ───────── */}
+        {/* ── Top micro-label — sits ABOVE the structural hairline ─────────── */}
+        <motion.p
+          {...item(0)}
+          className="font-mono text-[12px] uppercase text-muted"
+          style={{ letterSpacing: '0.06em', marginBottom: '10px' }}
+        >
+          Independent Software Studio &middot; Pune, India
+        </motion.p>
+
+        {/* ── Structural Grid Guide — coordinates left · clock right ───────── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -95,19 +104,27 @@ export default function Hero() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '24px',
+            marginBottom: '32px',
           }}
         >
-          {/* Full-width hairline */}
-          <div
+          {/* Geographic coordinates — flush left of the hairline */}
+          <span
             style={{
-              flex: 1,
-              height: '1px',
-              background: 'rgba(26,29,22,0.08)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              letterSpacing: '0.07em',
+              color: 'rgba(26,29,22,0.38)',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              paddingRight: '14px',
             }}
-          />
-          {/* Live clock — far right */}
+          >
+            // 18.5204° N, 73.8567° E
+          </span>
+          {/* Full-width hairline */}
+          <div style={{ flex: 1, height: '1px', background: 'rgba(26,29,22,0.08)' }} />
+          {/* Live clock — far right of the hairline */}
           <span
             style={{
               fontFamily: 'var(--font-mono)',
@@ -124,21 +141,12 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Top micro-label */}
-        <motion.p
-          {...item(0)}
-          className="font-mono text-[12px] uppercase text-muted mb-10"
-          style={{ letterSpacing: '0.06em' }}
-        >
-          Independent Software Studio &middot; Pune, India
-        </motion.p>
-
         {/* Main headline */}
         <div
           className="font-heading font-bold text-primary mb-10"
           style={{
             fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-            lineHeight: 1.08,
+            lineHeight: 1.05,
             letterSpacing: '-0.03em',
             maxWidth: '900px',
           }}
@@ -188,20 +196,36 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Twin CTAs */}
-        <motion.div {...item(0.6)} className="flex flex-wrap items-center gap-3 mb-14">
+        {/* Twin CTAs — asymmetric: solid pill + bare text link */}
+        <motion.div {...item(0.6)} className="flex flex-wrap items-center gap-5 mb-14">
           <Link href="/products" className="btn-primary">
             Explore Products
           </Link>
-          <Link href="/contact" className="btn-ghost">
-            Partner With Us
+          <Link href="/contact" className="btn-text-arrow">
+            <span className="btn-label">Partner With Us</span>
+            <svg
+              className="btn-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
         </motion.div>
 
         {/* Product quick-links row */}
         <motion.div
           {...item(0.78)}
-          className="flex items-center gap-6 pt-8"
+          className="flex items-end gap-6 pt-8"
           style={{ borderTop: '1px solid rgba(26,29,22,0.08)' }}
         >
           <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-muted shrink-0">
@@ -245,7 +269,7 @@ export default function Hero() {
               { val: '5',                         label: 'Client projects' },
               { val: String(COMPANY.foundedYear), label: 'Est. Pune, India' },
             ].map(s => (
-              <div key={s.label} className="text-right">
+              <div key={s.label} className="text-left">
                 <div className="font-heading font-bold text-xl text-primary" style={{ letterSpacing: '-0.03em' }}>
                   {s.val}
                 </div>
