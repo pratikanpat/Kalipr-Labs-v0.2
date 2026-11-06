@@ -1,8 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { motion } from 'motion/react'
 import { COMPANY, SOCIAL_LINKS } from '@/lib/constants'
-import { MagneticButton } from '@/components/ui/MagneticButton'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -106,12 +106,12 @@ export default function Hero() {
 
         {/* Twin CTAs */}
         <motion.div {...item(0.6)} className="flex flex-wrap items-center gap-3 mb-14">
-          <MagneticButton href="/products" className="btn-primary">
+          <Link href="/products" className="btn-primary">
             Explore Products
-          </MagneticButton>
-          <MagneticButton href="/contact" className="btn-ghost">
+          </Link>
+          <Link href="/contact" className="btn-ghost">
             Partner With Us
-          </MagneticButton>
+          </Link>
         </motion.div>
 
         {/* Product quick-links row */}

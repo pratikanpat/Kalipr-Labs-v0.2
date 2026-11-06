@@ -270,47 +270,6 @@
   .btn-pill-elev:hover  { letter-spacing: 0.03em; transform: none; box-shadow: none !important; }
   .btn-pill-elev:active { transform: scale(0.96); }
 
-  /* ── Flat Text-Shift Arrow Links ────────────────────────────────────
-     For inline text+icon links (not pill containers).
-     Typography momentum: label -1px, arrow +2px.
-     Quiet directional nod — no shaky jumps.
-  ──────────────────────────────────────────────────────────────────── */
-  .btn-text-arrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  .btn-text-arrow .btn-label {
-    display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-  }
-  .btn-text-arrow svg,
-  .btn-text-arrow .btn-arrow {
-    display: inline-block;
-    flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-  }
-  /* Precise 1px + 2px — calm visual nod, not a jump */
-  .btn-text-arrow:hover .btn-label { transform: translateX(-1px); }
-  .btn-text-arrow:hover svg,
-  .btn-text-arrow:hover .btn-arrow { transform: translateX(2px); }
-
-  /* ── MagneticButton override ────────────────────────────────────────
-     motion/react spring handles x/y translation; whileTap handles press.
-     Suppress CSS :hover transform (letter-spacing still fires via CSS).
-     Suppress CSS :active scale (whileTap owns that).
-  ──────────────────────────────────────────────────────────────────── */
-  [data-magnetic].btn-primary:hover,
-  [data-magnetic].btn-ghost:hover,
-  [data-magnetic].btn-accent:hover,
-  [data-magnetic].btn-pill-elev:hover  { transform: none; box-shadow: none; }
-  [data-magnetic].btn-primary:active,
-  [data-magnetic].btn-ghost:active,
-  [data-magnetic].btn-accent:active,
-  [data-magnetic].btn-pill-elev:active { transform: none; }
-
   /* Animated underline link */
   .link-underline { position: relative; display: inline-block; }
   .link-underline::after {
@@ -347,6 +306,56 @@
 
   /* Section divider */
   .divider { height: 1px; background: var(--color-border); }
+}
+
+/* ================================================================
+   TEXT-ARROW LINK ANIMATION
+   ─────────────────────────────────────────────────────────────────
+   IMPORTANT: This block is intentionally OUTSIDE @layer utilities.
+   Lucide SVG icons carry their own class/style attributes. Placing
+   these rules in plain global scope (highest cascade authority)
+   guarantees they win over Tailwind utility classes and inline
+   element styles without needing !important on each rule.
+
+   On hover:
+     · .btn-label text slides left  (-3px)  — momentum origin
+     · SVG arrow slides right (+6px) and grows (scale 1.15) — directional pull
+   ================================================================ */
+
+.btn-text-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  /* overflow: hidden ensures the growing arrow doesn't escape the link box */
+}
+
+.btn-text-arrow .btn-label {
+  display: inline-block;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Target the Lucide SVG directly — both selector forms for safety */
+.btn-text-arrow svg,
+.btn-text-arrow .btn-arrow {
+  display: inline-block;
+  flex-shrink: 0;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  /* Reset any transform Lucide might apply */
+  transform-origin: center;
+}
+
+/* Hover state — perceptible, intentional movement */
+.btn-text-arrow:hover .btn-label {
+  transform: translateX(-3px);
+}
+
+.btn-text-arrow:hover svg,
+.btn-text-arrow:hover .btn-arrow {
+  transform: translateX(6px) scale(1.15);
 }
 
 /* ================================================================

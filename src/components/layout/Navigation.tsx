@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS, COMPANY } from '@/lib/constants'
-import { MagneticButton } from '@/components/ui/MagneticButton'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -122,9 +121,9 @@ export default function Navigation() {
 
           {/* Right CTA */}
           <div className="hidden md:flex items-center">
-            <MagneticButton href="/contact" className="btn-primary text-[13px] px-5 py-2.5">
+            <Link href="/contact" className="btn-primary text-[13px] px-5 py-2.5">
               Start Project
-            </MagneticButton>
+            </Link>
           </div>
 
           {/* Mobile hamburger */}
