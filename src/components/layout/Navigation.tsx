@@ -47,15 +47,20 @@ export default function Navigation() {
               KALIPR LABS
             </Link>
 
-            {/* Desktop Nav links */}
+            {/* Desktop Nav links — animated underline on hover */}
             <nav className="hidden md:flex items-center gap-9" aria-label="Main navigation">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-sans text-muted hover:text-primary transition-colors duration-200"
+                  className="relative group text-sm font-sans text-muted hover:text-primary transition-colors duration-200"
                 >
                   {link.label}
+                  {/* Underline slides in from left */}
+                  <span
+                    aria-hidden
+                    className="absolute -bottom-0.5 left-0 h-px w-full bg-primary rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"
+                  />
                 </Link>
               ))}
             </nav>
@@ -64,10 +69,10 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 bg-primary text-on-inverse text-sm font-medium px-5 py-2.5 rounded-full hover:bg-primary/85 transition-colors duration-200"
+                className="group inline-flex items-center gap-1.5 bg-accent text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-200 hover:bg-accent-hover hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(67,89,232,0.3)] active:scale-[0.98]"
               >
                 Start a Project
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
             </div>
 

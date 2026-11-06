@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Navigation from '@/components/layout/Navigation'
 import Footer from '@/components/layout/Footer'
+import SmoothScroll from '@/components/layout/SmoothScroll'
 import { COMPANY } from '@/lib/constants'
 
 // Geist covers all sans-serif roles — Inter dropped
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-canvas text-secondary font-sans antialiased overflow-x-hidden">
+        <SmoothScroll />
         <Navigation />
         <main>{children}</main>
         <Footer />

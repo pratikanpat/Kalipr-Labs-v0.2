@@ -182,6 +182,30 @@
   }
   .btn-ghost:hover { @apply bg-surface; }
 
+  /* ── Card hover lift */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(25, 27, 34, 0.10);
+  }
+
+  /* ── Animated underline for inline links */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute -bottom-0.5 left-0 h-px w-full rounded-full bg-current;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
 }

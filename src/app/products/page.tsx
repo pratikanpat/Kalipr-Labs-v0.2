@@ -71,7 +71,7 @@ export default function ProductsPage() {
                       <Button href={SOCIAL_LINKS.kalvora} variant="primary" size="md" external>
                         Open Kalvora â†’
                       </Button>
-                      <Button href="/products/kalvora" variant="secondary" size="md">
+                      <Button href="/products/kalvora" variant="outline" size="md">
                         Product details
                       </Button>
                     </div>
@@ -112,6 +112,7 @@ export default function ProductsPage() {
     </div>
   )
 }
+
 
 
 
