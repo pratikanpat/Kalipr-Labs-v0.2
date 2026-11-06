@@ -81,7 +81,7 @@ export default function HowWeWork() {
                   fontSize: 'clamp(8rem, 20vw, 14rem)',
                   letterSpacing: '-0.06em',
                   lineHeight: 1,
-                  color: 'rgba(230,234,212,0.04)',
+                  color: 'rgba(230,234,212,0.03)',
                   userSelect: 'none',
                   pointerEvents: 'none',
                 }}
@@ -233,23 +233,19 @@ export default function HowWeWork() {
                     {steps[activeStep]?.title}
                   </h2>
 
-                  {/* Summary pill */}
+                  {/* Summary micro-label — flat mono, no pill container */}
                   <span
                     style={{
-                      display: 'inline-block',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
+                      fontSize: '11px',
                       fontWeight: 600,
-                      letterSpacing: '0.06em',
-                      color: 'rgba(230,234,212,0.45)',
-                      background: 'rgba(230,234,212,0.06)',
-                      border: '1px solid rgba(230,234,212,0.08)',
-                      borderRadius: '100px',
-                      padding: '5px 14px',
+                      letterSpacing: '0.10em',
+                      color: 'rgba(230,234,212,0.38)',
+                      textTransform: 'uppercase',
                       alignSelf: 'flex-start',
                     }}
                   >
-                    {steps[activeStep]?.summary}
+                    // {steps[activeStep]?.summary}
                   </span>
 
                   {/* Description */}
@@ -265,10 +261,10 @@ export default function HowWeWork() {
                     {steps[activeStep]?.description}
                   </p>
 
-                  {/* Deliverable */}
+                  {/* Deliverable — grid table separator above */}
                   <div
                     style={{
-                      borderTop: '1px solid rgba(230,234,212,0.08)',
+                      borderTop: '1px solid rgba(230,234,212,0.05)',
                       paddingTop: '20px',
                     }}
                   >

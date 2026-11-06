@@ -293,8 +293,8 @@ export function ContactForm() {
         </h3>
         <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9375rem', lineHeight: 1.65, color: 'rgba(26,29,22,0.55)', maxWidth: '36ch' }}>
           We'll review your message and reply within 24 hours. If it's urgent, email us directly at{' '}
-          <a href="mailto:contact@kaliprlabs.in" style={{ color: '#1A1D16', fontWeight: 600 }}>
-            contact@kaliprlabs.in
+          <a href="mailto:hello@kaliprlabs.in" style={{ color: '#1A1D16', fontWeight: 600 }}>
+            hello@kaliprlabs.in
           </a>.
         </p>
       </motion.div>

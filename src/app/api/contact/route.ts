@@ -59,7 +59,7 @@ ${data.description}
 
       await resend.emails.send({
         from: 'Kalipr Labs Contact <noreply@kaliprlabs.in>',
-        to: 'contact@kaliprlabs.in',
+        to: 'hello@kaliprlabs.in',
         replyTo: data.email,
         subject: `New inquiry: ${data.projectType} — ${data.name}`,
         text: emailBody,
@@ -67,7 +67,7 @@ ${data.description}
     } catch (err) {
       console.error('[contact/route] Resend error:', err)
       return NextResponse.json(
-        { error: 'Failed to send message. Please email us directly at contact@kaliprlabs.in' },
+        { error: 'Failed to send message. Please email us directly at hello@kaliprlabs.in' },
         { status: 500 },
       )
     }

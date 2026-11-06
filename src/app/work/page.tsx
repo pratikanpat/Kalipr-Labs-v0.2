@@ -57,7 +57,7 @@ export default function WorkPage() {
                   Request project references
                 </Link>
                 <a
-                  href="mailto:contact@kaliprlabs.in"
+                  href="mailto:hello@kaliprlabs.in"
                   className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-secondary hover:border-border-strong hover:text-primary transition-colors"
                 >
                   Email directly →

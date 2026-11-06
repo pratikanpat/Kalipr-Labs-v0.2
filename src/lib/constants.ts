@@ -5,7 +5,7 @@ export const COMPANY = {
   description:    'An independent software studio from Pune. We build our own products and engineer digital solutions for businesses.',
   philosophy:     'We find the friction. We build what fixes it.',
   location:       'Pune, India',
-  email:          'contact@kaliprlabs.in',
+  email:          'hello@kaliprlabs.in',
   url:            'https://kaliprlabs.in',
   foundedYear:    2025,
   kalvoraUsers:   '500+',
