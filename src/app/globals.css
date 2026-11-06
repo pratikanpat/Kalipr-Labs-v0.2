@@ -1,70 +1,66 @@
 @import "tailwindcss";
 
-/* --- Design Tokens ---------------------------------------- */
+/* ─── Design Tokens ─────────────────────────────────────── */
 /* Palette: The Curious Workshop
-   65% warm paper . 25% deep ink . 8% cobalt . 2% vermilion  */
+   65% warm paper · 25% deep ink · 8% cobalt · 2% vermilion */
 @theme {
-  /* Backgrounds */
+  /* ── Backgrounds (65% warm paper) */
   --color-canvas:         #F5F1E9;
   --color-surface:        #EAE6DC;
   --color-surface-hover:  #E0DBD0;
-  --color-inverse:        #191B22;
-  --color-inverse-soft:   #22242E;
+  --color-inverse:        #191B22;   /* deep charcoal ink */
+  --color-inverse-soft:   #22242E;   /* slightly lighter dark */
 
-  /* Dark hero tokens (Cal.com dark-first) */
-  --color-dark:           #0C0C0E;
-  --color-dark-surface:   #141416;
-  --color-dark-border:    rgba(255,255,255,0.08);
-  --color-dark-muted:     rgba(255,255,255,0.45);
-
-  /* Text */
-  --color-primary:        #191B22;
+  /* ── Text */
+  --color-primary:        #191B22;   /* deep charcoal — matches inverse */
   --color-secondary:      #4A4B55;
   --color-muted:          #7A7B85;
   --color-on-inverse:     #EDE9DF;
   --color-on-inverse-muted: #8E8F9A;
 
-  /* Accent -- Electric Cobalt (8%) */
+  /* ── Accent — Electric Cobalt (8%) */
   --color-accent:         #4359E8;
   --color-accent-hover:   #3447CC;
   --color-accent-light:   #6B7FEE;
   --color-accent-subtle:  rgba(67, 89, 232, 0.08);
-  --color-accent-on-dark: #7B8FF0;
+  --color-accent-on-dark: #7B8FF0;   /* cobalt on dark backgrounds */
 
-  /* Accent 2 -- Warm Vermilion (2%) */
+  /* ── Accent 2 — Warm Vermilion (2%) */
   --color-pop:            #F07852;
   --color-pop-subtle:     rgba(240, 120, 82, 0.10);
 
-  /* Product sub-brand: Kalvora */
-  --color-kalvora:        #E8DCC8;
-  --color-kalvora-accent: #8B6F47;
+  /* ── Product sub-brand: Kalvora */
+  --color-kalvora:        #E8DCC8;   /* warm sand */
+  --color-kalvora-accent: #8B6F47;   /* warm brown */
   --color-kalvora-ink:    #2C1F0E;
 
-  /* Product sub-brand: Sill */
-  --color-sill:           #C8D4E8;
-  --color-sill-accent:    #3A5A8B;
+  /* ── Product sub-brand: Sill */
+  --color-sill:           #C8D4E8;   /* cool slate */
+  --color-sill-accent:    #3A5A8B;   /* technical blue */
   --color-sill-ink:       #0A1428;
 
-  /* Borders */
+  /* ── Borders */
   --color-border:         rgba(25, 27, 34, 0.09);
   --color-border-strong:  rgba(25, 27, 34, 0.16);
   --color-border-inverse: rgba(255, 255, 255, 0.08);
   --color-border-accent:  rgba(67, 89, 232, 0.20);
 
-  /* Typography -- Geist only, JetBrains Mono for labels */
+  /* ── Typography — Geist only, JetBrains Mono for labels */
   --font-heading: var(--font-geist-sans), system-ui, sans-serif;
   --font-sans:    var(--font-geist-sans), system-ui, sans-serif;
   --font-mono:    var(--font-jetbrains-mono), 'Courier New', monospace;
 
-  /* Animation easings */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* ── Animation */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* --- Base Styles ------------------------------------------ */
+/* ─── Base Styles ────────────────────────────────────────── */
 @layer base {
-  *, *::before, *::after { box-sizing: border-box; }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
   html {
     scroll-behavior: smooth;
@@ -85,7 +81,10 @@
     letter-spacing: -0.02em;
   }
 
-  img, video { max-width: 100%; display: block; }
+  img, video {
+    max-width: 100%;
+    display: block;
+  }
 
   ::selection {
     background-color: rgba(67, 89, 232, 0.14);
@@ -106,7 +105,7 @@
   }
 }
 
-/* --- Layout Utilities ------------------------------------- */
+/* ─── Layout Utilities ───────────────────────────────────── */
 @layer utilities {
   .container-width {
     max-width: 1360px;
@@ -138,22 +137,16 @@
     letter-spacing: 0.18em;
   }
 
-  /* Technical label */
+  /* Technical label: // PRODUCTS */
   .section-label {
     @apply font-mono text-xs tracking-widest uppercase;
     font-size: 11px;
     letter-spacing: 0.16em;
   }
 
-  /* Dot grid background texture (light) */
+  /* Dot grid background texture */
   .dot-grid {
     background-image: radial-gradient(circle, rgba(25, 27, 34, 0.09) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
-
-  /* Dot grid background texture (dark) */
-  .dot-grid-dark {
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
@@ -166,51 +159,42 @@
   }
 
   /* Kalvora product surface */
-  .surface-kalvora { background-color: #F0E8D8; }
+  .surface-kalvora {
+    background-color: #F0E8D8;
+  }
 
   /* Sill product surface */
-  .surface-sill { background-color: #191B22; }
+  .surface-sill {
+    background-color: #191B22;
+  }
 
   /* Cobalt accent button base */
   .btn-accent {
-    @apply bg-accent text-white font-medium rounded-full transition-all duration-200;
+    @apply bg-accent text-white font-medium rounded-full transition-colors;
     padding: 12px 28px;
   }
-  .btn-accent:hover {
-    background-color: #3447CC;
-    transform: scale(1.025);
-    box-shadow: 0 0 24px rgba(67,89,232,0.4);
-  }
+  .btn-accent:hover { background-color: #3447CC; }
 
   /* Ghost button */
   .btn-ghost {
-    @apply border border-border-strong text-primary font-medium rounded-full transition-all duration-200;
+    @apply border border-border-strong text-primary font-medium rounded-full transition-colors;
     padding: 11px 27px;
   }
   .btn-ghost:hover { @apply bg-surface; }
 
-  /* Ghost button on dark backgrounds */
-  .btn-ghost-dark {
-    @apply border font-medium rounded-full transition-all duration-200;
-    padding: 11px 27px;
-    border-color: rgba(255,255,255,0.14);
-    color: rgba(255,255,255,0.75);
+  /* ── Card hover lift */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
   }
-  .btn-ghost-dark:hover {
-    border-color: rgba(255,255,255,0.3);
-    color: #fff;
-    background: rgba(255,255,255,0.05);
-  }
-
-  /* Card hover lift */
-  .card-hover { @apply transition-all duration-300 ease-out; }
   .card-hover:hover {
     transform: translateY(-5px);
     box-shadow: 0 16px 40px rgba(25, 27, 34, 0.10);
   }
 
-  /* Animated underline for inline links */
-  .link-underline { @apply relative inline-block; }
+  /* ── Animated underline for inline links */
+  .link-underline {
+    @apply relative inline-block;
+  }
   .link-underline::after {
     content: '';
     @apply absolute -bottom-0.5 left-0 h-px w-full rounded-full bg-current;
@@ -218,13 +202,15 @@
     transform-origin: left;
     transition: transform 0.3s ease-out;
   }
-  .link-underline:hover::after { transform: scaleX(1); }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
 
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
 }
 
-/* --- Reduced Motion --------------------------------------- */
+/* ─── Reduced Motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

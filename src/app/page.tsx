@@ -1,6 +1,5 @@
 import Hero            from '@/components/sections/Hero'
 import CredibilityBar  from '@/components/sections/CredibilityBar'
-import ProblemSolution from '@/components/sections/ProblemSolution'
 import ProductsSection from '@/components/sections/ProductsSection'
 import Services        from '@/components/sections/Services'
 import SelectedWork    from '@/components/sections/SelectedWork'
@@ -10,28 +9,25 @@ import ClosingCTA      from '@/components/sections/ClosingCTA'
 export default function HomePage() {
   return (
     <>
-      {/* 01 · Hero — dark, centered, Cal.com style */}
+      {/* 01 · Hero */}
       <Hero />
 
-      {/* 02 · Proof strip — dark bg, 4-stat grid */}
+      {/* 02 · Proof */}
       <CredibilityBar />
 
-      {/* 03 · Problem → Solution accordion — Cal.com signature section */}
-      <ProblemSolution />
-
-      {/* 04 · Our Products — Kalvora (warm) + Sill (dark) blocks */}
+      {/* 03 · Our Products — before services (product-led studio) */}
       <ProductsSection />
 
-      {/* 05 · Services */}
+      {/* 04 · Services */}
       <Services />
 
-      {/* 06 · Selected Work */}
+      {/* 05 · Selected Work */}
       <SelectedWork />
 
-      {/* 07 · How We Work */}
+      {/* 06 · How We Work */}
       <HowWeWork />
 
-      {/* 08 · Closing CTA */}
+      {/* 07 · Closing CTA */}
       <ClosingCTA />
     </>
   )
