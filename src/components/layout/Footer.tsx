@@ -74,8 +74,9 @@ export default function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <p style={labelStyle}>Navigation</p>
             {studioLinks.map((l) => (
-              <Link key={l.href} href={l.href} className="link-underline" style={linkStyle}>
-                {l.label}
+              <Link key={l.href} href={l.href} className="footer-link">
+                <span className="footer-link-text">{l.label}</span>
+                <span className="footer-link-arrow" aria-hidden>→</span>
               </Link>
             ))}
           </div>
@@ -88,10 +89,10 @@ export default function Footer() {
                 key={l.href}
                 href={l.href}
                 {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                className="link-underline"
-                style={linkStyle}
+                className="footer-link"
               >
-                {l.label}
+                <span className="footer-link-text">{l.label}</span>
+                <span className="footer-link-arrow" aria-hidden>→</span>
               </Link>
             ))}
           </div>
@@ -100,33 +101,29 @@ export default function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <p style={labelStyle}>Legal</p>
             {legalLinks.map((l) => (
-              <Link key={l.href} href={l.href} className="link-underline" style={linkStyle}>
-                {l.label}
+              <Link key={l.href} href={l.href} className="footer-link">
+                <span className="footer-link-text">{l.label}</span>
+                <span className="footer-link-arrow" aria-hidden>→</span>
               </Link>
             ))}
-            {/* Cookie Preferences — inline text toggle */}
+            {/* Cookie Preferences */}
             <button
               type="button"
-              onClick={() => {/* cookie consent reset hook — extend as needed */}}
-              className="link-underline"
-              style={{
-                ...linkStyle,
-                background: 'none',
-                border: 'none',
-                padding: 0,
-                cursor: 'pointer',
-                textAlign: 'left',
-              }}
+              onClick={() => {}}
+              className="footer-link"
             >
-              Cookie Preferences
+              <span className="footer-link-text">Cookie Preferences</span>
+              <span className="footer-link-arrow" aria-hidden>→</span>
             </button>
             <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <p style={labelStyle}>Social</p>
-              <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline" style={linkStyle}>
-                LinkedIn
+              <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">
+                <span className="footer-link-text">LinkedIn</span>
+                <span className="footer-link-arrow" aria-hidden>→</span>
               </Link>
-              <Link href={SOCIAL_LINKS.founderPortfolio} target="_blank" rel="noopener noreferrer" className="link-underline" style={linkStyle}>
-                Founder
+              <Link href={SOCIAL_LINKS.founderPortfolio} target="_blank" rel="noopener noreferrer" className="footer-link">
+                <span className="footer-link-text">Founder</span>
+                <span className="footer-link-arrow" aria-hidden>→</span>
               </Link>
             </div>
           </div>

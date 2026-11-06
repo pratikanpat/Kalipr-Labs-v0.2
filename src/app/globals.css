@@ -380,6 +380,61 @@
 }
 
 /* ================================================================
+   FOOTER LINK — Directional Shift + Slide-In Arrow
+   ─────────────────────────────────────────────────────────────────
+   OUTSIDE @layer utilities for full cascade authority.
+
+   Resting state  : text at 0.5 cream opacity, arrow invisible/offset-left
+   Hover          : color snaps to full #E6EAD4, text shifts -2px left,
+                    arrow fades in and slides +6px right
+   ================================================================ */
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  color: rgba(230,234,212,0.5);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #E6EAD4;
+}
+
+.footer-link-text {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 0.32s cubic-bezier(0.16,1,0.3,1);
+}
+
+.footer-link:hover .footer-link-text {
+  transform: translateX(-2px);
+}
+
+.footer-link-arrow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-6px);
+  margin-left: 4px;
+  font-style: normal;
+  transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1),
+              transform 0.32s cubic-bezier(0.16,1,0.3,1);
+}
+
+.footer-link:hover .footer-link-arrow {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+/* ================================================================
    SKELETON LOADING ANIMATION (for Services section)
    ================================================================ */
 @keyframes skeleton-sweep {
