@@ -372,6 +372,17 @@ export function ContactForm() {
           aria-label="Email address"
           style={{ minWidth: '180px' }}
         />
+        .{' '}
+        <br className="hidden md:block" />
+        My mobile is{' '}
+        <NarrativeInput
+          {...register('phone')}
+          type="tel"
+          placeholder="phone (optional)"
+          error={errors.phone?.message}
+          aria-label="Phone number (optional)"
+          style={{ minWidth: '160px' }}
+        />
         .
       </div>
 

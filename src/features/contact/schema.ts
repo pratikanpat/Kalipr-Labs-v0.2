@@ -23,6 +23,11 @@ export const contactSchema = z.object({
     { required_error: 'Please select a project type' },
   ),
   budget: z.string().optional(),
+  phone: z
+    .string()
+    .regex(/^[+\d\s\-()]{7,20}$/, 'Please enter a valid phone number')
+    .optional()
+    .or(z.literal('')),
   description: z
     .string()
     .min(50, 'Please describe your project in at least 50 characters')
