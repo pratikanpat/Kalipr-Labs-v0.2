@@ -90,8 +90,8 @@ export default function Hero() {
         {/* ── Top micro-label — sits ABOVE the structural hairline ─────────── */}
         <motion.p
           {...item(0)}
-          className="font-mono text-[12px] uppercase text-muted"
-          style={{ letterSpacing: '0.06em', marginBottom: '10px' }}
+          className="font-mono text-[12px] uppercase"
+          style={{ letterSpacing: '0.06em', marginBottom: '10px', color: 'rgba(26,29,22,0.65)' }}
         >
           Independent Software Studio &middot; Pune, India
         </motion.p>
@@ -113,7 +113,7 @@ export default function Hero() {
               fontFamily: 'var(--font-mono)',
               fontSize: '10px',
               letterSpacing: '0.07em',
-              color: 'rgba(26,29,22,0.38)',
+              color: 'rgba(26,29,22,0.45)',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
               flexShrink: 0,
@@ -123,14 +123,14 @@ export default function Hero() {
             // 18.5204° N, 73.8567° E
           </span>
           {/* Full-width hairline */}
-          <div style={{ flex: 1, height: '1px', background: 'rgba(26,29,22,0.08)' }} />
+          <div style={{ flex: 1, height: '1px', background: 'rgba(26,29,22,0.12)' }} />
           {/* Live clock — far right of the hairline */}
           <span
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '10px',
               letterSpacing: '0.07em',
-              color: 'rgba(26,29,22,0.38)',
+              color: 'rgba(26,29,22,0.45)',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
               flexShrink: 0,
