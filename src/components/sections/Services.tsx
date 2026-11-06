@@ -242,9 +242,13 @@ function ServiceCard({ num, title, problem, description, deliverable, colSpan, w
         <p style={{ fontFamily:'var(--font-mono)', fontSize:'0.72rem', color:'rgba(26,29,22,0.40)', letterSpacing:'0.03em', lineHeight:1.4, maxWidth:'28ch' }}>
           {deliverable}
         </p>
-        <Link href={ctaHref} style={{ fontFamily:'var(--font-heading)', color:'#1A1D16', letterSpacing:'-0.01em', display:'inline-flex', alignItems:'center', gap:'6px', fontSize:'0.875rem', fontWeight:600, textDecoration:'none', whiteSpace:'nowrap' }}>
-          {cta}
-          <ArrowRight size={14} style={{ transform: hovered ? 'translateX(3px)' : 'translateX(0)', transition:'transform 0.4s cubic-bezier(0.16,1,0.3,1)' }}/>
+        <Link
+          href={ctaHref}
+          className="btn-text-arrow"
+          style={{ fontFamily:'var(--font-heading)', color:'#1A1D16', letterSpacing:'-0.01em', fontSize:'0.875rem', fontWeight:600, textDecoration:'none', whiteSpace:'nowrap' }}
+        >
+          <span className="btn-label">{cta}</span>
+          <ArrowRight size={14} />
         </Link>
       </div>
     </motion.div>

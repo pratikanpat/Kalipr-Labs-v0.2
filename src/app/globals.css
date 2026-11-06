@@ -164,6 +164,11 @@
     box-shadow: 0 20px 60px rgba(26, 29, 22, 0.08);
   }
 
+  /* ── Option 1: Physical Card Elevation ───────────────────────────────
+     Pill buttons lift 2% toward viewer on hover; press snaps 3% back.
+     Transition uses --ease-premium for a tactile, matte-card feel.
+  ──────────────────────────────────────────────────────────────────── */
+
   /* Pill button — solid ink */
   .btn-primary {
     display: inline-flex;
@@ -177,10 +182,18 @@
     border-radius: var(--radius-pill);
     border: none;
     cursor: pointer;
-    transition: var(--transition-std);
+    /* will-change keeps the GPU layer active, preventing jank on first hover */
+    will-change: transform, background;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                background 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
   }
-  .btn-primary:hover { background: #2A2D22; transform: scale(0.98); }
-  .btn-primary:active { transform: scale(0.97); }
+  .btn-primary:hover {
+    background: #2A2D22;
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(26,29,22,0.18);
+  }
+  .btn-primary:active { transform: scale(0.97); box-shadow: none; }
 
   /* Pill button — ghost outline */
   .btn-ghost {
@@ -193,14 +206,23 @@
     font-size: 14px;
     padding: 11px 27px;
     border-radius: var(--radius-pill);
-    border: 1px solid #1A1D16;
+    border: 1px solid rgba(26,29,22,0.55);
     cursor: pointer;
-    transition: var(--transition-std);
+    will-change: transform, background, border-color;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                background 0.4s cubic-bezier(0.16,1,0.3,1),
+                border-color 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
   }
-  .btn-ghost:hover { background: rgba(26,29,22,0.05); transform: scale(0.98); }
-  .btn-ghost:active { transform: scale(0.97); }
+  .btn-ghost:hover {
+    background: rgba(26,29,22,0.05);
+    border-color: #1A1D16;
+    transform: scale(1.02);
+    box-shadow: 0 4px 14px rgba(26,29,22,0.08);
+  }
+  .btn-ghost:active { transform: scale(0.97); box-shadow: none; }
 
-  /* Legacy compat aliases */
+  /* Legacy compat alias — mirrors btn-primary */
   .btn-accent {
     display: inline-flex;
     align-items: center;
@@ -213,10 +235,75 @@
     border-radius: var(--radius-pill);
     border: none;
     cursor: pointer;
-    transition: var(--transition-std);
+    will-change: transform, background;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                background 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
   }
-  .btn-accent:hover { background: #2A2D22; transform: scale(0.98); }
+  .btn-accent:hover { background: #2A2D22; transform: scale(1.02); box-shadow: 0 6px 20px rgba(26,29,22,0.18); }
+  .btn-accent:active { transform: scale(0.97); box-shadow: none; }
   .bg-inverse  { background-color: #1A1D16; }
+
+  /* ── Option 2: Text-Shift Arrow Reveal ───────────────────────────────
+     For inline text+icon links (not pill containers). On hover:
+       · The label text nudges left -2px  (momentum origin)
+       · The SVG / icon child slides right +4px (directional pull)
+     Zero box mutation — only sub-element translations move.
+  ──────────────────────────────────────────────────────────────────── */
+  .btn-text-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-text-arrow .btn-label {
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .btn-text-arrow svg,
+  .btn-text-arrow .btn-arrow {
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    flex-shrink: 0;
+  }
+  .btn-text-arrow:hover .btn-label  { transform: translateX(-2px); }
+  .btn-text-arrow:hover svg,
+  .btn-text-arrow:hover .btn-arrow  { transform: translateX(4px); }
+
+  /* ── btn-pill-elev: Option 1 physics for custom-colored pill links ──
+     Apply as an extra class alongside any rounded-full link/button that
+     has its own background/color inline styles (e.g. product CTAs).
+     Gives the same 1.02 lift + depth shadow without overriding colors.
+  ──────────────────────────────────────────────────────────────────── */
+  .btn-pill-elev {
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1) !important;
+  }
+  .btn-pill-elev:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 18px rgba(26,29,22,0.14);
+  }
+  .btn-pill-elev:active { transform: scale(0.97); box-shadow: none; }
+
+  /* ── Magnetic button override ─────────────────────────────────────
+     MagneticButton handles transform via motion/react spring.
+     Suppress CSS :hover scale so the two don't compound.
+  ──────────────────────────────────────────────────────────────────── */
+  [data-magnetic].btn-primary:hover,
+  [data-magnetic].btn-ghost:hover,
+  [data-magnetic].btn-accent:hover,
+  [data-magnetic].btn-pill-elev:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  [data-magnetic].btn-primary:active,
+  [data-magnetic].btn-ghost:active,
+  [data-magnetic].btn-accent:active,
+  [data-magnetic].btn-pill-elev:active {
+    transform: none;
+  }
 
   /* Animated underline link */
   .link-underline { position: relative; display: inline-block; }

@@ -89,6 +89,8 @@ export function MagneticButton({
 
   const motionProps = {
     ref,
+    // data-magnetic suppresses the CSS :hover scale (spring handles transform here)
+    'data-magnetic': true,
     style: { x, y, position: 'relative' as const, display: 'inline-flex', overflow: 'hidden', ...style },
     onMouseMove: handleMouseMove,
     onMouseEnter: handleMouseEnter,

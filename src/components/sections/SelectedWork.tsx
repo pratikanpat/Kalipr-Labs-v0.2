@@ -250,10 +250,8 @@ export default function SelectedWork() {
             </p>
             <Link
               href="/contact"
+              className="btn-text-arrow"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 600,
                 fontSize: '0.9375rem',
@@ -263,10 +261,9 @@ export default function SelectedWork() {
                 borderBottom: '1px solid rgba(230,234,212,0.25)',
                 paddingBottom: '2px',
                 alignSelf: 'flex-start',
-                transition: 'border-color 0.3s ease',
               }}
             >
-              Start a conversation
+              <span className="btn-label">Start a conversation</span>
               <ArrowRight size={15} />
             </Link>
           </motion.div>

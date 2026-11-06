@@ -159,7 +159,7 @@ function KalvoraBlock() {
                   href={SOCIAL_LINKS.kalvora}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500"
+                  className="btn-pill-elev inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
                   style={{
                     background: '#2C1F0E',
                     color: '#EDE5D5',
@@ -172,7 +172,7 @@ function KalvoraBlock() {
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500"
+                  className="btn-pill-elev inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
                   style={{
                     background: 'rgba(44,31,14,0.08)',
                     color: '#2C1F0E',
@@ -348,7 +348,7 @@ function SillBlock() {
                   href={SOCIAL_LINKS.sill}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500"
+                  className="btn-pill-elev inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
                   style={{
                     background: '#E6EAD4',
                     color: '#1A1D16',
@@ -361,7 +361,7 @@ function SillBlock() {
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500"
+                  className="btn-pill-elev inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
                   style={{
                     background: 'rgba(230,234,212,0.08)',
                     color: 'rgba(230,234,212,0.7)',
