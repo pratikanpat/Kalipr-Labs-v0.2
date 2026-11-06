@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'motion/react'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -18,10 +18,18 @@ const EXTRA_COMMANDS = [
   { icon: '📊', label: 'System Monitor',         sub: 'CPU · RAM · Storage' },
 ]
 
-const WIDGET_STATS = [
-  { label: 'CPU',  value: 34, unit: '%' },
-  { label: 'RAM',  value: 61, unit: '%' },
-]
+// ── Live CPU micro-animation ────────────────────────────────────────
+// Independently ticks every 2.8 s, shifting ±2–3 % to imply a live engine.
+function useLiveMetric(base: number, spread: number, intervalMs: number) {
+  const [val, setVal] = useState(base)
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVal(Math.min(99, Math.max(5, base + (Math.random() * spread * 2 - spread))))
+    }, intervalMs)
+    return () => clearInterval(id)
+  }, [base, spread, intervalMs])
+  return val
+}
 
 function TiltCard({ children }: { children: React.ReactNode }) {
   const x = useMotionValue(0)
@@ -50,6 +58,15 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 export default function SillUI() {
   const [hovered, setHovered] = useState(false)
   const [activeCmd, setActiveCmd] = useState(0)
+
+  // Live-ticking metrics — independent, different rhythms
+  const cpu = useLiveMetric(34, 3, 2800)
+  const ram = useLiveMetric(61, 2, 3600)
+
+  const stats = [
+    { label: 'CPU', value: cpu },
+    { label: 'RAM', value: ram },
+  ]
 
   return (
     <TiltCard>
@@ -83,7 +100,7 @@ export default function SillUI() {
 
         <div style={{ padding: 14 }}>
 
-          {/* Command palette card — glassmorphism */}
+          {/* Command palette card */}
           <div style={{
             background: 'rgba(255,255,255,0.05)',
             backdropFilter: 'blur(20px)',
@@ -113,11 +130,8 @@ export default function SillUI() {
                   key={i}
                   onClick={() => setActiveCmd(i)}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: '8px 14px',
-                    cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    padding: '8px 14px', cursor: 'pointer',
                     background: activeCmd === i ? 'rgba(230,234,212,0.08)' : 'transparent',
                     borderLeft: activeCmd === i ? '2px solid rgba(230,234,212,0.5)' : '2px solid transparent',
                     transition: 'all 0.15s',
@@ -162,29 +176,39 @@ export default function SillUI() {
             </div>
           </div>
 
-          {/* Taskbar widget strip */}
+          {/* ── Taskbar widget strip — live metrics ─────────────────── */}
           <div style={{
             background: 'rgba(255,255,255,0.04)',
             borderRadius: 10,
             border: '1px solid rgba(255,255,255,0.06)',
             padding: '8px 12px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 14,
+            display: 'flex', alignItems: 'center', gap: 14,
           }}>
             <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font-jetbrains-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', flexShrink: 0 }}>
               Taskbar
             </span>
-            {WIDGET_STATS.map(stat => (
+            {stats.map(stat => (
               <div key={stat.label} style={{ flex: 1 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
                   <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.3)' }}>{stat.label}</span>
-                  <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-jetbrains-mono)' }}>
-                    {stat.value}{stat.unit}
-                  </span>
+                  {/* Animated numeric readout */}
+                  <motion.span
+                    key={Math.round(stat.value)}
+                    initial={{ opacity: 0.4 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6 }}
+                    style={{ fontSize: 8, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-jetbrains-mono)' }}
+                  >
+                    {Math.round(stat.value)}%
+                  </motion.span>
                 </div>
                 <div style={{ height: 3, background: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: `${stat.value}%`, background: 'rgba(230,234,212,0.5)', borderRadius: 2 }} />
+                  {/* Smooth bar width transition on value change */}
+                  <motion.div
+                    animate={{ width: `${stat.value}%` }}
+                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ height: '100%', background: 'rgba(230,234,212,0.5)', borderRadius: 2 }}
+                  />
                 </div>
               </div>
             ))}
@@ -198,4 +222,3 @@ export default function SillUI() {
     </TiltCard>
   )
 }
-

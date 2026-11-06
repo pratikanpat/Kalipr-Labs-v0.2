@@ -155,20 +155,23 @@ interface CardProps {
   num: string; title: string; problem: string; description: string
   deliverable: string; colSpan: 7 | 5; wireframe: 'software'|'webapp'|'ai'|'website'
   cta: string; ctaHref: string;
+  /** Stagger delay index — each card offset by 0.06 s */
+  staggerIndex?: number;
 }
 
-function ServiceCard({ num, title, problem, description, deliverable, colSpan, wireframe, cta, ctaHref }: CardProps) {
+function ServiceCard({ num, title, problem, description, deliverable, colSpan, wireframe, cta, ctaHref, staggerIndex = 0 }: CardProps) {
   const [hovered, setHovered] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-40px 0px' } as any)
+  // Use section-level inView so all 4 cards share the same trigger threshold
+  const inView = useInView(ref, { once: true, margin: '-80px 0px' } as any)
 
   return (
     <motion.div
       ref={ref}
       className={`col-span-12 lg:col-span-${colSpan}`}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, delay: staggerIndex * 0.06, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -262,8 +265,8 @@ export default function Services() {
 
         {/* Grid */}
         <div className="bento-grid">
-          {CARDS.map((card) => (
-            <ServiceCard key={card.num} {...card} />
+          {CARDS.map((card, i) => (
+            <ServiceCard key={card.num} {...card} staggerIndex={i} />
           ))}
         </div>
 

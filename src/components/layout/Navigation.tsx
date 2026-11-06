@@ -5,35 +5,51 @@ import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS, COMPANY } from '@/lib/constants'
-import { cn } from '@/lib/utils'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// Pill nav link with background tracking on hover
-function NavLink({ href, label }: { href: string; label: string }) {
-  const [hovered, setHovered] = useState(false)
+// ── Shared-layout magnetic slider nav pill ──────────────────────────
+// A single background element (layoutId="nav-pill") slides
+// fluidly under whichever link is hovered — no per-item backgrounds.
+function NavPill() {
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null)
 
   return (
-    <Link
-      href={href}
-      className="relative px-3.5 py-1.5 text-[13px] font-medium rounded-full transition-colors duration-300"
-      style={{ color: hovered ? '#1A1D16' : 'rgba(26,29,22,0.55)' }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <nav
+      className="hidden md:flex items-center gap-0.5 px-1.5 py-1.5 rounded-full"
+      style={{
+        background: '#F5F7EF',
+        border: '1px solid rgba(26,29,22,0.07)',
+      }}
+      aria-label="Main navigation"
+      onMouseLeave={() => setHoveredHref(null)}
     >
-      {hovered && (
-        <motion.span
-          layoutId="nav-hover"
-          className="absolute inset-0 rounded-full"
-          style={{ background: 'rgba(26,29,22,0.07)' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: EASE }}
-        />
-      )}
-      <span className="relative z-10">{label}</span>
-    </Link>
+      {NAV_LINKS.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className="relative px-3.5 py-1.5 text-[13px] font-medium rounded-full"
+          style={{
+            color: hoveredHref === link.href ? '#1A1D16' : 'rgba(26,29,22,0.52)',
+            transition: 'color 0.25s ease',
+            fontFamily: 'var(--font-heading)',
+            letterSpacing: '-0.01em',
+          }}
+          onMouseEnter={() => setHoveredHref(link.href)}
+        >
+          {/* Shared sliding background */}
+          {hoveredHref === link.href && (
+            <motion.span
+              layoutId="nav-pill"
+              className="absolute inset-0 rounded-full"
+              style={{ background: 'rgba(26,29,22,0.06)' }}
+              transition={{ type: 'spring', stiffness: 380, damping: 36, mass: 0.6 }}
+            />
+          )}
+          <span className="relative z-10">{link.label}</span>
+        </Link>
+      ))}
+    </nav>
   )
 }
 
@@ -58,41 +74,38 @@ export default function Navigation() {
       {/* Desktop header */}
       <header
         className="fixed top-0 left-0 right-0 z-50"
-        style={{ height: 76 }}
+        style={{
+          height: 76,
+          transition: 'box-shadow 0.5s cubic-bezier(0.16,1,0.3,1)',
+          boxShadow: scrolled ? '0 1px 0 rgba(26,29,22,0.06)' : 'none',
+        }}
       >
         <div className="container-width h-full flex items-center justify-between">
 
-          {/* Logo — always visible, left-aligned */}
+          {/* Logo */}
           <Link
             href="/"
             className="font-heading font-bold text-[15px] tracking-[0.06em] text-primary transition-opacity hover:opacity-70"
             onClick={closeMenu}
+            style={{ fontFamily: 'var(--font-heading)', letterSpacing: '0.06em' }}
           >
             KALIPR LABS
           </Link>
 
-          {/* Center — floating pill navigation */}
-          <nav
-            className="hidden md:flex items-center gap-1 px-2 py-2 rounded-full"
+          {/* Center — magnetic floating pill */}
+          <div
             style={{
-              background: '#F5F7EF',
-              border: '1px solid rgba(26,29,22,0.07)',
               boxShadow: scrolled ? '0 4px 24px rgba(26,29,22,0.08)' : 'none',
+              borderRadius: '9999px',
               transition: 'box-shadow 0.5s cubic-bezier(0.16,1,0.3,1)',
             }}
-            aria-label="Main navigation"
           >
-            {NAV_LINKS.map((link) => (
-              <NavLink key={link.href} href={link.href} label={link.label} />
-            ))}
-          </nav>
+            <NavPill />
+          </div>
 
-          {/* Right — CTA */}
+          {/* Right CTA */}
           <div className="hidden md:flex items-center">
-            <Link
-              href="/contact"
-              className="btn-primary text-[13px] px-5 py-2.5"
-            >
+            <Link href="/contact" className="btn-primary text-[13px] px-5 py-2.5">
               Start Project
             </Link>
           </div>
