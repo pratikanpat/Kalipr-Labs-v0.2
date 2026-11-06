@@ -19,29 +19,34 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-inverse text-on-inverse">
+    <footer style={{ background: '#0C0C0E', color: '#EDE9DF' }}>
 
-      {/* ── Main footer grid ── */}
-      <div className="section-pad border-b border-border-inverse">
+      {/* Top separator */}
+      <div className="container-width">
+        <div className="h-px" style={{ background: 'rgba(255,255,255,0.07)' }} />
+      </div>
+
+      {/* Main footer grid */}
+      <div className="section-pad">
         <div className="container-width">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
             {/* Brand column */}
             <div className="lg:col-span-1">
-              <p className="font-heading font-bold tracking-[0.12em] text-on-inverse text-sm mb-3">
+              <p className="font-heading font-bold tracking-[0.12em] text-white text-sm mb-3">
                 KALIPR LABS
               </p>
-              <p className="text-[0.8125rem] text-on-inverse-muted leading-relaxed mb-6 max-w-[200px]">
+              <p className="text-[0.8125rem] leading-relaxed mb-6 max-w-[200px]" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 Independent software studio building products and digital solutions.
               </p>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-on-inverse-muted/60">
-                {COMPANY.location} · Est. {COMPANY.foundedYear}
+              <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.2)' }}>
+                {COMPANY.location} &middot; Est. {COMPANY.foundedYear}
               </p>
             </div>
 
             {/* Studio column */}
             <div>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-on-inverse-muted/60 mb-5">
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
                 Studio
               </p>
               <nav aria-label="Footer studio links">
@@ -50,7 +55,8 @@ export default function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors"
+                        className="text-sm transition-colors duration-200 hover:text-white"
+                        style={{ color: 'rgba(255,255,255,0.45)' }}
                       >
                         {link.label}
                       </Link>
@@ -62,7 +68,7 @@ export default function Footer() {
 
             {/* Products column */}
             <div>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-on-inverse-muted/60 mb-5">
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
                 Our Products
               </p>
               <nav aria-label="Footer product links">
@@ -74,7 +80,8 @@ export default function Footer() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors inline-flex items-center gap-1"
+                          className="text-sm transition-colors duration-200 hover:text-white inline-flex items-center gap-1"
+                          style={{ color: 'rgba(255,255,255,0.45)' }}
                         >
                           {link.label}
                           <ArrowRight className="w-3 h-3 -rotate-45 opacity-50" />
@@ -82,7 +89,8 @@ export default function Footer() {
                       ) : (
                         <Link
                           href={link.href}
-                          className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors"
+                          className="text-sm transition-colors duration-200 hover:text-white"
+                          style={{ color: 'rgba(255,255,255,0.45)' }}
                         >
                           {link.label}
                         </Link>
@@ -95,7 +103,7 @@ export default function Footer() {
 
             {/* Connect column */}
             <div>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-on-inverse-muted/60 mb-5">
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
                 Connect
               </p>
               <ul className="space-y-3">
@@ -104,7 +112,8 @@ export default function Footer() {
                     href={SOCIAL_LINKS.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors inline-flex items-center gap-1"
+                    className="text-sm transition-colors duration-200 hover:text-white inline-flex items-center gap-1"
+                    style={{ color: 'rgba(255,255,255,0.45)' }}
                   >
                     LinkedIn
                     <ArrowRight className="w-3 h-3 -rotate-45 opacity-50" />
@@ -113,7 +122,8 @@ export default function Footer() {
                 <li>
                   <a
                     href={`mailto:${COMPANY.email}`}
-                    className="text-sm text-on-inverse-muted hover:text-on-inverse transition-colors break-all"
+                    className="text-sm transition-colors duration-200 hover:text-white break-all"
+                    style={{ color: 'rgba(255,255,255,0.45)' }}
                   >
                     {COMPANY.email}
                   </a>
@@ -125,29 +135,45 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Bottom strip ── */}
-      <div className="section-pad-sm">
+      {/* Bottom strip */}
+      <div className="section-pad-sm" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
         <div className="container-width">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="font-mono text-[11px] text-on-inverse-muted">
-              © {year} Kalipr Labs. All rights reserved.
+            <p className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              &copy; {year} Kalipr Labs. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               {/* Privacy & Terms — only add hrefs when real pages exist */}
-              <span className="font-mono text-[11px] text-on-inverse-muted/40">
+              <span className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.18)' }}>
                 Privacy Policy
               </span>
-              <span className="text-on-inverse-muted/20">·</span>
-              <span className="font-mono text-[11px] text-on-inverse-muted/40">
+              <span style={{ color: 'rgba(255,255,255,0.12)' }}>&middot;</span>
+              <span className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.18)' }}>
                 Terms of Use
               </span>
-              <span className="text-on-inverse-muted/20">·</span>
-              <span className="font-mono text-[11px] text-on-inverse-muted/40">
+              <span style={{ color: 'rgba(255,255,255,0.12)' }}>&middot;</span>
+              <span className="font-mono text-[11px]" style={{ color: 'rgba(255,255,255,0.18)' }}>
                 Made in Pune, India.
               </span>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Cal.com-style giant brand text — decorative background art */}
+      <div className="overflow-hidden select-none" aria-hidden>
+        <p
+          className="font-heading font-black text-center leading-none whitespace-nowrap"
+          style={{
+            fontSize: 'clamp(80px, 18vw, 180px)',
+            letterSpacing: '-0.05em',
+            lineHeight: 0.9,
+            color: 'rgba(255,255,255,0.025)',
+            paddingBottom: 'clamp(24px, 4vw, 48px)',
+          }}
+        >
+          KALIPR LABS
+        </p>
       </div>
 
     </footer>

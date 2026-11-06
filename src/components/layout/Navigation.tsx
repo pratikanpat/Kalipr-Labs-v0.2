@@ -8,8 +8,8 @@ import { NAV_LINKS, COMPANY } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
 export default function Navigation() {
-  const [scrolled,    setScrolled]    = useState(false)
-  const [mobileOpen,  setMobileOpen]  = useState(false)
+  const [scrolled,   setScrolled]   = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -24,16 +24,22 @@ export default function Navigation() {
 
   const closeMenu = () => setMobileOpen(false)
 
+  // Nav is always on a dark background (hero is dark, scrolled becomes dark blur)
   return (
     <>
-      {/* ── Desktop / Main Header ── */}
+      {/* Desktop / Main Header */}
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           scrolled
-            ? 'bg-canvas/90 backdrop-blur-md border-b border-border'
-            : 'bg-transparent',
+            ? 'backdrop-blur-md border-b'
+            : 'bg-transparent border-b border-transparent',
         )}
+        style={
+          scrolled
+            ? { background: 'rgba(12,12,14,0.85)', borderColor: 'rgba(255,255,255,0.08)' }
+            : {}
+        }
       >
         <div className="container-width">
           <div className="flex items-center justify-between h-[72px]">
@@ -41,25 +47,30 @@ export default function Navigation() {
             {/* Logo */}
             <Link
               href="/"
-              className="font-heading font-semibold text-sm tracking-[0.14em] text-primary hover:opacity-75 transition-opacity"
+              className="font-heading font-semibold text-sm tracking-[0.14em] transition-opacity"
+              style={{ color: 'rgba(255,255,255,0.9)', letterSpacing: '0.14em' }}
               onClick={closeMenu}
             >
               KALIPR LABS
             </Link>
 
-            {/* Desktop Nav links — animated underline on hover */}
+            {/* Desktop Nav links */}
             <nav className="hidden md:flex items-center gap-9" aria-label="Main navigation">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative group text-sm font-sans text-muted hover:text-primary transition-colors duration-200"
+                  className="relative group text-sm font-sans transition-colors duration-200"
+                  style={{ color: 'rgba(255,255,255,0.5)' }}
                 >
-                  {link.label}
+                  <span className="group-hover:text-white transition-colors duration-200">
+                    {link.label}
+                  </span>
                   {/* Underline slides in from left */}
                   <span
                     aria-hidden
-                    className="absolute -bottom-0.5 left-0 h-px w-full bg-primary rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"
+                    className="absolute -bottom-0.5 left-0 h-px w-full rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"
+                    style={{ background: 'rgba(255,255,255,0.4)' }}
                   />
                 </Link>
               ))}
@@ -69,7 +80,7 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-1.5 bg-accent text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-200 hover:bg-accent-hover hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(67,89,232,0.3)] active:scale-[0.98]"
+                className="group inline-flex items-center gap-1.5 bg-white text-black text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Start a Project
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -78,10 +89,8 @@ export default function Navigation() {
 
             {/* Mobile hamburger */}
             <button
-              className={cn(
-                'md:hidden relative z-50 flex items-center justify-center w-10 h-10 rounded-lg',
-                'hover:bg-surface transition-colors',
-              )}
+              className="md:hidden relative z-50 flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
+              style={{ color: 'rgba(255,255,255,0.7)' }}
               onClick={() => setMobileOpen((o) => !o)}
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
@@ -96,7 +105,7 @@ export default function Navigation() {
                     exit={{   rotate:  90,  opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X className="w-5 h-5 text-primary" />
+                    <X className="w-5 h-5" />
                   </motion.span>
                 ) : (
                   <motion.span
@@ -106,7 +115,7 @@ export default function Navigation() {
                     exit={{   rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu className="w-5 h-5 text-primary" />
+                    <Menu className="w-5 h-5" />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -116,7 +125,7 @@ export default function Navigation() {
         </div>
       </header>
 
-      {/* ── Mobile Full-screen Overlay ── */}
+      {/* Mobile Full-screen Overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -124,7 +133,8 @@ export default function Navigation() {
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="fixed inset-0 z-40 bg-canvas flex flex-col"
+            className="fixed inset-0 z-40 flex flex-col"
+            style={{ background: '#0C0C0E' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{   opacity: 0 }}
@@ -136,7 +146,11 @@ export default function Navigation() {
               aria-label="Mobile navigation"
             >
               {NAV_LINKS.map((link, i) => (
-                <div key={link.href} className="overflow-hidden border-b border-border first:border-t">
+                <div
+                  key={link.href}
+                  className="overflow-hidden"
+                  style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
+                >
                   <motion.div
                     initial={{ y: '110%' }}
                     animate={{ y: 0 }}
@@ -148,8 +162,11 @@ export default function Navigation() {
                       className="flex items-baseline gap-4 py-6 group"
                       onClick={closeMenu}
                     >
-                      <span className="font-mono text-xs text-muted">0{i + 1}</span>
-                      <span className="font-heading text-5xl font-bold text-primary tracking-tight leading-none group-hover:text-accent transition-colors duration-200">
+                      <span className="font-mono text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>0{i + 1}</span>
+                      <span
+                        className="font-heading text-5xl font-bold tracking-tight leading-none transition-colors duration-200"
+                        style={{ color: 'rgba(255,255,255,0.75)' }}
+                      >
                         {link.label}
                       </span>
                     </Link>
@@ -167,7 +184,7 @@ export default function Navigation() {
                 <Link
                   href="/contact"
                   onClick={closeMenu}
-                  className="inline-flex items-center gap-2 bg-primary text-on-inverse font-medium px-6 py-3.5 rounded-full text-base"
+                  className="inline-flex items-center gap-2 bg-white text-black font-semibold px-6 py-3.5 rounded-full text-base"
                 >
                   Start a Project <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -176,20 +193,22 @@ export default function Navigation() {
 
             {/* Footer strip */}
             <motion.div
-              className="border-t border-border px-8 md:px-14 py-6 flex justify-between items-end"
+              className="border-t px-8 md:px-14 py-6 flex justify-between items-end"
+              style={{ borderColor: 'rgba(255,255,255,0.07)' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.4 }}
             >
               <div>
-                <p className="font-mono text-xs text-muted uppercase tracking-widest mb-1">
+                <p className="font-mono text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.3)' }}>
                   {COMPANY.tagline}
                 </p>
-                <p className="text-sm text-secondary">{COMPANY.location}</p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{COMPANY.location}</p>
               </div>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="font-mono text-xs text-accent hover:text-accent-light transition-colors"
+                className="font-mono text-xs transition-colors"
+                style={{ color: '#7B8FF0' }}
               >
                 {COMPANY.email}
               </a>
@@ -200,4 +219,3 @@ export default function Navigation() {
     </>
   )
 }
-
