@@ -30,8 +30,9 @@ export const contactSchema = z.object({
     .or(z.literal('')),
   description: z
     .string()
-    .min(50, 'Please describe your project in at least 50 characters')
-    .max(2000, 'Description is too long'),
+    .max(2000, 'Description is too long')
+    .optional()
+    .or(z.literal('')),
   honeypot: z.string().optional(),
   submittedAt: z.number().optional(),
 })

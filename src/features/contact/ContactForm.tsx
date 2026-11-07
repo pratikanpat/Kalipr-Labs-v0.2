@@ -18,11 +18,9 @@ const PROJECT_TYPES = [
 ] as const
 
 const TIMELINE_OPTIONS = [
-  'Under ₹1L',
-  '₹1L – ₹3L',
-  '₹3L – ₹7L',
-  '₹7L – ₹15L',
-  '₹15L+',
+  'Under ₹50k',
+  '₹50k – ₹1L',
+  '₹1L – ₹1.5L',
   "Let's discuss",
 ] as const
 
@@ -399,7 +397,7 @@ export function ContactForm() {
           }}
         >
           Any additional details?{' '}
-          <span style={{ color: 'rgba(26,29,22,0.35)', fontWeight: 400 }}>(required · min 50 chars)</span>
+          <span style={{ color: 'rgba(26,29,22,0.35)', fontWeight: 400 }}>(optional)</span>
         </label>
         <textarea
           id="description"

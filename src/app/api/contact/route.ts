@@ -49,12 +49,13 @@ New project inquiry from Kalipr Labs contact form.
 
 Name: ${data.name}
 Email: ${data.email}
+Phone: ${data.phone ?? '—'}
 Company: ${data.company ?? '—'}
 Project Type: ${data.projectType}
 Budget: ${data.budget ?? '—'}
 
-Description:
-${data.description}
+Message:
+${data.description ?? '(no message provided)'}
       `.trim()
 
       await resend.emails.send({
@@ -77,7 +78,7 @@ ${data.description}
       name: data.name,
       email: data.email,
       projectType: data.projectType,
-      description: data.description.slice(0, 80) + '...',
+      description: data.description ? data.description.slice(0, 80) + '...' : '(none)',
     })
   }
 
