@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { contactSchema } from '@/features/contact/schema'
 
-// Pin this serverless function to Mumbai (nearest to India)
-export const preferredRegion = 'bom1'
-
 // ── POST handler ─────────────────────────────────────────────
-// Note: Runs on Vercel Edge/Node.js runtime.
-// In-memory rate limiting is intentionally omitted — stateless per-request env.
-// Use Vercel Firewall or middleware-based rate limiting for production.
+// Runs on Vercel serverless. Region is pinned to Mumbai (bom1)
+// via vercel.json — see project root.
 
 export async function POST(req: NextRequest) {
   // Parse body

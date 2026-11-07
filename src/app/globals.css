@@ -435,6 +435,36 @@
 }
 
 /* ================================================================
+   ARROW LINK — Products page borderless text link with 2px arrow slide
+   OUTSIDE @layer utilities for full cascade authority.
+   ================================================================ */
+
+.arrow-link-label {
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.arrow-link-icon {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.arrow-link-dark:hover {
+  color: #1A1D16;
+}
+
+.arrow-link-dark:hover .arrow-link-icon {
+  transform: translateX(4px);
+}
+
+.arrow-link-light:hover {
+  color: #E6EAD4;
+}
+
+.arrow-link-light:hover .arrow-link-icon {
+  transform: translateX(4px);
+}
+
+/* ================================================================
    SKELETON LOADING ANIMATION (for Services section)
    ================================================================ */
 @keyframes skeleton-sweep {
