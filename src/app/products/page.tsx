@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Reveal } from '@/components/animations/Reveal'
+import KalvoraUI from '@/components/ui/KalvoraUI'
+import SillUI from '@/components/ui/SillUI'
 import { COMPANY, KALVORA, SILL, SOCIAL_LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -290,47 +291,10 @@ export default function ProductsPage() {
               </div>
             </Reveal>
 
-            {/* Right — UI showcase */}
+            {/* Right — coded UI mockup */}
             <Reveal delay={0.1}>
-              <div style={{
-                paddingLeft: '64px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-              }}>
-                {/* Dashboard screenshot */}
-                <div style={{
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(26,29,22,0.08)',
-                  background: '#F5F7EF',
-                  boxShadow: '0 8px 40px rgba(26,29,22,0.08)',
-                }}>
-                  <Image
-                    src="/screenshots/kalvora/Screenshot 2026-05-07 043145.png"
-                    alt="Kalvora dashboard — project pipeline"
-                    width={900}
-                    height={560}
-                    style={{ width:'100%', height:'auto', display:'block' }}
-                    priority
-                  />
-                </div>
-                {/* Second screenshot — smaller */}
-                <div style={{
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(26,29,22,0.07)',
-                  background: '#F5F7EF',
-                  boxShadow: '0 4px 20px rgba(26,29,22,0.06)',
-                }}>
-                  <Image
-                    src="/screenshots/kalvora/Screenshot 2026-05-01 153123.png"
-                    alt="Kalvora proposal editor"
-                    width={900}
-                    height={420}
-                    style={{ width:'100%', height:'auto', display:'block' }}
-                  />
-                </div>
+              <div style={{ paddingLeft: '64px' }}>
+                <KalvoraUI />
               </div>
             </Reveal>
           </div>
@@ -389,45 +353,10 @@ export default function ProductsPage() {
             padding: '64px 0',
           }} className="grid-cols-1 md:grid-cols-2">
 
-            {/* Left — UI showcase */}
+            {/* Left — coded UI mockup */}
             <Reveal>
-              <div style={{
-                paddingRight: '64px',
-                borderRight: '1px solid rgba(230,234,212,0.06)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-              }}>
-                {/* Command palette screenshot */}
-                <div style={{
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(230,234,212,0.08)',
-                  boxShadow: '0 8px 40px rgba(0,0,0,0.30)',
-                }}>
-                  <Image
-                    src="/screenshots/sill/Screenshot 2026-11-06 050754.png"
-                    alt="Sill — command palette"
-                    width={900}
-                    height={560}
-                    style={{ width:'100%', height:'auto', display:'block' }}
-                  />
-                </div>
-                {/* Widget screenshot */}
-                <div style={{
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(230,234,212,0.07)',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
-                }}>
-                  <Image
-                    src="/screenshots/sill/Screenshot 2026-11-06 050838.png"
-                    alt="Sill — taskbar widget"
-                    width={900}
-                    height={420}
-                    style={{ width:'100%', height:'auto', display:'block' }}
-                  />
-                </div>
+              <div style={{ paddingRight: '64px', borderRight: '1px solid rgba(230,234,212,0.06)' }}>
+                <SillUI />
               </div>
             </Reveal>
 
