@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { contactSchema } from '@/features/contact/schema'
 
+// Pin this serverless function to Mumbai (nearest to India)
+export const preferredRegion = 'bom1'
+
 // ── POST handler ─────────────────────────────────────────────
 // Note: Runs on Vercel Edge/Node.js runtime.
 // In-memory rate limiting is intentionally omitted — stateless per-request env.
