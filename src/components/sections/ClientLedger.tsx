@@ -10,17 +10,9 @@ const CLIENT_LEDGER = [
 
 export function ClientLedger() {
   return (
-    <div style={{ marginTop: '32px', overflowX: 'auto' }}>
-      {/* Table header */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '120px 1fr 1fr 80px',
-          gap: '0 24px',
-          paddingBottom: '12px',
-          borderBottom: '1px solid rgba(26,29,22,0.12)',
-        }}
-      >
+    <div style={{ marginTop: '32px' }}>
+      {/* Table header — hidden on mobile via CSS */}
+      <div className="ledger-table-header" style={{ paddingBottom: '12px', borderBottom: '1px solid rgba(26,29,22,0.12)' }}>
         {['Registry No.', 'Sector', 'Deployed System Architecture', 'Year'].map((col) => (
           <span
             key={col}
@@ -38,33 +30,24 @@ export function ClientLedger() {
         ))}
       </div>
 
-      {/* Table rows */}
+      {/* Rows — desktop table / mobile bento cards via CSS */}
       {CLIENT_LEDGER.map((entry) => (
         <div
           key={entry.reg}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '120px 1fr 1fr 80px',
-            gap: '0 24px',
-            padding: '20px 0',
-            borderBottom: '1px solid rgba(26,29,22,0.06)',
-            alignItems: 'center',
-            transition: 'background 0.2s ease',
-            cursor: 'default',
-          }}
+          className="ledger-table-row"
           onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(26,29,22,0.02)' }}
           onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'transparent' }}
         >
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.06em', color: 'rgba(26,29,22,0.38)' }}>
+          <span className="ledger-cell-reg" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.06em', color: 'rgba(26,29,22,0.38)' }}>
             {entry.reg}
           </span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(26,29,22,0.65)' }}>
+          <span className="ledger-cell-sector" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(26,29,22,0.65)' }}>
             {entry.sector}
           </span>
-          <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.875rem', color: 'rgba(26,29,22,0.65)' }}>
+          <span className="ledger-cell-system" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.875rem', color: 'rgba(26,29,22,0.65)' }}>
             {entry.system}
           </span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.04em', color: 'rgba(26,29,22,0.38)' }}>
+          <span className="ledger-cell-year" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.04em', color: 'rgba(26,29,22,0.38)' }}>
             {entry.year}
           </span>
         </div>

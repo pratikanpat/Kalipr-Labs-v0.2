@@ -43,6 +43,7 @@ export default function ServicesPage() {
               return (
                 <Reveal key={service.id} delay={i * 0.06}>
                   <div
+                    className="services-split-row"
                     style={{
                       display: 'grid',
                       gridTemplateColumns: '1fr 1fr',
@@ -50,10 +51,10 @@ export default function ServicesPage() {
                       borderBottom: i < SERVICES.length - 1 ? '1px solid rgba(26,29,22,0.08)' : 'none',
                       padding: '56px 0',
                     }}
-                    className="grid-cols-1 md:grid-cols-2"
                   >
                     {/* Content block — alternates left/right */}
                     <div
+                      className="services-content-block"
                       style={{
                         order: isEven ? 1 : 2,
                         paddingRight: isEven ? '64px' : '0',
@@ -61,7 +62,6 @@ export default function ServicesPage() {
                         borderRight: isEven ? '1px solid rgba(26,29,22,0.08)' : 'none',
                         borderLeft: !isEven ? '1px solid rgba(26,29,22,0.08)' : 'none',
                       }}
-                      className={isEven ? 'pr-0 md:pr-16' : 'pl-0 md:pl-16'}
                     >
                       <span
                         style={{
@@ -111,6 +111,7 @@ export default function ServicesPage() {
 
                     {/* Meta block — the opposing half */}
                     <div
+                      className="services-meta-block"
                       style={{
                         order: isEven ? 2 : 1,
                         display: 'flex',
@@ -119,7 +120,6 @@ export default function ServicesPage() {
                         padding: isEven ? '0 0 0 64px' : '0 64px 0 0',
                         gap: '16px',
                       }}
-                      className={isEven ? 'pl-0 md:pl-16' : 'pr-0 md:pr-16'}
                     >
                       {/* Problem statement */}
                       <div

@@ -152,10 +152,8 @@ export default function AboutPage() {
 
           {/* Ledger header */}
           <div
+            className="timeline-header-row"
             style={{
-              display: 'grid',
-              gridTemplateColumns: '120px 1fr',
-              gap: '0 48px',
               marginTop: '48px',
               paddingBottom: '16px',
               borderBottom: '1px solid rgba(26,29,22,0.12)',
@@ -191,19 +189,12 @@ export default function AboutPage() {
           {TIMELINE.map((entry, i) => (
             <Reveal key={entry.year} delay={i * 0.08}>
               <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '120px 1fr',
-                  gap: '0 48px',
-                  borderBottom: '1px solid rgba(26,29,22,0.07)',
-                  paddingTop: '32px',
-                  paddingBottom: '32px',
-                  alignItems: 'start',
-                }}
+                className="timeline-row"
               >
                 {/* Left — year marker */}
                 <div>
                   <span
+                    className={`timeline-year${entry.year === 'Now' ? ' timeline-year-now' : ''}`}
                     style={{
                       fontFamily: 'var(--font-heading)',
                       fontWeight: 800,

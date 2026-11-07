@@ -123,8 +123,8 @@
     max-width: 1360px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: clamp(20px, 5vw, 56px);
-    padding-right: clamp(20px, 5vw, 56px);
+    padding-left: clamp(24px, 5vw, 56px);
+    padding-right: clamp(24px, 5vw, 56px);
   }
 
   .section-pad {
@@ -569,4 +569,303 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ================================================================
+   MOBILE RESPONSIVE — Global layout fixes for screens < 768px
+   OUTSIDE @layer utilities for full cascade authority.
+   ================================================================ */
+
+/* ── Contact Form — vertical stacked layout on mobile ─────────── */
+.contact-narrative-para {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.65;
+  color: #1A1D16;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+}
+
+/* Mobile: each field row becomes a vertical label+input block */
+.contact-field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-field-label {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  letter-spacing: -0.02em;
+  color: #1A1D16;
+  line-height: 1.4;
+}
+
+.contact-field-input {
+  width: 100%;
+}
+
+.contact-field-input input,
+.contact-field-input button[type="button"] {
+  width: 100% !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  box-sizing: border-box;
+}
+
+/* On desktop restore inline flow */
+@media (min-width: 768px) {
+  .contact-field-row {
+    display: contents; /* dissolve back into inline text flow */
+  }
+  .contact-field-label {
+    display: inline;
+  }
+  .contact-field-input {
+    display: inline-flex;
+    width: auto;
+  }
+  .contact-field-input input,
+  .contact-field-input button[type="button"] {
+    width: auto !important;
+    min-width: 120px !important;
+    max-width: 300px !important;
+  }
+}
+
+/* ── /products — 50/50 → stack on mobile ──────────────────────── */
+.products-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 40px 0;
+}
+
+@media (min-width: 768px) {
+  .products-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 64px 0;
+  }
+}
+
+/* Copy always on top on mobile (order 1), UI mockup below (order 2) */
+.products-split-copy {
+  order: 1;
+  padding-right: 0;
+  border-right: none;
+  border-bottom: 1px solid rgba(26,29,22,0.07);
+  padding-bottom: 32px;
+}
+
+.products-split-ui {
+  order: 2;
+  padding-left: 0;
+  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .products-split-copy {
+    padding-right: 64px;
+    border-right: 1px solid rgba(26,29,22,0.07);
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .products-split-ui {
+    padding-left: 64px;
+  }
+}
+
+/* Sill (flipped) — copy right on desktop, top on mobile */
+.products-split-copy-dark {
+  order: 1;
+  padding-left: 0;
+  border-left: none;
+  border-bottom: 1px solid rgba(230,234,212,0.06);
+  padding-bottom: 32px;
+}
+
+.products-split-ui-dark {
+  order: 2;
+  padding-right: 0;
+  border-right: none;
+  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .products-split-copy-dark {
+    order: 2;
+    padding-left: 64px;
+    border-left: 1px solid rgba(230,234,212,0.06);
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .products-split-ui-dark {
+    order: 1;
+    padding-right: 64px;
+    border-right: 1px solid rgba(230,234,212,0.06);
+  }
+}
+
+/* Products page meta strip — scroll on mobile */
+.products-meta-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+@media (max-width: 480px) {
+  .products-meta-strip {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .products-meta-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(26,29,22,0.08);
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* ── /about — Timeline 2-col → vertical on mobile ─────────────── */
+.timeline-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0 48px;
+  border-bottom: 1px solid rgba(26,29,22,0.07);
+  padding-top: 32px;
+  padding-bottom: 32px;
+  align-items: start;
+}
+
+.timeline-header-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0 48px;
+}
+
+@media (max-width: 767px) {
+  .timeline-row {
+    grid-template-columns: 1fr;
+    gap: 16px 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .timeline-header-row {
+    display: none; /* hide column headers on mobile */
+  }
+  .timeline-year {
+    font-size: 1.5rem !important;
+    color: rgba(26,29,22,0.45) !important;
+  }
+  .timeline-year-now {
+    color: #1A1D16 !important;
+  }
+}
+
+/* ── /work — Capability metrics: strip border/margin fix ─────── */
+@media (max-width: 640px) {
+  .capability-item {
+    border-right: none !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    border-bottom: 1px solid rgba(26,29,22,0.08);
+    padding-bottom: 24px !important;
+    padding-top: 24px;
+  }
+  .capability-item:last-child {
+    border-bottom: none;
+  }
+  /* Override inline grid-template to single column */
+  .capabilities-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── /work — ClientLedger bento cards on mobile ────────────────── */
+.ledger-table-header {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr 80px;
+  gap: 0 24px;
+}
+
+.ledger-table-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr 80px;
+  gap: 0 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(26,29,22,0.06);
+  align-items: center;
+  transition: background 0.2s ease;
+  cursor: default;
+}
+
+@media (max-width: 767px) {
+  .ledger-table-header {
+    display: none; /* hide table header on mobile */
+  }
+  .ledger-table-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background: #F5F7EF;
+    border-radius: 12px;
+    border: 1px solid rgba(26,29,22,0.07);
+    border-bottom: 1px solid rgba(26,29,22,0.07);
+    margin-bottom: 10px;
+  }
+  .ledger-table-row:last-child {
+    margin-bottom: 0;
+  }
+  .ledger-cell-reg {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.10em !important;
+    color: rgba(26,29,22,0.38) !important;
+    font-weight: 600 !important;
+  }
+  .ledger-cell-sector {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: #1A1D16 !important;
+  }
+  .ledger-cell-system {
+    font-size: 0.875rem !important;
+    color: rgba(26,29,22,0.65) !important;
+  }
+  .ledger-cell-year {
+    font-size: 0.72rem !important;
+    color: rgba(26,29,22,0.38) !important;
+    padding-top: 6px;
+    border-top: 1px solid rgba(26,29,22,0.06);
+  }
+}
+
+/* ── /services — Z-pattern split: fix padding on mobile ───────── */
+@media (max-width: 767px) {
+  .services-content-block {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: 1px solid rgba(26,29,22,0.08);
+    padding-bottom: 32px;
+  }
+  .services-meta-block {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    padding-top: 32px;
+    padding-bottom: 0;
+  }
+  .services-split-row {
+    grid-template-columns: 1fr !important;
+    padding: 40px 0 !important;
+  }
+  .services-split-row > div {
+    order: unset !important;
+  }
+  /* Always show content first, meta block second */
+  .services-content-block { order: 1 !important; }
+  .services-meta-block    { order: 2 !important; }
 }

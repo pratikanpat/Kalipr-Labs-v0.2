@@ -74,11 +74,12 @@ export default function WorkPage() {
               marginTop: '32px',
               borderTop: '1px solid rgba(26,29,22,0.08)',
             }}
-            className="grid-cols-1 sm:grid-cols-3"
+            className="capabilities-grid"
           >
             {CAPABILITIES.map((cap, i) => (
               <Reveal key={cap.id} delay={i * 0.06}>
                 <div
+                  className="capability-item"
                   style={{
                     padding: '32px 32px 32px 0',
                     borderRight: i < CAPABILITIES.length - 1 ? '1px solid rgba(26,29,22,0.08)' : 'none',

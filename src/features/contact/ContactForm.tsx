@@ -302,16 +302,6 @@ export function ContactForm() {
     )
   }
 
-  /* Shared paragraph style */
-  const paraStyle: React.CSSProperties = {
-    fontFamily: 'var(--font-heading)',
-    fontWeight: 500,
-    fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
-    letterSpacing: '-0.02em',
-    lineHeight: 1.65,
-    color: '#1A1D16',
-  }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       {/* Honeypot — hidden from humans */}
@@ -325,63 +315,99 @@ export function ContactForm() {
       />
       <input {...register('submittedAt', { valueAsNumber: true })} type="hidden" />
 
-      {/* Narrative paragraph */}
-      <div style={paraStyle}>
-        Hello Kalipr Labs, my name is{' '}
-        <NarrativeInput
-          {...register('name')}
-          placeholder="your name"
-          error={errors.name?.message}
-          aria-label="Your name"
-        />
-        {' '}and I represent{' '}
-        <NarrativeInput
-          {...register('company')}
-          placeholder="your company"
-          aria-label="Company name"
-        />
-        .{' '}
-        <br className="hidden md:block" />
-        We are looking for help with{' '}
-        <NarrativeSelect
-          options={PROJECT_TYPES}
-          value={projectTypeValue ?? ''}
-          onChange={(v) => setValue('projectType', v as ContactFormData['projectType'], { shouldValidate: true })}
-          placeholder="type of project"
-          error={errors.projectType?.message}
-        />
-        .{' '}
-        <br className="hidden md:block" />
-        Our budget is around{' '}
-        <NarrativeSelect
-          options={TIMELINE_OPTIONS}
-          value={budgetValue ?? ''}
-          onChange={(v) => setValue('budget', v)}
-          placeholder="estimated budget"
-        />
-        .{' '}
-        <br className="hidden md:block" />
-        Reach me at{' '}
-        <NarrativeInput
-          {...register('email')}
-          type="email"
-          placeholder="your email"
-          error={errors.email?.message}
-          aria-label="Email address"
-          style={{ minWidth: '180px' }}
-        />
-        .{' '}
-        <br className="hidden md:block" />
-        My mobile is{' '}
-        <NarrativeInput
-          {...register('phone')}
-          type="tel"
-          placeholder="phone (optional)"
-          error={errors.phone?.message}
-          aria-label="Phone number (optional)"
-          style={{ minWidth: '160px' }}
-        />
-        .
+      {/* Narrative paragraph — inline on desktop, stacked on mobile */}
+      <div>
+        {/* Greeting — always visible */}
+        <p className="contact-field-label" style={{ marginBottom: '24px' }}>
+          Hello Kalipr Labs,
+        </p>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Name */}
+          <div className="contact-field-row">
+            <span className="contact-field-label">My name is</span>
+            <span className="contact-field-input">
+              <NarrativeInput
+                {...register('name')}
+                placeholder="your name"
+                error={errors.name?.message}
+                aria-label="Your name"
+              />
+            </span>
+          </div>
+
+          {/* Company */}
+          <div className="contact-field-row">
+            <span className="contact-field-label">I represent</span>
+            <span className="contact-field-input">
+              <NarrativeInput
+                {...register('company')}
+                placeholder="your company"
+                aria-label="Company name"
+              />
+            </span>
+          </div>
+
+          {/* Project type */}
+          <div className="contact-field-row">
+            <span className="contact-field-label">I need help with</span>
+            <span className="contact-field-input">
+              <NarrativeSelect
+                options={PROJECT_TYPES}
+                value={projectTypeValue ?? ''}
+                onChange={(v) => setValue('projectType', v as ContactFormData['projectType'], { shouldValidate: true })}
+                placeholder="type of project"
+                error={errors.projectType?.message}
+              />
+            </span>
+          </div>
+
+          {/* Budget */}
+          <div className="contact-field-row">
+            <span className="contact-field-label">Our budget is around</span>
+            <span className="contact-field-input">
+              <NarrativeSelect
+                options={TIMELINE_OPTIONS}
+                value={budgetValue ?? ''}
+                onChange={(v) => setValue('budget', v)}
+                placeholder="estimated budget"
+              />
+            </span>
+          </div>
+
+          {/* Email */}
+          <div className="contact-field-row">
+            <span className="contact-field-label">Reach me at</span>
+            <span className="contact-field-input">
+              <NarrativeInput
+                {...register('email')}
+                type="email"
+                placeholder="your email"
+                error={errors.email?.message}
+                aria-label="Email address"
+                style={{ minWidth: '180px' }}
+              />
+            </span>
+          </div>
+
+          {/* Phone (optional) */}
+          <div className="contact-field-row">
+            <span className="contact-field-label">
+              WhatsApp / Phone{' '}
+              <span style={{ fontWeight: 400, color: 'rgba(26,29,22,0.38)', fontSize: '0.85em' }}>(Optional)</span>
+            </span>
+            <span className="contact-field-input">
+              <NarrativeInput
+                {...register('phone')}
+                type="tel"
+                placeholder="+91"
+                error={errors.phone?.message}
+                aria-label="Phone number (optional)"
+                style={{ minWidth: '160px' }}
+              />
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Additional details textarea */}

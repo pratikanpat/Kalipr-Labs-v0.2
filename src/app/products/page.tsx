@@ -105,13 +105,13 @@ export default function ProductsPage() {
 
           {/* 3-col meta strip */}
           <Reveal delay={0.18}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3,1fr)',
-              gap: '0',
-              marginTop: '48px',
-              borderTop: '1px solid rgba(26,29,22,0.10)',
-            }}>
+            <div
+              className="products-meta-strip"
+              style={{
+                marginTop: '48px',
+                borderTop: '1px solid rgba(26,29,22,0.10)',
+              }}
+            >
               {[
                 { label: 'Production tools live', value: `${COMPANY.productCount.toString().padStart(2,'0')}` },
                 { label: 'Direct active users',   value: COMPANY.kalvoraUsers },
@@ -119,6 +119,7 @@ export default function ProductsPage() {
               ].map((item, i) => (
                 <div
                   key={item.label}
+                  className="products-meta-item"
                   style={{
                     padding: '24px 0',
                     paddingRight: i < 2 ? '32px' : '0',
@@ -199,18 +200,11 @@ export default function ProductsPage() {
           </Reveal>
 
           {/* 50/50 split — copy left, UI right */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '0',
-            padding: '64px 0',
-          }} className="grid-cols-1 md:grid-cols-2">
+          <div className="products-split">
 
             {/* Left — copy */}
             <Reveal>
-              <div style={{
-                paddingRight: '64px',
-                borderRight: '1px solid rgba(26,29,22,0.07)',
+              <div className="products-split-copy" style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -292,7 +286,7 @@ export default function ProductsPage() {
 
             {/* Right — coded UI mockup */}
             <Reveal delay={0.1}>
-              <div style={{ paddingLeft: '64px' }}>
+              <div className="products-split-ui">
                 <KalvoraUI />
               </div>
             </Reveal>
@@ -345,24 +339,18 @@ export default function ProductsPage() {
           </Reveal>
 
           {/* 50/50 split — UI left, copy right (flipped) */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '0',
-            padding: '64px 0',
-          }} className="grid-cols-1 md:grid-cols-2">
+          <div className="products-split">
 
-            {/* Left — coded UI mockup */}
+            {/* Left — coded UI mockup (desktop left, mobile below copy) */}
             <Reveal>
-              <div style={{ paddingRight: '64px', borderRight: '1px solid rgba(230,234,212,0.06)' }}>
+              <div className="products-split-ui-dark">
                 <SillUI />
               </div>
             </Reveal>
 
-            {/* Right — copy */}
+            {/* Right — copy (always top on mobile) */}
             <Reveal delay={0.1}>
-              <div style={{
-                paddingLeft: '64px',
+              <div className="products-split-copy-dark" style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
