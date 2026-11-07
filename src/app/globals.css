@@ -474,6 +474,8 @@
 /* Mobile safe-area and watermark offset */
 @media (max-width: 767px) {
   .footer-watermark-wrapper {
+    width: 100%;
+    overflow: hidden;
     padding-bottom: calc(40px + env(safe-area-inset-bottom));
   }
 }

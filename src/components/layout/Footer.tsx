@@ -112,7 +112,7 @@ export default function Footer() {
               <span className="footer-link-arrow" aria-hidden>→</span>
             </button>
             {/* Social — visible on desktop inside Legal col */}
-            <div className="footer-social-desktop" style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div className="footer-social-desktop" style={{ marginTop: '12px', flexDirection: 'column', gap: '12px' }}>
               <p style={labelStyle}>Social</p>
               <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">
                 <span className="footer-link-text">LinkedIn</span>
@@ -162,6 +162,7 @@ export default function Footer() {
         className="footer-watermark-wrapper"
         style={{
           position: 'relative',
+          width: '100%',
           overflow: 'hidden',
           lineHeight: 0.85,
           userSelect: 'none',
