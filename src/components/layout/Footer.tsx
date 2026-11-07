@@ -53,14 +53,10 @@ export default function Footer() {
         {/* Separator */}
         <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', marginBottom: '40px' }} />
 
-        {/* 4-column grid */}
+        {/* Grid — 2-col on mobile, 4-col on md+ */}
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-            gap: '40px 24px',
-            paddingBottom: '48px',
-          }}
+          className="footer-grid"
+          style={{ paddingBottom: '48px' }}
         >
           {/* Col 1 — Studio info */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -70,8 +66,8 @@ export default function Footer() {
             <p style={mutedStyle}>Est. {COMPANY.foundedYear}</p>
           </div>
 
-          {/* Col 2 — Studio links */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {/* Col 2 — Navigation links */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <p style={labelStyle}>Navigation</p>
             {studioLinks.map((l) => (
               <Link key={l.href} href={l.href} className="footer-link">
@@ -82,7 +78,7 @@ export default function Footer() {
           </div>
 
           {/* Col 3 — Products */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <p style={labelStyle}>Products</p>
             {productLinks.map((l) => (
               <Link
@@ -97,8 +93,8 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Col 4 — Legal & social */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {/* Col 4 — Legal (desktop includes Social) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <p style={labelStyle}>Legal</p>
             {legalLinks.map((l) => (
               <Link key={l.href} href={l.href} className="footer-link">
@@ -115,7 +111,8 @@ export default function Footer() {
               <span className="footer-link-text">Cookie Preferences</span>
               <span className="footer-link-arrow" aria-hidden>→</span>
             </button>
-            <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {/* Social — visible on desktop inside Legal col */}
+            <div className="footer-social-desktop" style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <p style={labelStyle}>Social</p>
               <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">
                 <span className="footer-link-text">LinkedIn</span>
@@ -129,11 +126,25 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Social — mobile only, full-width row below the 2×2 grid */}
+        <div className="footer-social-mobile" style={{ paddingBottom: '32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <p style={labelStyle}>Social</p>
+          <Link href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">
+            <span className="footer-link-text">LinkedIn</span>
+            <span className="footer-link-arrow" aria-hidden>→</span>
+          </Link>
+          <Link href={SOCIAL_LINKS.founderPortfolio} target="_blank" rel="noopener noreferrer" className="footer-link">
+            <span className="footer-link-text">Founder</span>
+            <span className="footer-link-arrow" aria-hidden>→</span>
+          </Link>
+        </div>
+
         {/* Bottom bar */}
         <div
           style={{
             borderTop: '1px solid rgba(255,255,255,0.06)',
-            padding: '20px 0',
+            paddingTop: '20px',
+            paddingBottom: 'max(20px, env(safe-area-inset-bottom))',
             display: 'flex',
             alignItems: 'baseline',
             justifyContent: 'space-between',
@@ -148,6 +159,7 @@ export default function Footer() {
 
       {/* ── Giant brand text ─────────────────────────────────────── */}
       <div
+        className="footer-watermark-wrapper"
         style={{
           position: 'relative',
           overflow: 'hidden',

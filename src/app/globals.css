@@ -435,6 +435,69 @@
 }
 
 /* ================================================================
+   FOOTER GRID — 2-col on mobile, 4-col on md+
+   OUTSIDE @layer utilities for full cascade authority.
+   ================================================================ */
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 20px;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 24px;
+  }
+}
+
+/* Mobile social row — shown only on mobile */
+.footer-social-mobile {
+  display: flex;
+}
+
+/* Desktop social inside legal col — hidden on mobile */
+.footer-social-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .footer-social-mobile {
+    display: none;
+  }
+  .footer-social-desktop {
+    display: flex;
+  }
+}
+
+/* Mobile safe-area and watermark offset */
+@media (max-width: 767px) {
+  .footer-watermark-wrapper {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ================================================================
+   FOOTER TOUCH — tap compression on mobile, suppress arrow hover
+   OUTSIDE @layer utilities for full cascade authority.
+   ================================================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  .footer-link:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
+  .footer-link:active .footer-link-text {
+    transform: translateX(0);
+  }
+  .footer-link:active .footer-link-arrow {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+/* ================================================================
    ARROW LINK — Products page borderless text link with 2px arrow slide
    OUTSIDE @layer utilities for full cascade authority.
    ================================================================ */
