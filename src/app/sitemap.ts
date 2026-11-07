@@ -1,48 +1,58 @@
 import { MetadataRoute } from 'next'
 
+const BASE = 'https://kaliprlabs.in'
+
+// Pinned to actual last-meaningful-update date per route.
+// Update lastModified here whenever a page gets a content change.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://kaliprlabs.in',
-      lastModified: new Date(),
+      url: BASE,
+      lastModified: new Date('2026-11-08'),
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
     },
     {
-      url: 'https://kaliprlabs.in/products',
-      lastModified: new Date(),
+      url: `${BASE}/products`,
+      lastModified: new Date('2026-11-08'),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: 'https://kaliprlabs.in/products/kalvora',
-      lastModified: new Date(),
+      url: `${BASE}/services`,
+      lastModified: new Date('2026-11-08'),
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.85,
     },
     {
-      url: 'https://kaliprlabs.in/services',
-      lastModified: new Date(),
+      url: `${BASE}/work`,
+      lastModified: new Date('2026-11-08'),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.80,
     },
     {
-      url: 'https://kaliprlabs.in/work',
-      lastModified: new Date(),
+      url: `${BASE}/about`,
+      lastModified: new Date('2026-11-08'),
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.75,
     },
     {
-      url: 'https://kaliprlabs.in/about',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: 'https://kaliprlabs.in/contact',
-      lastModified: new Date(),
+      url: `${BASE}/contact`,
+      lastModified: new Date('2026-11-08'),
       changeFrequency: 'yearly',
-      priority: 0.6,
+      priority: 0.65,
+    },
+    {
+      url: `${BASE}/privacy`,
+      lastModified: new Date('2026-11-01'),
+      changeFrequency: 'yearly',
+      priority: 0.30,
+    },
+    {
+      url: `${BASE}/terms`,
+      lastModified: new Date('2026-11-01'),
+      changeFrequency: 'yearly',
+      priority: 0.30,
     },
   ]
 }

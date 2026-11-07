@@ -6,9 +6,21 @@ import { ClientLedger } from '@/components/sections/ClientLedger'
 import { COMPANY } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Work',
+  title: 'Work — Client Projects & Portfolio',
   description:
     'Kalipr Labs has worked with 5+ clients across product development, custom engineering, and automation projects. Pune, India.',
+  alternates: { canonical: 'https://kaliprlabs.in/work' },
+  openGraph: {
+    title: 'Work — Kalipr Labs',
+    description: '5+ client projects across product development, custom engineering, and automation.',
+    url: 'https://kaliprlabs.in/work',
+    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Kalipr Labs Work' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Work — Kalipr Labs',
+    description: '5+ client projects across product development, custom engineering, and automation.',
+  },
 }
 
 const CAPABILITIES = [

@@ -4,6 +4,8 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Terms of Service — Kalipr Labs',
   description: 'Terms governing use of the Kalipr Labs website, Kalvora, Sill, and custom engineering services.',
+  alternates: { canonical: 'https://kaliprlabs.in/terms' },
+  robots: { index: false, follow: false },
 }
 
 const H2_STYLE: React.CSSProperties = {

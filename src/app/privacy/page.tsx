@@ -4,6 +4,8 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Privacy Policy — Kalipr Labs',
   description: 'How Kalipr Labs collects, processes, and protects information across our agency ecosystem, client channels, and software products.',
+  alternates: { canonical: 'https://kaliprlabs.in/privacy' },
+  robots: { index: false, follow: false },
 }
 
 const SECTION_STYLE: React.CSSProperties = {

@@ -3,9 +3,21 @@ import { ContactForm } from '@/features/contact/ContactForm'
 import { COMPANY } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Start a Project — Kalipr Labs',
+  title: 'Contact — Start a Project',
   description:
     'Tell us about your project. We build software products, custom web applications, AI automation systems, and professional websites.',
+  alternates: { canonical: 'https://kaliprlabs.in/contact' },
+  openGraph: {
+    title: 'Contact — Kalipr Labs',
+    description: 'Start a project with Kalipr Labs. Software products, custom web apps, AI automation.',
+    url: 'https://kaliprlabs.in/contact',
+    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Contact Kalipr Labs' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact — Kalipr Labs',
+    description: 'Start a project with Kalipr Labs. Software products, custom web apps, AI automation.',
+  },
 }
 
 export default function ContactPage() {

@@ -5,9 +5,21 @@ import { Reveal } from '@/components/animations/Reveal'
 import { SERVICES, PROCESS_STEPS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: 'Services — Software Development, AI & Automation',
   description:
     'Software product development, custom web applications, AI & workflow automation, and professional website development. Kalipr Labs, Pune.',
+  alternates: { canonical: 'https://kaliprlabs.in/services' },
+  openGraph: {
+    title: 'Services — Kalipr Labs',
+    description: 'Software product development, custom web apps, AI automation. Based in Pune, India.',
+    url: 'https://kaliprlabs.in/services',
+    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Kalipr Labs Services' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services — Kalipr Labs',
+    description: 'Software product development, custom web apps, AI automation. Pune, India.',
+  },
 }
 
 export default function ServicesPage() {

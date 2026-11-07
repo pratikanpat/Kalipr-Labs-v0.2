@@ -34,17 +34,25 @@ export const metadata: Metadata = {
     'We find the friction. We build what fixes it. Kalipr Labs is an independent software studio from Pune — creators of Kalvora and Sill, and builders of custom digital solutions.',
   keywords: [
     'independent software studio',
-    'software products',
+    'software product studio',
+    'software development Pune',
+    'custom web application development India',
+    'SaaS development India',
+    'AI automation software',
     'Kalvora',
-    'Sill',
-    'SaaS development',
-    'custom web applications',
-    'AI automation',
-    'Pune',
-    'India',
+    'Sill Windows 11',
+    'interior design software India',
+    'proposal software for designers',
+    'Kalipr Labs',
+    'Pratik Anpat',
   ],
   authors: [{ name: 'Pratik Anpat', url: 'https://pratik.kaliprlabs.in' }],
   creator: 'Kalipr Labs',
+  publisher: 'Kalipr Labs',
+  category: 'technology',
+  alternates: {
+    canonical: COMPANY.url,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_IN',
@@ -53,41 +61,97 @@ export const metadata: Metadata = {
     description:
       'We find the friction. We build what fixes it. Creators of Kalvora and Sill. Based in Pune, India.',
     siteName: 'Kalipr Labs',
-    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Kalipr Labs' }],
+    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Kalipr Labs — Independent Software Product Studio' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kalipr Labs — Independent Software Product Studio',
     description: 'We find the friction. We build what fixes it. Creators of Kalvora and Sill.',
     images: ['/og/home.png'],
+    creator: '@kaliprlabs',
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add Google Search Console verification token here when available:
+    // google: 'your-verification-token',
+  },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Kalipr Labs',
-  url: COMPANY.url,
-  logo: `${COMPANY.url}/brand/logo.svg`,
-  description: 'Independent software product studio. Creators of Kalvora and Sill.',
-  founder: {
-    '@type': 'Person',
-    name: 'Pratik Anpat',
-    url: 'https://pratik.kaliprlabs.in',
+const jsonLd = [
+  // Organization schema
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${COMPANY.url}/#organization`,
+    name: 'Kalipr Labs',
+    url: COMPANY.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${COMPANY.url}/brand/logo.svg`,
+      width: 180,
+      height: 48,
+    },
+    description: 'Independent software product studio. Creators of Kalvora and Sill.',
+    email: COMPANY.email,
+    foundingDate: '2025',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Pune',
+      addressRegion: 'Maharashtra',
+      addressCountry: 'IN',
+    },
+    founder: {
+      '@type': 'Person',
+      name: 'Pratik Anpat',
+      url: 'https://pratik.kaliprlabs.in',
+      jobTitle: 'Founder',
+    },
+    sameAs: [
+      'https://www.linkedin.com/company/kalipr-labs',
+    ],
+    owns: [
+      {
+        '@type': 'SoftwareApplication',
+        name: 'Kalvora',
+        url: 'https://kalvora.kaliprlabs.in',
+        applicationCategory: 'BusinessApplication',
+        operatingSystem: 'Web',
+        description: 'Proposal and invoice software for interior designers.',
+      },
+      {
+        '@type': 'SoftwareApplication',
+        name: 'Sill',
+        url: 'https://sill.kaliprlabs.in',
+        applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'Windows 11',
+        description: 'A small tool belt for Windows 11 — command palette and taskbar widget.',
+      },
+    ],
   },
-  foundingDate: '2025',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Pune',
-    addressCountry: 'IN',
+  // WebSite schema with SearchAction (enables Google Sitelinks Search Box)
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${COMPANY.url}/#website`,
+    url: COMPANY.url,
+    name: 'Kalipr Labs',
+    description: 'Independent software product studio from Pune, India.',
+    publisher: {
+      '@id': `${COMPANY.url}/#organization`,
+    },
+    inLanguage: 'en-IN',
   },
-  sameAs: ['https://www.linkedin.com/company/kalipr-labs'],
-  owns: [
-    { '@type': 'SoftwareApplication', name: 'Kalvora', url: 'https://kalvora.kaliprlabs.in' },
-    { '@type': 'SoftwareApplication', name: 'Sill',    url: 'https://sill.kaliprlabs.in' },
-  ],
-}
+]
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

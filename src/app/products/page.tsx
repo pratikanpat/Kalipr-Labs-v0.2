@@ -6,9 +6,21 @@ import SillUI from '@/components/ui/SillUI'
 import { COMPANY, KALVORA, SILL, SOCIAL_LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Products — Kalipr Labs',
+  title: 'Products — Kalvora & Sill',
   description:
     'Software products built and owned by Kalipr Labs. Kalvora — proposal & invoice software for interior designers. Sill — Windows 11 tool belt.',
+  alternates: { canonical: 'https://kaliprlabs.in/products' },
+  openGraph: {
+    title: 'Products — Kalipr Labs',
+    description: 'Kalvora: proposal software for interior designers. Sill: Windows 11 tool belt. Built and owned by Kalipr Labs.',
+    url: 'https://kaliprlabs.in/products',
+    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Kalipr Labs Products' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Products — Kalipr Labs',
+    description: 'Kalvora: proposal software for interior designers. Sill: Windows 11 tool belt.',
+  },
 }
 
 /* ── Arrow link (borderless text, 2px arrow slide on hover) ─── */

@@ -5,9 +5,21 @@ import { Reveal } from '@/components/animations/Reveal'
 import { PHILOSOPHY_PRINCIPLES, SOCIAL_LINKS, COMPANY } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About — Kalipr Labs',
   description:
     'Kalipr Labs is an independent software product studio founded in Pune, India. We build software products and engineer digital solutions for real-world business problems.',
+  alternates: { canonical: 'https://kaliprlabs.in/about' },
+  openGraph: {
+    title: 'About — Kalipr Labs',
+    description: 'An independent software product studio from Pune. Creators of Kalvora and Sill.',
+    url: 'https://kaliprlabs.in/about',
+    images: [{ url: '/og/home.png', width: 1200, height: 630, alt: 'Kalipr Labs' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About — Kalipr Labs',
+    description: 'An independent software product studio from Pune. Creators of Kalvora and Sill.',
+  },
 }
 
 const TIMELINE = [
