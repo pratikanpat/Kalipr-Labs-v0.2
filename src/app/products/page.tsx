@@ -285,8 +285,7 @@ export default function ProductsPage() {
 
                 {/* Links */}
                 <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-                  <ArrowLink href={SOCIAL_LINKS.kalvora} external>Open Kalvora</ArrowLink>
-                  <ArrowLink href="/products/kalvora">View Product Details</ArrowLink>
+                  <ArrowLink href="https://kalvora.kaliprlabs.in/" external>Open Kalvora</ArrowLink>
                 </div>
               </div>
             </Reveal>
