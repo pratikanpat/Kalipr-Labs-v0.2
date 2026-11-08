@@ -270,34 +270,48 @@ export function ContactForm() {
   if (formState === 'success') {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '40px 0' }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '48px 0' }}
       >
-        <div
+        {/* Animated check */}
+        <motion.div
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           style={{
-            width: '48px', height: '48px', borderRadius: '50%',
-            background: 'rgba(26,29,22,0.07)',
+            width: '52px', height: '52px', borderRadius: '50%',
+            background: '#1A1D16',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
-          <Check size={22} style={{ color: '#1A1D16' }} />
-        </div>
-        <h3
-          style={{
-            fontFamily: 'var(--font-heading)', fontWeight: 700,
-            fontSize: '1.5rem', letterSpacing: '-0.03em', color: '#1A1D16',
-          }}
+          <Check size={22} style={{ color: '#E6EAD4' }} />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
         >
-          Message sent.
-        </h3>
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9375rem', lineHeight: 1.65, color: 'rgba(26,29,22,0.55)', maxWidth: '36ch' }}>
-          We'll review your message and reply within 24 hours. If it's urgent, email us directly at{' '}
-          <a href="mailto:hello@kaliprlabs.in" style={{ color: '#1A1D16', fontWeight: 600 }}>
-            hello@kaliprlabs.in
-          </a>.
-        </p>
+          <h3 style={{
+            fontFamily: 'var(--font-heading)', fontWeight: 800,
+            fontSize: 'clamp(1.5rem, 3vw, 2rem)', letterSpacing: '-0.03em', color: '#1A1D16',
+            marginBottom: '12px',
+          }}>
+            Message received.
+          </h3>
+          <p style={{
+            fontFamily: 'var(--font-sans)', fontSize: '0.9375rem',
+            lineHeight: 1.7, color: 'rgba(26,29,22,0.55)', maxWidth: '40ch',
+          }}>
+            We review every inquiry personally and reply within 24 hours. If it&apos;s urgent,
+            reach us directly at{' '}
+            <a href="mailto:hello@kaliprlabs.in" style={{ color: '#1A1D16', fontWeight: 600, textDecoration: 'none' }}>
+              hello@kaliprlabs.in
+            </a>.
+          </p>
+        </motion.div>
       </motion.div>
     )
   }
@@ -456,9 +470,23 @@ export function ContactForm() {
 
       {/* Error message */}
       {formState === 'error' && errorMessage && (
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.875rem', color: 'rgba(200,60,40,0.80)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            background: 'rgba(200,60,40,0.06)',
+            border: '1px solid rgba(200,60,40,0.20)',
+            borderRadius: '10px',
+            padding: '14px 18px',
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.875rem',
+            color: 'rgba(200,60,40,0.90)',
+            lineHeight: 1.5,
+          }}
+        >
           {errorMessage}
-        </p>
+        </motion.div>
       )}
 
       {/* Submit */}
@@ -468,10 +496,25 @@ export function ContactForm() {
           disabled={formState === 'loading'}
           className="btn-primary"
           style={{
-            opacity: formState === 'loading' ? 0.6 : 1,
+            opacity: formState === 'loading' ? 0.7 : 1,
             cursor: formState === 'loading' ? 'wait' : 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: 'opacity 0.2s ease',
           }}
         >
+          {formState === 'loading' && (
+            <span style={{
+              width: '14px', height: '14px',
+              border: '2px solid rgba(230,234,212,0.35)',
+              borderTopColor: '#E6EAD4',
+              borderRadius: '50%',
+              display: 'inline-block',
+              animation: 'spin 0.7s linear infinite',
+              flexShrink: 0,
+            }} />
+          )}
           {formState === 'loading' ? 'Sending…' : 'Send it →'}
         </button>
       </div>
